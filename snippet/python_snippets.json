@@ -1,0 +1,207 @@
+{
+  "Python Class": {
+    "prefix": "class",
+    "body": [
+      "class ${1:ClassName}:",
+      "    def __init__(self, ${2:parameters}):",
+      "        ${3:self.property = property}",
+      "        $0",
+      "",
+      "    def ${4:method_name}(self):",
+      "        ${5:pass}"
+    ],
+    "description": "Create a Python class"
+  },
+  "Python Function": {
+    "prefix": "def",
+    "body": [
+      "def ${1:function_name}(${2:parameters}) -> ${3:return_type}:",
+      "    \"\"\"${4:Description}\"\"\"",
+      "    ${5:pass}",
+      "    $0"
+    ],
+    "description": "Create a Python function with type hints"
+  },
+  "Python Async Function": {
+    "prefix": "adef",
+    "body": [
+      "async def ${1:function_name}(${2:parameters}) -> ${3:return_type}:",
+      "    \"\"\"${4:Description}\"\"\"",
+      "    ${5:pass}",
+      "    $0"
+    ],
+    "description": "Create an async Python function"
+  },
+  "Python Main": {
+    "prefix": "main",
+    "body": [
+      "def main():",
+      "    ${1:pass}",
+      "",
+      "",
+      "if __name__ == \"__main__\":",
+      "    main()"
+    ],
+    "description": "Create main function"
+  },
+  "Python Try-Except": {
+    "prefix": "try",
+    "body": [
+      "try:",
+      "    ${1:pass}",
+      "except ${2:Exception} as e:",
+      "    ${3:print(f\"Error: {e}\")}"
+    ],
+    "description": "Try-except block"
+  },
+  "Python List Comprehension": {
+    "prefix": "lc",
+    "body": [
+      "[${1:expression} for ${2:item} in ${3:iterable}${4: if ${5:condition}}]"
+    ],
+    "description": "List comprehension"
+  },
+  "Python Dict Comprehension": {
+    "prefix": "dc",
+    "body": [
+      "{${1:key}: ${2:value} for ${3:item} in ${4:iterable}${5: if ${6:condition}}}"
+    ],
+    "description": "Dictionary comprehension"
+  },
+  "Python Dataclass": {
+    "prefix": "dataclass",
+    "body": [
+      "from dataclasses import dataclass",
+      "",
+      "@dataclass",
+      "class ${1:ClassName}:",
+      "    ${2:field}: ${3:type}",
+      "    ${4:optional_field}: ${5:type} = ${6:default_value}",
+      "    $0"
+    ],
+    "description": "Create a dataclass"
+  },
+  "Python Property": {
+    "prefix": "property",
+    "body": [
+      "@property",
+      "def ${1:property_name}(self):",
+      "    return self._${1:property_name}",
+      "",
+      "@${1:property_name}.setter",
+      "def ${1:property_name}(self, value):",
+      "    self._${1:property_name} = value"
+    ],
+    "description": "Create a property with getter and setter"
+  },
+  "Python Context Manager": {
+    "prefix": "with",
+    "body": [
+      "with ${1:context_manager} as ${2:variable}:",
+      "    ${3:pass}"
+    ],
+    "description": "Context manager (with statement)"
+  },
+  "Python Lambda": {
+    "prefix": "lambda",
+    "body": [
+      "lambda ${1:parameters}: ${2:expression}"
+    ],
+    "description": "Lambda function"
+  },
+  "Python Decorator": {
+    "prefix": "decorator",
+    "body": [
+      "def ${1:decorator_name}(func):",
+      "    def wrapper(*args, **kwargs):",
+      "        ${2:# Pre-execution code}",
+      "        result = func(*args, **kwargs)",
+      "        ${3:# Post-execution code}",
+      "        return result",
+      "    return wrapper"
+    ],
+    "description": "Create a decorator"
+  },
+  "Python FastAPI Route": {
+    "prefix": "fastapi",
+    "body": [
+      "@app.${1:get}(\"/${2:endpoint}\")",
+      "async def ${3:function_name}(${4:parameters}):",
+      "    \"\"\"${5:Description}\"\"\"",
+      "    ${6:pass}",
+      "    $0"
+    ],
+    "description": "FastAPI route"
+  },
+  "Python Pydantic Model": {
+    "prefix": "pydantic",
+    "body": [
+      "from pydantic import BaseModel",
+      "",
+      "class ${1:ModelName}(BaseModel):",
+      "    ${2:field}: ${3:type}",
+      "    ${4:optional_field}: ${5:type} = ${6:default_value}",
+      "    $0"
+    ],
+    "description": "Pydantic model"
+  },
+  "Python Enum": {
+    "prefix": "enum",
+    "body": [
+      "from enum import Enum",
+      "",
+      "class ${1:EnumName}(Enum):",
+      "    ${2:VALUE1} = \"${3:value1}\"",
+      "    ${4:VALUE2} = \"${5:value2}\"",
+      "    $0"
+    ],
+    "description": "Create an enum"
+  },
+  "Python Type Alias": {
+    "prefix": "type",
+    "body": [
+      "from typing import ${1:Union, List, Dict}",
+      "",
+      "${2:AliasName} = ${3:Union[str, int]}"
+    ],
+    "description": "Type alias"
+  },
+  "Python Logging": {
+    "prefix": "log",
+    "body": [
+      "import logging",
+      "",
+      "logging.basicConfig(level=logging.INFO)",
+      "logger = logging.getLogger(__name__)",
+      "",
+      "logger.${1:info}(\"${2:message}\")"
+    ],
+    "description": "Setup logging"
+  },
+  "Python File Read": {
+    "prefix": "read",
+    "body": [
+      "with open(\"${1:filename}\", \"r\") as file:",
+      "    ${2:content} = file.read()"
+    ],
+    "description": "Read file"
+  },
+  "Python File Write": {
+    "prefix": "write",
+    "body": [
+      "with open(\"${1:filename}\", \"w\") as file:",
+      "    file.write(${2:content})"
+    ],
+    "description": "Write file"
+  },
+  "Python JSON Load": {
+    "prefix": "json",
+    "body": [
+      "import json",
+      "",
+      "with open(\"${1:filename}.json\", \"r\") as file:",
+      "    ${2:data} = json.load(file)"
+    ],
+    "description": "Load JSON file"
+  }
+}

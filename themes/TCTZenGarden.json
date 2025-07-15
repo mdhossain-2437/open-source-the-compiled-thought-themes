@@ -1,0 +1,59 @@
+{
+  "name": "TCT Zen Garden",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#1f2933",
+    "editor.foreground": "#d2d4de",
+    "editorLineNumber.foreground": "#9ca3af",
+    "editor.selectionBackground": "#3d445133",
+    "editor.inactiveSelectionBackground": "#3d445122",
+    "editorCursor.foreground": "#ffae00",
+
+    "activityBar.background": "#2a2e37",
+    "sideBar.background": "#2a2e37",
+    "statusBar.background": "#2a2e37",
+    "terminal.foreground": "#a3b2c2",
+    "titleBar.activeBackground": "#3b424b",
+    "tab.activeBackground": "#3b424b",
+
+    "editorBracketHighlight.foreground1": "#e06c75",
+    "editorBracketHighlight.foreground2": "#d19a66",
+    "editorBracketHighlight.foreground3": "#e5c07b",
+    "editorBracketHighlight.foreground4": "#98c379",
+    "editorBracketHighlight.foreground5": "#56b6c2",
+    "editorBracketHighlight.foreground6": "#c678dd"
+  },
+  "tokenColors": [
+    {
+      "scope": "comment",
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#8b938e"
+      }
+    },
+    {
+      "scope": "string",
+      "settings": {
+        "foreground": "#a5d6a7"
+      }
+    },
+    {
+      "scope": "keyword",
+      "settings": {
+        "foreground": "#b8b4f8"
+      }
+    },
+    {
+      "scope": "variable",
+      "settings": {
+        "foreground": "#e2e4ef"
+      }
+    },
+    {
+      "scope": "storage.type",
+      "settings": {
+        "foreground": "#93c5fd"
+      }
+    }
+  ]
+}

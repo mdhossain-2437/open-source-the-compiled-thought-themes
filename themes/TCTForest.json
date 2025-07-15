@@ -1,0 +1,59 @@
+{
+  "name": "TCT Forest",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#1e2c25",
+    "editor.foreground": "#c4f0c2",
+    "editorLineNumber.foreground": "#81e6d9",
+    "editor.selectionBackground": "#1fc49f44",
+    "editor.inactiveSelectionBackground": "#00775922",
+    "editorCursor.foreground": "#ffae00",
+
+    "activityBar.background": "#143f35",
+    "sideBar.background": "#143f35",
+    "statusBar.background": "#143f35",
+    "terminal.foreground": "#9ae6b4",
+    "titleBar.activeBackground": "#1c5749",
+    "tab.activeBackground": "#1c5749",
+
+    "editorBracketHighlight.foreground1": "#e06c75",
+    "editorBracketHighlight.foreground2": "#d19a66",
+    "editorBracketHighlight.foreground3": "#e5c07b",
+    "editorBracketHighlight.foreground4": "#98c379",
+    "editorBracketHighlight.foreground5": "#56b6c2",
+    "editorBracketHighlight.foreground6": "#c678dd"
+  },
+  "tokenColors": [
+    {
+      "scope": "comment",
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#9ae6b4"
+      }
+    },
+    {
+      "scope": "string",
+      "settings": {
+        "foreground": "#c6f6d5"
+      }
+    },
+    {
+      "scope": "keyword",
+      "settings": {
+        "foreground": "#4fd1c5"
+      }
+    },
+    {
+      "scope": "variable",
+      "settings": {
+        "foreground": "#f0fff4"
+      }
+    },
+    {
+      "scope": "storage.type",
+      "settings": {
+        "foreground": "#48bb78"
+      }
+    }
+  ]
+}

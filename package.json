@@ -1,0 +1,321 @@
+{
+  "name": "compiled-thought-themes",
+  "displayName": "The Compiled Thought Themes",
+  "description": "Intelligent, memory-optimized theme collection with smart recommendations and advanced features",
+  "version": "2.0.0",
+  "publisher": "delowar",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Themes",
+    "Snippets"
+  ],
+  "keywords": [
+    "theme",
+    "dark theme",
+    "light theme",
+    "snippets",
+    "python",
+    "react",
+    "operator mono",
+    "italic",
+    "TCT",
+    "intelligent",
+    "smart themes"
+  ],
+  "icon": "logo.png",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "themes": [
+      {
+        "label": "TCT Ayu",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ayu.json"
+      },
+      {
+        "label": "TCT Ayu Italic",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ayuItalic.json"
+      },
+      {
+        "label": "TCT Blue Velvet",
+        "uiTheme": "vs-dark",
+        "path": "./themes/blue-velvet-theme.json"
+      },
+      {
+        "label": "TCT Darcula",
+        "uiTheme": "vs-dark",
+        "path": "./themes/darcula.json"
+      },
+      {
+        "label": "TCT Darcula Italic",
+        "uiTheme": "vs-dark",
+        "path": "./themes/darculaItalic.json"
+      },
+      {
+        "label": "TCT Dark Theme",
+        "uiTheme": "vs-dark",
+        "path": "./themes/dark_theme_json.json"
+      },
+      {
+        "label": "TCT Default Color",
+        "uiTheme": "vs-dark",
+        "path": "./themes/default-color-theme.json"
+      },
+      {
+        "label": "TCT Dracula",
+        "uiTheme": "vs-dark",
+        "path": "./themes/dracula-theme.json"
+      },
+      {
+        "label": "TCT Gruvbox",
+        "uiTheme": "vs-dark",
+        "path": "./themes/gruvbox.json"
+      },
+      {
+        "label": "TCT Gruvbox Italic",
+        "uiTheme": "vs-dark",
+        "path": "./themes/gruvboxItalic.json"
+      },
+      {
+        "label": "TCT Material",
+        "uiTheme": "vs-dark",
+        "path": "./themes/material.json"
+      },
+      {
+        "label": "TCT Material Italic",
+        "uiTheme": "vs-dark",
+        "path": "./themes/materialItalic.json"
+      },
+      {
+        "label": "TCT Monokai",
+        "uiTheme": "vs-dark",
+        "path": "./themes/monokai.json"
+      },
+      {
+        "label": "TCT Monokai Italic",
+        "uiTheme": "vs-dark",
+        "path": "./themes/monokaiItalic.json"
+      },
+      {
+        "label": "TCT Monokai Pro",
+        "uiTheme": "vs-dark",
+        "path": "./themes/monokai_pro_theme.json"
+      },
+      {
+        "label": "TCT Ocean Blue",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ocean_blue_theme.json"
+      },
+      {
+        "label": "TCT Oceanic",
+        "uiTheme": "vs-dark",
+        "path": "./themes/oceanic.json"
+      },
+      {
+        "label": "TCT Oceanic Italic",
+        "uiTheme": "vs-dark",
+        "path": "./themes/oceanicItalic.json"
+      },
+      {
+        "label": "TCT Official",
+        "uiTheme": "vs-dark",
+        "path": "./themes/official-theme.json"
+      },
+      {
+        "label": "TCT One Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/one.json"
+      },
+      {
+        "label": "TCT One Dark Italic",
+        "uiTheme": "vs-dark",
+        "path": "./themes/oneItalic.json"
+      },
+      {
+        "label": "TCT Party",
+        "uiTheme": "vs-dark",
+        "path": "./themes/party-theme.json"
+      },
+      {
+        "label": "TCT Peace of Eye",
+        "uiTheme": "vs-dark",
+        "path": "./themes/peace-of-eye-theme.json"
+      },
+      {
+        "label": "TCT Peace of Eye Dracula",
+        "uiTheme": "vs-dark",
+        "path": "./themes/peace-of-eye-dracula-theme.json"
+      },
+      {
+        "label": "TCT Professional",
+        "uiTheme": "vs-dark",
+        "path": "./themes/professional-theme.json"
+      },
+      {
+        "label": "TCT Shades of Grey",
+        "uiTheme": "vs-dark",
+        "path": "./themes/shades-of-grey-theme.json"
+      },
+      {
+        "label": "TCT Simple Light",
+        "uiTheme": "vs",
+        "path": "./themes/simple-as-light-theme.json"
+      },
+      {
+        "label": "TCT Slime",
+        "uiTheme": "vs-dark",
+        "path": "./themes/slime.json"
+      },
+      {
+        "label": "TCT Slime Italic",
+        "uiTheme": "vs-dark",
+        "path": "./themes/slimeItalic.json"
+      },
+      {
+        "label": "TCT Traditional",
+        "uiTheme": "vs-dark",
+        "path": "./themes/traditional-theme.json"
+      },
+      {
+        "label": "TCT Vintage",
+        "uiTheme": "vs-dark",
+        "path": "./themes/vintage-theme.json"
+      },
+      {
+        "label": "TCT UI",
+        "uiTheme": "vs-dark",
+        "path": "./themes/_ui.json"
+      },
+      {
+        "label": "TCT Candyland",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTCandyland.json"
+      },
+      {
+        "label": "TCT Sunset",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTSunset.json"
+      },
+      {
+        "label": "TCT Forest",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTForest.json"
+      },
+      {
+        "label": "TCT Sea Wave",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTSeaWave.json"
+      },
+      {
+        "label": "TCT Zen Garden",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTZenGarden.json"
+      },
+      {
+        "label": "TCT Starry Night",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTStarryNight.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "python",
+        "path": "./snippet/python_snippets.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippet/react_snippets.json"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippet/react_snippets.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippet/react_snippets.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippet/react_snippets.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "delowar.selectTheme",
+        "title": "TCT: Select Theme"
+      },
+      {
+        "command": "delowar.toggleItalic",
+        "title": "TCT: Toggle Italic Variant"
+      },
+      {
+        "command": "delowar.enableAutoTheme",
+        "title": "TCT: Enable Auto Theme Switching"
+      },
+      {
+        "command": "delowar.previewTheme",
+        "title": "TCT: Preview Themes"
+      }
+    ],
+    "configuration": {
+      "title": "TCT Extension Settings",
+      "properties": {
+        "delowar.enableItalic": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable italic variants for themes that support it"
+        },
+        "delowar.autoTheme": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically switch themes based on time and context"
+        },
+        "delowar.fontFamily": {
+          "type": "string",
+          "default": "Operator Mono, Fira Code, JetBrains Mono, Cascadia Code, Consolas, monospace",
+          "description": "Optimized font family for coding"
+        },
+        "delowar.fontLigatures": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable font ligatures for better code readability"
+        },
+        "delowar.smartRecommendations": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable smart theme recommendations based on file type and time"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package --no-dependencies",
+    "publish": "vsce publish",
+    "clean": "rimraf out",
+    "precompile": "npm run clean"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.70.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4",
+    "vsce": "^2.15.0",
+    "rimraf": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/compiled-thought-themes"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/compiled-thought-themes/issues"
+  },
+  "homepage": "https://github.com/yourusername/compiled-thought-themes#readme"
+}

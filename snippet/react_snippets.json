@@ -1,0 +1,222 @@
+{
+  "React Functional Component": {
+    "prefix": "rfc",
+    "body": [
+      "import React from 'react';",
+      "",
+      "const ${1:ComponentName} = () => {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "};",
+      "",
+      "export default ${1:ComponentName};"
+    ],
+    "description": "Create a React functional component"
+  },
+  "React Hook Component": {
+    "prefix": "rhc",
+    "body": [
+      "import React, { useState, useEffect } from 'react';",
+      "",
+      "const ${1:ComponentName} = () => {",
+      "  const [${2:state}, set${2/(.*)/${1:/capitalize}/}] = useState(${3:initialValue});",
+      "",
+      "  useEffect(() => {",
+      "    $4",
+      "  }, []);",
+      "",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "};",
+      "",
+      "export default ${1:ComponentName};"
+    ],
+    "description": "Create a React component with hooks"
+  },
+  "useState Hook": {
+    "prefix": "us",
+    "body": [
+      "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState(${2:initialValue});"
+    ],
+    "description": "useState hook"
+  },
+  "useEffect Hook": {
+    "prefix": "ue",
+    "body": [
+      "useEffect(() => {",
+      "  $1",
+      "}, [${2:dependencies}]);"
+    ],
+    "description": "useEffect hook"
+  },
+  "useContext Hook": {
+    "prefix": "uc",
+    "body": [
+      "const ${1:contextValue} = useContext(${2:Context});"
+    ],
+    "description": "useContext hook"
+  },
+  "useReducer Hook": {
+    "prefix": "ur",
+    "body": [
+      "const [${1:state}, ${2:dispatch}] = useReducer(${3:reducer}, ${4:initialState});"
+    ],
+    "description": "useReducer hook"
+  },
+  "useMemo Hook": {
+    "prefix": "um",
+    "body": [
+      "const ${1:memoizedValue} = useMemo(() => {",
+      "  return ${2:computeExpensiveValue};",
+      "}, [${3:dependencies}]);"
+    ],
+    "description": "useMemo hook"
+  },
+  "useCallback Hook": {
+    "prefix": "ucb",
+    "body": [
+      "const ${1:memoizedCallback} = useCallback(() => {",
+      "  ${2:callback}",
+      "}, [${3:dependencies}]);"
+    ],
+    "description": "useCallback hook"
+  },
+  "React Context Provider": {
+    "prefix": "rcp",
+    "body": [
+      "import React, { createContext, useContext, useState } from 'react';",
+      "",
+      "const ${1:Context} = createContext();",
+      "",
+      "export const ${1:Context}Provider = ({ children }) => {",
+      "  const [${2:state}, set${2/(.*)/${1:/capitalize}/}] = useState(${3:initialValue});",
+      "",
+      "  const value = {",
+      "    ${2:state},",
+      "    set${2/(.*)/${1:/capitalize}/}",
+      "  };",
+      "",
+      "  return (",
+      "    <${1:Context}.Provider value={value}>",
+      "      {children}",
+      "    </${1:Context}.Provider>",
+      "  );",
+      "};",
+      "",
+      "export const use${1:Context} = () => {",
+      "  const context = useContext(${1:Context});",
+      "  if (!context) {",
+      "    throw new Error('use${1:Context} must be used within a ${1:Context}Provider');",
+      "  }",
+      "  return context;",
+      "};"
+    ],
+    "description": "Create React Context with Provider"
+  },
+  "React Custom Hook": {
+    "prefix": "rch",
+    "body": [
+      "import { useState, useEffect } from 'react';",
+      "",
+      "const use${1:HookName} = (${2:parameters}) => {",
+      "  const [${3:state}, set${3/(.*)/${1:/capitalize}/}] = useState(${4:initialValue});",
+      "",
+      "  useEffect(() => {",
+      "    ${5:effect}",
+      "  }, [${6:dependencies}]);",
+      "",
+      "  return {",
+      "    ${3:state},",
+      "    set${3/(.*)/${1:/capitalize}/}",
+      "  };",
+      "};",
+      "",
+      "export default use${1:HookName};"
+    ],
+    "description": "Create a custom React hook"
+  },
+  "React Props Interface": {
+    "prefix": "rpi",
+    "body": [
+      "interface ${1:ComponentName}Props {",
+      "  ${2:prop}: ${3:type};",
+      "}"
+    ],
+    "description": "Create React component props interface"
+  },
+  "React Memo Component": {
+    "prefix": "rmc",
+    "body": [
+      "import React, { memo } from 'react';",
+      "",
+      "const ${1:ComponentName} = memo(({ ${2:props} }) => {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "});",
+      "",
+      "${1:ComponentName}.displayName = '${1:ComponentName}';",
+      "",
+      "export default ${1:ComponentName};"
+    ],
+    "description": "Create a memoized React component"
+  },
+  "React Lazy Component": {
+    "prefix": "rlc",
+    "body": [
+      "import { lazy, Suspense } from 'react';",
+      "",
+      "const ${1:ComponentName} = lazy(() => import('./${2:ComponentPath}'));",
+      "",
+      "const ${1:ComponentName}WithSuspense = () => (",
+      "  <Suspense fallback={<div>Loading...</div>}>",
+      "    <${1:ComponentName} />",
+      "  </Suspense>",
+      ");",
+      "",
+      "export default ${1:ComponentName}WithSuspense;"
+    ],
+    "description": "Create a lazy-loaded React component"
+  },
+  "React Error Boundary": {
+    "prefix": "reb",
+    "body": [
+      "import React from 'react';",
+      "",
+      "class ${1:ErrorBoundary} extends React.Component {",
+      "  constructor(props) {",
+      "    super(props);",
+      "    this.state = { hasError: false };",
+      "  }",
+      "",
+      "  static getDerivedStateFromError(error) {",
+      "    return { hasError: true };",
+      "  }",
+      "",
+      "  componentDidCatch(error, errorInfo) {",
+      "    console.error('${1:ErrorBoundary} caught an error:', error, errorInfo);",
+      "  }",
+      "",
+      "  render() {",
+      "    if (this.state.hasError) {",
+      "      return <h1>Something went wrong.</h1>;",
+      "    }",
+      "",
+      "    return this.props.children;",
+      "  }",
+      "}",
+      "",
+      "export default ${1:ErrorBoundary};"
+    ],
+    "description": "Create a React Error Boundary component"
+  }
+}
+    

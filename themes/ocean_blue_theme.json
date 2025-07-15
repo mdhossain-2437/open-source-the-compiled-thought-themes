@@ -1,0 +1,260 @@
+{
+  "name": "Delowar Ocean Blue",
+  "type": "dark",
+  "semanticHighlighting": true,
+  "colors": {
+    "editor.background": "#0f1419",
+    "editor.foreground": "#bfdbfe",
+    "editorCursor.foreground": "#60a5fa",
+    "editor.selectionBackground": "#1e3a8a",
+    "editor.lineHighlightBackground": "#1e293b",
+    "editor.wordHighlightBackground": "#1e3a8a",
+    "editor.findMatchBackground": "#fbbf2444",
+    "editor.findMatchHighlightBackground": "#fbbf2422",
+    
+    "activityBar.background": "#0c1017",
+    "activityBar.foreground": "#bfdbfe",
+    "activityBar.inactiveForeground": "#64748b",
+    "activityBarBadge.background": "#3b82f6",
+    "activityBarBadge.foreground": "#ffffff",
+    
+    "sideBar.background": "#0f1419",
+    "sideBar.foreground": "#bfdbfe",
+    "sideBarSectionHeader.background": "#1e293b",
+    "sideBarSectionHeader.foreground": "#bfdbfe",
+    
+    "statusBar.background": "#0f1419",
+    "statusBar.foreground": "#bfdbfe",
+    "statusBarItem.hoverBackground": "#1e293b",
+    
+    "titleBar.activeBackground": "#0f1419",
+    "titleBar.activeForeground": "#bfdbfe",
+    "titleBar.inactiveBackground": "#0f1419",
+    "titleBar.inactiveForeground": "#64748b",
+    
+    "tab.activeBackground": "#0f1419",
+    "tab.activeForeground": "#bfdbfe",
+    "tab.inactiveBackground": "#1e293b",
+    "tab.inactiveForeground": "#64748b",
+    "tab.border": "#334155",
+    
+    "panel.background": "#0f1419",
+    "panel.border": "#334155",
+    "panelTitle.activeForeground": "#bfdbfe",
+    "panelTitle.inactiveForeground": "#64748b",
+    
+    "terminal.background": "#0f1419",
+    "terminal.foreground": "#bfdbfe",
+    "terminal.ansiBlack": "#334155",
+    "terminal.ansiRed": "#ef4444",
+    "terminal.ansiGreen": "#22c55e",
+    "terminal.ansiYellow": "#f59e0b",
+    "terminal.ansiBlue": "#3b82f6",
+    "terminal.ansiMagenta": "#a855f7",
+    "terminal.ansiCyan": "#06b6d4",
+    "terminal.ansiWhite": "#e2e8f0",
+    
+    "button.background": "#2563eb",
+    "button.foreground": "#ffffff",
+    "button.hoverBackground": "#3b82f6",
+    
+    "input.background": "#0f1419",
+    "input.foreground": "#bfdbfe",
+    "input.border": "#334155",
+    "input.placeholderForeground": "#64748b",
+    
+    "dropdown.background": "#1e293b",
+    "dropdown.foreground": "#bfdbfe",
+    "dropdown.border": "#334155",
+    
+    "list.activeSelectionBackground": "#1e3a8a",
+    "list.activeSelectionForeground": "#bfdbfe",
+    "list.hoverBackground": "#1e293b",
+    "list.inactiveSelectionBackground": "#1e3a8a",
+    
+    "scrollbarSlider.background": "#334155",
+    "scrollbarSlider.hoverBackground": "#475569",
+    "scrollbarSlider.activeBackground": "#64748b",
+    
+    "gitDecoration.addedResourceForeground": "#22c55e",
+    "gitDecoration.modifiedResourceForeground": "#f59e0b",
+    "gitDecoration.deletedResourceForeground": "#ef4444",
+    "gitDecoration.untrackedResourceForeground": "#06b6d4",
+    "gitDecoration.ignoredResourceForeground": "#64748b"
+  },
+  "tokenColors": [
+    {
+      "name": "Comment",
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
+      "settings": {
+        "foreground": "#64748b",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "String",
+      "scope": [
+        "string",
+        "string.quoted",
+        "string.template"
+      ],
+      "settings": {
+        "foreground": "#7dd3fc"
+      }
+    },
+    {
+      "name": "Number",
+      "scope": [
+        "constant.numeric"
+      ],
+      "settings": {
+        "foreground": "#60a5fa"
+      }
+    },
+    {
+      "name": "Boolean",
+      "scope": [
+        "constant.language.boolean"
+      ],
+      "settings": {
+        "foreground": "#60a5fa"
+      }
+    },
+    {
+      "name": "Keyword",
+      "scope": [
+        "keyword",
+        "storage.type",
+        "storage.modifier"
+      ],
+      "settings": {
+        "foreground": "#fb7185"
+      }
+    },
+    {
+      "name": "Function",
+      "scope": [
+        "entity.name.function",
+        "meta.function-call",
+        "support.function"
+      ],
+      "settings": {
+        "foreground": "#c084fc"
+      }
+    },
+    {
+      "name": "Class",
+      "scope": [
+        "entity.name.class",
+        "entity.other.inherited-class"
+      ],
+      "settings": {
+        "foreground": "#fbbf24"
+      }
+    },
+    {
+      "name": "Variable",
+      "scope": [
+        "variable",
+        "meta.definition.variable"
+      ],
+      "settings": {
+        "foreground": "#fbbf24"
+      }
+    },
+    {
+      "name": "Property",
+      "scope": [
+        "variable.other.property",
+        "support.variable.property"
+      ],
+      "settings": {
+        "foreground": "#60a5fa"
+      }
+    },
+    {
+      "name": "Import/Export",
+      "scope": [
+        "keyword.control.import",
+        "keyword.control.export",
+        "keyword.control.from"
+      ],
+      "settings": {
+        "foreground": "#fb7185",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Tag",
+      "scope": [
+        "entity.name.tag",
+        "meta.tag"
+      ],
+      "settings": {
+        "foreground": "#34d399"
+      }
+    },
+    {
+      "name": "Attribute",
+      "scope": [
+        "entity.other.attribute-name"
+      ],
+      "settings": {
+        "foreground": "#60a5fa"
+      }
+    },
+    {
+      "name": "Python Decorator",
+      "scope": [
+        "entity.name.function.decorator.python"
+      ],
+      "settings": {
+        "foreground": "#fbbf24",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Python Self",
+      "scope": [
+        "variable.language.special.self.python"
+      ],
+      "settings": {
+        "foreground": "#fb7185",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "JavaScript/TypeScript This",
+      "scope": [
+        "variable.language.this"
+      ],
+      "settings": {
+        "foreground": "#fb7185",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "React JSX Component",
+      "scope": [
+        "support.class.component.jsx",
+        "support.class.component.tsx"
+      ],
+      "settings": {
+        "foreground": "#fbbf24"
+      }
+    },
+    {
+      "name": "TypeScript Type",
+      "scope": [
+        "entity.name.type.ts",
+        "entity.name.type.tsx"
+      ],
+      "settings": {
+        "foreground": "#60a5fa"
+      }
+    }
+  ]
+}
