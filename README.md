@@ -1,32 +1,36 @@
 # 🎨 The Compiled Thought Themes (TCT)
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://marketplace.visualstudio.com/items?itemName=delowar.compiled-thought-themes)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://marketplace.visualstudio.com/items?itemName=Delowar%20Hossain.compiled-thought-themes)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Downloads](https://img.shields.io/badge/downloads-1k+-brightgreen.svg)](https://marketplace.visualstudio.com/items?itemName=delowar.compiled-thought-themes)
+[![Downloads](https://img.shields.io/badge/downloads-1k+-brightgreen.svg)](https://marketplace.visualstudio.com/items?itemName=Delowar%20Hossain.compiled-thought-themes)
 
 > **Intelligent, memory-optimized theme collection with smart recommendations and advanced features**
 
 ## ✨ Features
 
 ### 🧠 **Intelligent Theme System**
+
 - **Smart Recommendations**: Automatically suggests themes based on file type and time of day
 - **Context-Aware Switching**: Different themes for Python, JavaScript, React, CSS, etc.
 - **Memory Optimized**: Efficient caching system that uses minimal resources
 - **Auto Theme Switching**: Optional time-based theme changes
 
 ### 🎨 **Beautiful Theme Collection**
+
 - **38 Carefully Crafted Themes**: All prefixed with "TCT" for easy identification
 - **Custom Color Palettes**: Unique themes like Candyland, Sunset, Forest, Sea Wave, Zen Garden, Starry Night
 - **Bracket Colorization**: Rainbow bracket pairs for better code readability
 - **Custom Cursor Colors**: Enhanced visual experience with golden cursor highlights
 
 ### 🔤 **Advanced Typography**
+
 - **Operator Mono Support**: Optimized for premium coding fonts
 - **Font Ligatures**: Automatic ligature support for better code symbols
 - **Italic Variants**: Many themes include beautiful italic versions
 - **Font Optimization**: Auto-configures best font settings
 
 ### 📝 **Code Snippets**
+
 - **Python Snippets**: Common patterns and boilerplate code
 - **React/JavaScript Snippets**: Modern React hooks and components
 - **TypeScript Support**: Full TypeScript and TSX snippet support
@@ -40,18 +44,29 @@
 
 ## 🎯 Smart Commands
 
-| Command | Description |
-|---------|-------------|
-| `TCT: Select Theme` | Intelligent theme picker with search and preview |
-| `TCT: Toggle Italic Variant` | Switch between regular and italic versions |
-| `TCT: Enable Auto Theme Switching` | Time-based automatic theme changes |
-| `TCT: Preview Themes` | Visual preview of all available themes |
+| Command                            | Description                                      |
+| ---------------------------------- | ------------------------------------------------ |
+| `TCT: Select Theme`                | Intelligent theme picker with search and preview |
+| `TCT: Toggle Italic Variant`       | Switch between regular and italic versions       |
+| `TCT: Enable Auto Theme Switching` | Time-based automatic theme changes               |
+| `TCT: Preview Themes`              | Visual preview of all available themes           |
+
+## ⚙️ Configuration
+
+````json
+{
+  "Delowar Hossain.autoTheme": true,
+  "Delowar Hossain.smartRecommendations": true,
+  "Delowar Hossain.fontFamily": "Operator Mono, Fira Code, JetBrains Mono",
+  "Delowar Hossain.fontLigatures": true,
+  "Delowar Hossain.enableItalic": true
+}
 
 ## 🎨 Theme Categories
 
 ### 🌟 **Signature TCT Themes**
 - **TCT Candyland** - Playful pink and purple palette
-- **TCT Sunset** - Warm orange and red gradients  
+- **TCT Sunset** - Warm orange and red gradients
 - **TCT Forest** - Calming green nature tones
 - **TCT Sea Wave** - Cool blue ocean vibes
 - **TCT Zen Garden** - Minimalist gray harmony
@@ -72,13 +87,13 @@ Most themes include beautiful italic versions for enhanced readability.
 
 ```json
 {
-  "delowar.autoTheme": true,
-  "delowar.smartRecommendations": true,
-  "delowar.fontFamily": "Operator Mono, Fira Code, JetBrains Mono",
-  "delowar.fontLigatures": true,
-  "delowar.enableItalic": true
+  "Delowar Hossain.autoTheme": true,
+  "Delowar Hossain.smartRecommendations": true,
+  "Delowar Hossain.fontFamily": "Operator Mono, Fira Code, JetBrains Mono",
+  "Delowar Hossain.fontLigatures": true,
+  "Delowar Hossain.enableItalic": true
 }
-```
+````
 
 ## 🎯 Smart Recommendations
 
@@ -129,12 +144,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📞 Support
 
-- 🐛 [Report Issues](https://github.com/yourusername/compiled-thought-themes/issues)
-- 💡 [Feature Requests](https://github.com/yourusername/compiled-thought-themes/issues)
-- ⭐ [Rate & Review](https://marketplace.visualstudio.com/items?itemName=delowar.compiled-thought-themes)
+- 🐛 [Report Issues](https://github.com/mdhossain-2437/open-source-the-compiled-thought-themes/issues)
+- 💡 [Feature Requests](https://github.com/mdhossain-2437/open-source-the-compiled-thought-themes/issues)
+- ⭐ [Rate & Review](https://marketplace.visualstudio.com/items?itemName=Delowar%20Hossain.compiled-thought-themes)
 
 ---
 
-**Made with ❤️ by Delowar**
+**Made with ❤️ by Delowar Hossain**
 
-*Transform your coding experience with intelligent, beautiful themes that adapt to your workflow.*
+_Transform your coding experience with intelligent, beautiful themes that adapt to your workflow._

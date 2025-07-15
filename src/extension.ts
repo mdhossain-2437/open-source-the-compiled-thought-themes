@@ -203,7 +203,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Enhanced theme selector command
   const selectThemeCommand = vscode.commands.registerCommand(
-    "delowar.selectTheme",
+    "Delowar Hossain.selectTheme",
     async () => {
       try {
         const themes = themeManager.getThemes();
@@ -239,7 +239,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Intelligent italic toggle
   const toggleItalicCommand = vscode.commands.registerCommand(
-    "delowar.toggleItalic",
+    "Delowar Hossain.toggleItalic",
     async () => {
       try {
         const currentTheme = vscode.workspace
@@ -287,13 +287,13 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Auto theme switching based on time (optional feature)
   const autoThemeCommand = vscode.commands.registerCommand(
-    "delowar.enableAutoTheme",
+    "Delowar Hossain.enableAutoTheme",
     () => {
       const interval = setInterval(() => {
         const hour = new Date().getHours();
         const config = vscode.workspace.getConfiguration();
         const autoThemeEnabled = config.get<boolean>(
-          "delowar.autoTheme",
+          "Delowar Hossain.autoTheme",
           false
         );
 
@@ -319,7 +319,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Theme preview command
   const previewThemeCommand = vscode.commands.registerCommand(
-    "delowar.previewTheme",
+    "Delowar Hossain.previewTheme",
     async () => {
       const themes = themeManager.getThemes();
       const panel = vscode.window.createWebviewPanel(

@@ -3,7 +3,7 @@
   "displayName": "The Compiled Thought Themes",
   "description": "Intelligent, memory-optimized theme collection with smart recommendations and advanced features",
   "version": "2.0.0",
-  "publisher": "delowar",
+  "publisher": "Delowar Hossain",
   "license": "MIT",
   "engines": {
     "vscode": "^1.70.0"
@@ -312,10 +312,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/compiled-thought-themes"
+    "url": "https://github.com/mdhossain-2437/open-source-the-compiled-thought-themes.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/compiled-thought-themes/issues"
+    "url": "https://github.com/mdhossain-2437/open-source-the-compiled-thought-themes/issues"
   },
-  "homepage": "https://github.com/yourusername/compiled-thought-themes#readme"
+  "homepage": "https://github.com/mdhossain-2437/open-source-the-compiled-thought-themes#readme"
 }
