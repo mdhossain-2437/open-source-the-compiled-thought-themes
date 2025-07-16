@@ -1,0 +1,81 @@
+{
+  "name": "TCT Aurora",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#0B132B",
+    "editor.foreground": "#F0F4EF",
+    "activityBar.background": "#1C2541",
+    "activityBar.foreground": "#5BC0BE",
+    "sideBar.background": "#1C2541",
+    "sideBar.foreground": "#F0F4EF",
+    "titleBar.activeBackground": "#1C2541",
+    "titleBar.activeForeground": "#5BC0BE",
+    "statusBar.background": "#1C2541",
+    "statusBar.foreground": "#5BC0BE",
+    "tab.activeBackground": "#1C2541",
+    "tab.activeForeground": "#5BC0BE",
+    "tab.inactiveBackground": "#0B132B",
+    "tab.inactiveForeground": "#6C757D",
+    "editorLineNumber.foreground": "#6C757D",
+    "editorLineNumber.activeForeground": "#5BC0BE",
+    "editorIndentGuide.background": "#2A3A4B",
+    "editorIndentGuide.activeBackground": "#5BC0BE",
+    "editor.selectionBackground": "#5BC0BE40",
+    "editor.selectionHighlightBackground": "#5BC0BE40",
+    "editor.wordHighlightBackground": "#5BC0BE40",
+    "editor.wordHighlightStrongBackground": "#5BC0BE80"
+  },
+  "tokenColors": [
+    {
+      "scope": ["comment", "punctuation.definition.comment"],
+      "settings": {
+        "foreground": "#6C757D"
+      }
+    },
+    {
+      "scope": ["string", "string.quoted"],
+      "settings": {
+        "foreground": "#F9A825"
+      }
+    },
+    {
+      "scope": ["keyword", "storage.type", "storage.modifier"],
+      "settings": {
+        "foreground": "#5BC0BE"
+      }
+    },
+    {
+      "scope": ["entity.name.function", "support.function"],
+      "settings": {
+        "foreground": "#3A506B"
+      }
+    },
+    {
+      "scope": ["variable", "support.variable"],
+      "settings": {
+        "foreground": "#F45B69"
+      }
+    },
+    {
+      "scope": ["constant", "constant.numeric", "constant.language"],
+      "settings": {
+        "foreground": "#F9A825"
+      }
+    },
+    {
+      "scope": ["entity.name.type", "support.type"],
+      "settings": {
+        "foreground": "#3A506B"
+      }
+    }
+  ],
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "function": "#3A506B",
+    "variable": "#F45B69",
+    "type": "#3A506B",
+    "class": "#5BC0BE",
+    "property": "#F9A825",
+    "parameter": "#F45B69"
+  }
+}

@@ -1,9 +1,9 @@
 {
   "name": "compiled-thought-themes",
-  "displayName": "The Compiled Thought Themes",
+  "displayName": "The Compiled Thought Themes - Enhanced Edition",
   "description": "Intelligent, memory-optimized theme collection with smart recommendations and advanced features",
-  "version": "2.0.0",
-  "publisher": "Delowar Hossain",
+  "version": "3.1.0",
+  "publisher": "DelowarHossain",
   "license": "MIT",
   "engines": {
     "vscode": "^1.70.0"
@@ -221,6 +221,16 @@
         "label": "TCT Starry Night",
         "uiTheme": "vs-dark",
         "path": "./themes/TCTStarryNight.json"
+      },
+      {
+        "label": "TCT Morning Light",
+        "uiTheme": "vs",
+        "path": "./themes/TCTMorningLight.json"
+      },
+      {
+        "label": "TCT Soft Dawn",
+        "uiTheme": "vs",
+        "path": "./themes/TCTSoftDawn.json"
       }
     ],
     "snippets": [
@@ -247,49 +257,131 @@
     ],
     "commands": [
       {
-        "command": "delowar.selectTheme",
+        "command": "DelowarHossain.selectTheme",
         "title": "TCT: Select Theme"
       },
       {
-        "command": "delowar.toggleItalic",
+        "command": "DelowarHossain.toggleItalic",
         "title": "TCT: Toggle Italic Variant"
       },
       {
-        "command": "delowar.enableAutoTheme",
+        "command": "DelowarHossain.enableAutoTheme",
         "title": "TCT: Enable Auto Theme Switching"
       },
       {
-        "command": "delowar.previewTheme",
+        "command": "DelowarHossain.previewTheme",
         "title": "TCT: Preview Themes"
+      },
+      {
+        "command": "DelowarHossain.viewThemeAnalytics",
+        "title": "TCT: View Theme Analytics"
+      },
+      {
+        "command": "DelowarHossain.shareTheme",
+        "title": "TCT: Share Current Theme"
+      },
+      {
+        "command": "DelowarHossain.configureSchedule",
+        "title": "TCT: Configure Theme Schedule"
+      },
+      {
+        "command": "DelowarHossain.customizeIcons",
+        "title": "TCT: Customize Icon Pack"
+      },
+      {
+        "command": "DelowarHossain.configureWorkspaceTheme",
+        "title": "TCT: Configure Workspace Theme"
+      },
+      {
+        "command": "DelowarHossain.customizeKeyboardShortcuts",
+        "title": "TCT: Customize Theme Shortcuts"
       }
     ],
     "configuration": {
       "title": "TCT Extension Settings",
       "properties": {
-        "delowar.enableItalic": {
+        "DelowarHossain.enableItalic": {
           "type": "boolean",
           "default": true,
           "description": "Enable italic variants for themes that support it"
         },
-        "delowar.autoTheme": {
+        "DelowarHossain.autoTheme": {
           "type": "boolean",
           "default": false,
           "description": "Automatically switch themes based on time and context"
         },
-        "delowar.fontFamily": {
+        "DelowarHossain.fontFamily": {
           "type": "string",
           "default": "Operator Mono, Fira Code, JetBrains Mono, Cascadia Code, Consolas, monospace",
           "description": "Optimized font family for coding"
         },
-        "delowar.fontLigatures": {
+        "DelowarHossain.fontLigatures": {
           "type": "boolean",
           "default": true,
           "description": "Enable font ligatures for better code readability"
         },
-        "delowar.smartRecommendations": {
+        "DelowarHossain.smartRecommendations": {
           "type": "boolean",
           "default": true,
           "description": "Enable smart theme recommendations based on file type and time"
+        },
+        "tct.ai.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable AI-powered features using Gemini"
+        },
+        "tct.ai.suggestions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable AI code suggestions and theme recommendations"
+        },
+        "tct.ai.codeAnalysis": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable AI code analysis for bug detection"
+        },
+        "tct.themes.customization": {
+          "type": "object",
+          "default": {},
+          "description": "Store custom theme configurations"
+        },
+        "tct.analytics.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable theme usage analytics to improve recommendations"
+        },
+        "tct.community.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable community features like theme sharing and ratings"
+        },
+        "tct.scheduling.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable theme scheduling based on time zones"
+        },
+        "tct.scheduling.timeZone": {
+          "type": "string",
+          "default": "auto",
+          "description": "Time zone for theme scheduling (auto or IANA time zone name)"
+        },
+        "tct.iconPacks": {
+          "type": "object",
+          "default": {
+            "selected": "material-design",
+            "custom": {}
+          },
+          "description": "Icon pack configuration and custom icon mappings"
+        },
+        "tct.workspace.themeOverrides": {
+          "type": "object",
+          "default": {},
+          "description": "Workspace-specific theme settings and overrides"
+        },
+        "tct.keyboardShortcuts": {
+          "type": "object",
+          "default": {},
+          "description": "Custom keyboard shortcuts for theme actions"
         }
       }
     }
@@ -298,17 +390,36 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "package": "vsce package --no-dependencies",
-    "publish": "vsce publish",
+    "package": "node ./scripts/version.js && vsce package --no-dependencies",
+    "publish": "node ./scripts/version.js && vsce publish",
+    "release": "node ./scripts/release.js",
     "clean": "rimraf out",
-    "precompile": "npm run clean"
+    "precompile": "npm run clean",
+    "version:bump": "node ./scripts/version.js bump",
+    "changelog": "node ./scripts/version.js changelog"
   },
   "devDependencies": {
-    "@types/vscode": "^1.70.0",
+    "@types/feather-icons": "^4.29.4",
     "@types/node": "16.x",
+    "@types/primer__octicons": "^19.11.0",
+    "@types/semver": "^7.7.0",
+    "@types/vscode": "^1.70.0",
+    "conventional-changelog-cli": "^4.1.0",
+    "conventional-recommended-bump": "^9.0.0",
+    "rimraf": "^3.0.2",
+    "semver": "^7.7.2",
     "typescript": "^4.9.4",
-    "vsce": "^2.15.0",
-    "rimraf": "^3.0.2"
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.5.1",
+    "@primer/octicons": "^19.8.0",
+    "analytics-node": "^3.0.0",
+    "chokidar": "^3.5.3",
+    "date-fns": "^2.30.0",
+    "date-fns-tz": "^2.0.0",
+    "feather-icons": "^4.29.1",
+    "material-design-icons": "^3.0.1"
   },
   "repository": {
     "type": "git",

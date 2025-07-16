@@ -1,510 +1,1025 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Compiled Thought Themes - Official</title>
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Font Awesome 6 Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  
-  <!-- AOS Animation Library -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  
-  <style>
-    * {
-      font-family: 'Inter', sans-serif;
-    }
-    
-    .code-font {
-      font-family: 'JetBrains Mono', monospace;
-    }
-    
-    .gradient-bg {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    
-    .gradient-text {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .glass-effect {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    .theme-card {
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    
-    .theme-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    }
-    
-    .floating {
-      animation: floating 3s ease-in-out infinite;
-    }
-    
-    @keyframes floating {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    
-    .pulse-glow {
-      animation: pulse-glow 2s infinite;
-    }
-    
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.4); }
-      50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.8); }
-    }
-    
-    .typing-animation {
-      overflow: hidden;
-      border-right: 3px solid #667eea;
-      white-space: nowrap;
-      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-    }
-    
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-    
-    @keyframes blink-caret {
-      from, to { border-color: transparent; }
-      50% { border-color: #667eea; }
-    }
-  </style>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      The Compiled Thought Themes - Transform Your VS Code Experience
+    </title>
 
-<body class="bg-gray-50 text-gray-800 overflow-x-hidden">
-  
-  <!-- Navigation -->
-  <nav class="fixed top-0 w-full z-50 glass-effect">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center py-4">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
-            <i class="fas fa-brain text-white text-lg"></i>
-          </div>
-          <span class="text-xl font-bold gradient-text">TCT Themes</span>
-        </div>
-        
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="#features" class="text-gray-700 hover:text-indigo-600 transition-colors font-medium">Features</a>
-          <a href="#themes" class="text-gray-700 hover:text-indigo-600 transition-colors font-medium">Themes</a>
-          <a href="#ai-power" class="text-gray-700 hover:text-indigo-600 transition-colors font-medium">AI Power</a>
-          <a href="#contribute" class="text-gray-700 hover:text-indigo-600 transition-colors font-medium">Contribute</a>
-          <a href="https://marketplace.visualstudio.com/items?itemName=Delowar%20Hossain.compiled-thought-themes" 
-             target="_blank" 
-             class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
-            Install Now
-          </a>
-        </div>
-        
-        <button class="md:hidden text-gray-700" id="mobile-menu-btn">
-          <i class="fas fa-bars text-xl"></i>
-        </button>
-      </div>
-    </div>
-  </nav>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Hero Section -->
-  <section class="min-h-screen flex items-center justify-center gradient-bg relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute top-20 left-20 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-      <div class="absolute top-40 right-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
-      <div class="absolute -bottom-8 left-40 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
-    </div>
-    
-    <div class="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
-      <div data-aos="fade-up" data-aos-duration="1000">
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-          The <span class="text-yellow-300">Compiled</span><br>
-          <span class="typing-animation inline-block">Thought Themes</span>
-        </h1>
-      </div>
-      
-      <div data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
-        <p class="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto leading-relaxed">
-          Intelligent, memory-optimized theme collection with smart recommendations and advanced features. 
-          Transform your coding experience with 38+ beautiful themes powered by AI.
-        </p>
-      </div>
-      
-      <div data-aos="fade-up" data-aos-delay="1000" data-aos-duration="1000" class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="https://marketplace.visualstudio.com/items?itemName=Delowar%20Hossain.compiled-thought-themes" 
-           target="_blank"
-           class="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors pulse-glow">
-          <i class="fas fa-download mr-2"></i>
-          Install Extension
-        </a>
-        <a href="#themes" 
-           class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-indigo-600 transition-colors">
-          <i class="fas fa-palette mr-2"></i>
-          Explore Themes
-        </a>
-      </div>
-      
-      <div data-aos="fade-up" data-aos-delay="1500" class="mt-12 flex justify-center items-center space-x-8 text-sm text-gray-300">
-        <div class="flex items-center">
-          <i class="fas fa-star text-yellow-400 mr-1"></i>
-          <span>4.9/5 Rating</span>
-        </div>
-        <div class="flex items-center">
-          <i class="fas fa-download mr-1"></i>
-          <span>10K+ Downloads</span>
-        </div>
-        <div class="flex items-center">
-          <i class="fas fa-palette mr-1"></i>
-          <span>38+ Themes</span>
-        </div>
-      </div>
-    </div>
-    
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
-      <i class="fas fa-chevron-down text-2xl"></i>
-    </div>
-  </section>
+    <!-- Font Awesome 6 Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
-  <!-- Features Section -->
-  <section id="features" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-aos="fade-up">
-        <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">Powerful Features</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Experience the next generation of VS Code themes with intelligent features designed for modern developers.
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl theme-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mb-6 floating">
-            <i class="fas fa-brain text-white text-2xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 text-gray-800">Smart Recommendations</h3>
-          <p class="text-gray-600 leading-relaxed">
-            AI-powered theme suggestions based on your coding patterns, file types, and time of day for optimal productivity.
-          </p>
-        </div>
-        
-        <div class="bg-gradient-to-br from-purple-50 to-pink-100 p-8 rounded-2xl theme-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mb-6 floating">
-            <i class="fas fa-palette text-white text-2xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 text-gray-800">38+ Premium Themes</h3>
-          <p class="text-gray-600 leading-relaxed">
-            Carefully crafted color schemes including signature themes like Candyland, Sunset, Forest, and Starry Night.
-          </p>
-        </div>
-        
-        <div class="bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-2xl theme-card" data-aos="fade-up" data-aos-delay="300">
-          <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-6 floating">
-            <i class="fas fa-memory text-white text-2xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 text-gray-800">Memory Optimized</h3>
-          <p class="text-gray-600 leading-relaxed">
-            Intelligent caching system that uses minimal resources while providing lightning-fast theme switching.
-          </p>
-        </div>
-        
-        <div class="bg-gradient-to-br from-yellow-50 to-orange-100 p-8 rounded-2xl theme-card" data-aos="fade-up" data-aos-delay="400">
-          <div class="w-16 h-16 bg-yellow-500 rounded-2xl flex items-center justify-center mb-6 floating">
-            <i class="fas fa-italic text-white text-2xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 text-gray-800">Italic Variants</h3>
-          <p class="text-gray-600 leading-relaxed">
-            Beautiful italic versions of popular themes optimized for premium fonts like Operator Mono and Fira Code.
-          </p>
-        </div>
-        
-        <div class="bg-gradient-to-br from-red-50 to-pink-100 p-8 rounded-2xl theme-card" data-aos="fade-up" data-aos-delay="500">
-          <div class="w-16 h-16 bg-red-500 rounded-2xl flex items-center justify-center mb-6 floating">
-            <i class="fas fa-code text-white text-2xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 text-gray-800">Code Snippets</h3>
-          <p class="text-gray-600 leading-relaxed">
-            Built-in Python and React snippets to boost your productivity with common patterns and boilerplate code.
-          </p>
-        </div>
-        
-        <div class="bg-gradient-to-br from-indigo-50 to-blue-100 p-8 rounded-2xl theme-card" data-aos="fade-up" data-aos-delay="600">
-          <div class="w-16 h-16 bg-indigo-500 rounded-2xl flex items-center justify-center mb-6 floating">
-            <i class="fas fa-clock text-white text-2xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-4 text-gray-800">Auto Theme Switching</h3>
-          <p class="text-gray-600 leading-relaxed">
-            Automatic theme changes based on time of day and coding context for the perfect ambiance.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Fira+Code:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Themes Showcase -->
-  <section id="themes" class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-aos="fade-up">
-        <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">Theme Gallery</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Discover our signature collection of carefully crafted themes, each designed to enhance your coding experience.
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        <div class="theme-card bg-white rounded-2xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="100">
-          <div class="h-32 bg-gradient-to-br from-pink-400 to-purple-600 rounded-xl mb-4 flex items-center justify-center">
-            <span class="text-white font-bold text-lg">TCT</span>
-          </div>
-          <h3 class="font-bold text-lg mb-2">Candyland</h3>
-          <p class="text-gray-600 text-sm">Playful pink and purple palette</p>
-        </div>
-        
-        <div class="theme-card bg-white rounded-2xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="200">
-          <div class="h-32 bg-gradient-to-br from-orange-400 to-red-600 rounded-xl mb-4 flex items-center justify-center">
-            <span class="text-white font-bold text-lg">TCT</span>
-          </div>
-          <h3 class="font-bold text-lg mb-2">Sunset</h3>
-          <p class="text-gray-600 text-sm">Warm orange and red gradients</p>
-        </div>
-        
-        <div class="theme-card bg-white rounded-2xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="300">
-          <div class="h-32 bg-gradient-to-br from-green-400 to-emerald-600 rounded-xl mb-4 flex items-center justify-center">
-            <span class="text-white font-bold text-lg">TCT</span>
-          </div>
-          <h3 class="font-bold text-lg mb-2">Forest</h3>
-          <p class="text-gray-600 text-sm">Calming green nature tones</p>
-        </div>
-        
-        <div class="theme-card bg-white rounded-2xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="400">
-          <div class="h-32 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-xl mb-4 flex items-center justify-center">
-            <span class="text-white font-bold text-lg">TCT</span>
-          </div>
-          <h3 class="font-bold text-lg mb-2">Sea Wave</h3>
-          <p class="text-gray-600 text-sm">Cool blue ocean vibes</p>
-        </div>
-        
-        <div class="theme-card bg-white rounded-2xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="500">
-          <div class="h-32 bg-gradient-to-br from-gray-400 to-gray-600 rounded-xl mb-4 flex items-center justify-center">
-            <span class="text-white font-bold text-lg">TCT</span>
-          </div>
-          <h3 class="font-bold text-lg mb-2">Zen Garden</h3>
-          <p class="text-gray-600 text-sm">Minimalist gray harmony</p>
-        </div>
-        
-        <div class="theme-card bg-white rounded-2xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="600">
-          <div class="h-32 bg-gradient-to-br from-purple-600 to-indigo-800 rounded-xl mb-4 flex items-center justify-center">
-            <span class="text-white font-bold text-lg">TCT</span>
-          </div>
-          <h3 class="font-bold text-lg mb-2">Starry Night</h3>
-          <p class="text-gray-600 text-sm">Deep purple cosmic feel</p>
-        </div>
-        
-        <div class="theme-card bg-white rounded-2xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="700">
-          <div class="h-32 bg-gradient-to-br from-gray-800 to-purple-900 rounded-xl mb-4 flex items-center justify-center">
-            <span class="text-white font-bold text-lg">TCT</span>
-          </div>
-          <h3 class="font-bold text-lg mb-2">Dracula</h3>
-          <p class="text-gray-600 text-sm">Classic dark vampire theme</p>
-        </div>
-        
-        <div class="theme-card bg-white rounded-2xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="800">
-          <div class="h-32 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-xl mb-4 flex items-center justify-center">
-            <span class="text-gray-800 font-bold text-lg">TCT</span>
-          </div>
-          <h3 class="font-bold text-lg mb-2">Monokai Pro</h3>
-          <p class="text-gray-600 text-sm">Professional coding theme</p>
-        </div>
-      </div>
-      
-      <div class="text-center" data-aos="fade-up">
-        <p class="text-gray-600 mb-6">And 30+ more themes waiting to be discovered!</p>
-        <a href="https://marketplace.visualstudio.com/items?itemName=Delowar%20Hossain.compiled-thought-themes" 
-           target="_blank"
-           class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
-          View All Themes
-        </a>
-      </div>
-    </div>
-  </section>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-  <!-- AI Power Section -->
-  <section id="ai-power" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-aos="fade-up">
-        <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">AI-Powered Intelligence</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Experience the future of theme selection with advanced AI that learns your preferences and adapts to your workflow.
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div data-aos="fade-right">
-          <div class="bg-gradient-to-br from-indigo-50 to-purple-100 p-8 rounded-2xl">
-            <div class="flex items-center mb-6">
-              <div class="w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center mr-4">
-                <i class="fas fa-robot text-white text-xl"></i>
-              </div>
-              <h3 class="text-2xl font-bold text-gray-800">Smart Learning</h3>
-            </div>
-            <p class="text-gray-600 mb-6 leading-relaxed">
-              Our AI analyzes your coding patterns, file types, and time preferences to suggest the perfect theme for every situation.
-            </p>
-            <ul class="space-y-3">
-              <li class="flex items-center text-gray-700">
-                <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                Context-aware recommendations
-              </li>
-              <li class="flex items-center text-gray-700">
-                <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                Time-based theme switching
-              </li>
-              <li class="flex items-center text-gray-700">
-                <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                File type optimization
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        <div data-aos="fade-left">
-          <div class="bg-gradient-to-br from-purple-50 to-pink-100 p-8 rounded-2xl">
-            <div class="flex items-center mb-6">
-              <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mr-4">
-                <i class="fas fa-chart-line text-white text-xl"></i>
-              </div>
-              <h3 class="text-2xl font-bold text-gray-800">Analytics & Insights</h3>
-            </div>
-            <p class="text-gray-600 mb-6 leading-relaxed">
-              Track your theme usage patterns and discover insights about your coding habits to optimize your development environment.
-            </p>
-            <ul class="space-y-3">
-              <li class="flex items-center text-gray-700">
-                <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                Usage analytics dashboard
-              </li>
-              <li class="flex items-center text-gray-700">
-                <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                Productivity insights
-              </li>
-              <li class="flex items-center text-gray-700">
-                <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                Personal recommendations
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <style>
+      * {
+        font-family: "Inter", sans-serif;
+      }
 
-  <!-- Contribute Section -->
-  <section id="contribute" class="py-20 gradient-bg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div data-aos="fade-up">
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Join Our Community</h2>
-        <p class="text-xl text-gray-200 mb-12 max-w-3xl mx-auto">
-          Help us build the future of VS Code themes. Contribute, share feedback, and be part of our growing community of developers.
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-        <div class="glass-effect p-8 rounded-2xl text-white" data-aos="fade-up" data-aos-delay="100">
-          <i class="fas fa-star text-4xl text-yellow-400 mb-4"></i>
-          <h3 class="text-xl font-bold mb-4">Star the Repo</h3>
-          <p class="text-gray-200 mb-6">Show your support by starring our GitHub repository</p>
-          <a href="https://github.com/mdhossain-2437/open-source-the-compiled-thought-themes" 
-             target="_blank"
-             class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center">
-            <i class="fas fa-star mr-2"></i>
-            Star Now
-          </a>
-        </div>
-        
-        <div class="glass-effect p-8 rounded-2xl text-white" data-aos="fade-up" data-aos-delay="200">
-          <i class="fas fa-code-branch text-4xl text-blue-400 mb-4"></i>
-          <h3 class="text-xl font-bold mb-4">Fork & Contribute</h3>
-          <p class="text-gray-200 mb-6">Create your own themes and submit pull requests</p>
-          <a href="https://github.com/mdhossain-2437/open-source-the-compiled-thought-themes/fork" 
-             target="_blank"
-             class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center">
-            <i class="fas fa-code-branch mr-2"></i>
-            Fork Repo
-          </a>
-        </div>
-        
-        <div class="glass-effect p-8 rounded-2xl text-white" data-aos="fade-up" data-aos-delay="300">
-          <i class="fas fa-bug text-4xl text-green-400 mb-4"></i>
-          <h3 class="text-xl font-bold mb-4">Report Issues</h3>
-          <p class="text-gray-200 mb-6">Help us improve by reporting bugs and suggesting features</p>
-          <a href="https://github.com/mdhossain-2437/open-source-the-compiled-thought-themes/issues" 
-             target="_blank"
-             class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center">
-            <i class="fas fa-bug mr-2"></i>
-            Report Issue
-          </a>
-        </div>
-      </div>
-      
-      <div data-aos="fade-up" data-aos-delay="400">
-        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
-          <div class="flex items-center text-white">
-            <i class="fas fa-users mr-2"></i>
-            <span>500+ Contributors</span>
-          </div>
-          <div class="flex items-center text-white">
-            <i class="fas fa-code-branch mr-2"></i>
-            <span>200+ Forks</span>
-          </div>
-          <div class="flex items-center text-white">
-            <i class="fas fa-star mr-2"></i>
-            <span>1.2K+ Stars</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      .code-font {
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+      }
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-        <div>
-          <div class="flex items-center space-x-3 mb-4">
-            <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .theme-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .theme-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .floating {
+        animation: floating 3s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .pulse-glow {
+        animation: pulse-glow 2s infinite;
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(102, 126, 234, 0.8);
+        }
+      }
+
+      .typing-animation {
+        overflow: hidden;
+        border-right: 3px solid #667eea;
+        white-space: nowrap;
+        animation: typing 3.5s steps(40, end),
+          blink-caret 0.75s step-end infinite;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: #667eea;
+        }
+      }
+
+      /* VS Code Editor Simulator Styles */
+      .vscode-editor {
+        background: #1e1e1e;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .vscode-titlebar {
+        background: #323233;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        border-bottom: 1px solid #2d2d30;
+      }
+
+      .vscode-traffic-lights {
+        display: flex;
+        gap: 8px;
+      }
+
+      .traffic-light {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+
+      .traffic-light.red {
+        background: #ff5f57;
+      }
+
+      .traffic-light.yellow {
+        background: #ffbd2e;
+      }
+
+      .traffic-light.green {
+        background: #28ca42;
+      }
+
+      .vscode-tabs {
+        background: #2d2d30;
+        display: flex;
+        border-bottom: 1px solid #1e1e1e;
+      }
+
+      .vscode-tab {
+        background: #2d2d30;
+        color: #cccccc;
+        padding: 8px 16px;
+        border-right: 1px solid #1e1e1e;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+      }
+
+      .vscode-tab.active {
+        background: #1e1e1e;
+        color: #ffffff;
+      }
+
+      .vscode-tab:hover:not(.active) {
+        background: #37373d;
+      }
+
+      .vscode-sidebar {
+        background: #252526;
+        width: 240px;
+        border-right: 1px solid #2d2d30;
+      }
+
+      .vscode-main {
+        display: flex;
+        height: 500px;
+      }
+
+      .vscode-editor-area {
+        flex: 1;
+        background: #1e1e1e;
+        position: relative;
+      }
+
+      .line-numbers {
+        background: #1e1e1e;
+        color: #858585;
+        padding: 16px 8px;
+        text-align: right;
+        font-size: 13px;
+        line-height: 1.6;
+        border-right: 1px solid #2d2d30;
+        user-select: none;
+        width: 50px;
+      }
+
+      .code-content {
+        padding: 16px;
+        color: #d4d4d4;
+        flex: 1;
+        overflow-y: auto;
+        white-space: pre;
+      }
+
+      .code-line {
+        min-height: 22px;
+        display: flex;
+      }
+
+      .sidebar-section {
+        padding: 12px;
+        border-bottom: 1px solid #2d2d30;
+      }
+
+      .sidebar-title {
+        color: #cccccc;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+
+      .file-item {
+        color: #cccccc;
+        padding: 4px 8px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s;
+      }
+
+      .file-item:hover {
+        background: #37373d;
+      }
+
+      .file-item.active {
+        background: #094771;
+        color: #ffffff;
+      }
+
+      /* Theme-specific syntax highlighting */
+      .keyword {
+        font-weight: bold;
+      }
+      .string {
+      }
+      .comment {
+        font-style: italic;
+        opacity: 0.7;
+      }
+      .function {
+        font-weight: 600;
+      }
+      .variable {
+      }
+      .type {
+        font-weight: 600;
+      }
+      .number {
+      }
+
+      /* Theme animations */
+      .theme-transition {
+        transition: all 0.5s ease;
+      }
+
+      .star-animation {
+        animation: starPulse 2s infinite;
+      }
+
+      @keyframes starPulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      .download-counter {
+        animation: countUp 3s ease-out;
+      }
+
+      @keyframes countUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .vscode-main {
+          flex-direction: column;
+          height: auto;
+        }
+
+        .vscode-sidebar {
+          width: 100%;
+          height: 200px;
+        }
+
+        .vscode-editor-area {
+          height: 400px;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50 text-gray-800 overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center"
+            >
               <i class="fas fa-brain text-white text-lg"></i>
             </div>
-            <span class="text-xl font-bold">TCT Themes</span>
+            <span class="text-xl font-bold gradient-text">TCT Themes</span>
           </div>
-          <p class="text-gray-400 leading-relaxed">
-            The ultimate VS Code theme collection with AI-powered intelligence and beautiful design.
+
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              href="#features"
+              class="text-gray-700 hover:text-indigo-600 transition-colors font-medium"
+              >Features</a
+            >
+            <a
+              href="#live-editor"
+              class="text-gray-700 hover:text-indigo-600 transition-colors font-medium"
+              >Live Editor</a
+            >
+            <a
+              href="#themes"
+              class="text-gray-700 hover:text-indigo-600 transition-colors font-medium"
+              >Themes</a
+            >
+            <a
+              href="#contribute"
+              class="text-gray-700 hover:text-indigo-600 transition-colors font-medium"
+              >Contribute</a
+            >
+            <a
+              href="https://marketplace.visualstudio.com/items?itemName=DelowarHossain.compiled-thought-themes"
+              target="_blank"
+              class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+            >
+              Install Now
+            </a>
+          </div>
+
+          <button class="md:hidden text-gray-700" id="mobile-menu-btn">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="min-h-screen flex flex-col items-center justify-center gradient-bg relative overflow-hidden"
+      id="live-editor"
+    >
+      <div class="absolute inset-0 opacity-10">
+        <div
+          class="absolute top-20 left-20 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl animate-pulse"
+        ></div>
+        <div
+          class="absolute top-40 right-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"
+        ></div>
+        <div
+          class="absolute -bottom-8 left-40 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"
+        ></div>
+      </div>
+
+      <div
+        class="relative z-10 text-center text-white px-4 max-w-7xl mx-auto w-full"
+      >
+        <div data-aos="fade-up" data-aos-duration="1000" class="mb-8">
+          <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            🎮 Interactive Theme Playground
+          </h1>
+          <p
+            class="text-xl md:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed"
+          >
+            Experience all 38+ TCT themes in a real VS Code-like environment!
+            Click any theme below to see how your code will look. This is
+            exactly how it appears in your editor.
           </p>
         </div>
-        
-        <div>
-          <h4 class="font-bold mb-4">Quick Links</h4>
-          <ul class="space-y-2 text-gray-400">
-            <li><a href="#features" class="hover:text-white transition-colors">Features</a></li>
-            <li><a href="#themes" class="hover:text-white transition-colors">Themes</a></li>
-            <li><a href="#ai-power" class="hover:text-white transition-colors">AI Power</a></li>
-            <li><a href="#contribute" class="hover:text-white transition-colors">Contribute</a></li>
-          </ul>
+
+        <div
+          class="flex flex-wrap justify-center gap-3 mb-6"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <button
+            class="theme-btn px-4 py-2 rounded-lg font-medium transition-all bg-indigo-600 hover:bg-indigo-700"
+            data-theme="TCTCandyland"
+          >
+            🍭 TCT Candyland
+          </button>
+          <button
+            class="theme-btn px-4 py-2 rounded-lg font-medium transition-all bg-pink-600 hover:bg-pink-700"
+            data-theme="TCTSunset"
+          >
+            🌅 TCT Sunset
+          </button>
+          <button
+            class="theme-btn px-4 py-2 rounded-lg font-medium transition-all bg-green-600 hover:bg-green-700"
+            data-theme="TCTForest"
+          >
+            🌲 TCT Forest
+          </button>
+          <button
+            class="theme-btn px-4 py-2 rounded-lg font-medium transition-all bg-blue-600 hover:bg-blue-700"
+            data-theme="TCTSeaWave"
+          >
+            🌊 TCT Sea Wave
+          </button>
+          <button
+            class="theme-btn px-4 py-2 rounded-lg font-medium transition-all bg-gray-600 hover:bg-gray-700"
+            data-theme="TCTZenGarden"
+          >
+            🧘 TCT Zen Garden
+          </button>
+          <button
+            class="theme-btn px-4 py-2 rounded-lg font-medium transition-all bg-purple-700 hover:bg-purple-800"
+            data-theme="TCTStarryNight"
+          >
+            ⭐ TCT Starry Night
+          </button>
+          <button
+            class="theme-btn px-4 py-2 rounded-lg font-medium transition-all bg-purple-900 hover:bg-purple-950"
+            data-theme="TCTDracula"
+          >
+            🧛 TCT Dracula
+          </button>
+          <button
+            class="theme-btn px-4 py-2 rounded-lg font-medium transition-all bg-yellow-600 hover:bg-yellow-700"
+            data-theme="TCTMonokaiPro"
+          >
+            🎯 TCT Monokai Pro
+          </button>
         </div>
-        
-        <div>
-          <h4 class="font-bold mb-4">Resources</h4>
-          <ul class="space-y-2 text-gray-400">
-            <li><a href="https://marketplace.visualstudio.com/items?itemName=Delowar%20Hossain.
+
+        <!-- New Testimonials Section -->
+        <section id="testimonials" class="py-16 bg-white">
+          <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-8 gradient-text">What Developers Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div class="p-6 border rounded-lg shadow hover:shadow-lg transition">
+                <p class="text-gray-700 italic mb-4">"TCT Themes have transformed my coding experience. The smart recommendations are a game changer!"</p>
+                <h3 class="font-semibold text-indigo-600">Sarah Chen</h3>
+                <p class="text-sm text-gray-500">Senior Developer</p>
+              </div>
+              <div class="p-6 border rounded-lg shadow hover:shadow-lg transition">
+                <p class="text-gray-700 italic mb-4">"The automatic theme switching based on file type is genius. Productivity boosted by 40%!"</p>
+                <h3 class="font-semibold text-indigo-600">Marcus Rodriguez</h3>
+                <p class="text-sm text-gray-500">Full-Stack Engineer</p>
+              </div>
+              <div class="p-6 border rounded-lg shadow hover:shadow-lg transition">
+                <p class="text-gray-700 italic mb-4">"Memory optimization means no more slowdowns. Plus, Candyland theme makes coding fun!"</p>
+                <h3 class="font-semibold text-indigo-600">Priya Patel</h3>
+                <p class="text-sm text-gray-500">Frontend Developer</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- New FAQ Section -->
+        <section id="faq" class="py-16 bg-gray-50">
+          <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-8 text-center gradient-text">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+              <div>
+                <h3 class="font-semibold text-indigo-600 cursor-pointer faq-question">How do I install TCT Themes?</h3>
+                <p class="mt-2 text-gray-700 hidden faq-answer">You can install TCT Themes directly from the VS Code Marketplace by clicking the "Install Now" button above.</p>
+              </div>
+              <div>
+                <h3 class="font-semibold text-indigo-600 cursor-pointer faq-question">Are the themes compatible with all VS Code versions?</h3>
+                <p class="mt-2 text-gray-700 hidden faq-answer">TCT Themes support VS Code version 1.70.0 and above.</p>
+              </div>
+              <div>
+                <h3 class="font-semibold text-indigo-600 cursor-pointer faq-question">Can I contribute my own themes?</h3>
+                <p class="mt-2 text-gray-700 hidden faq-answer">Yes! We welcome contributions. Please fork the repo and submit a pull request.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- New Call to Action Section -->
+        <section id="call-to-action" class="py-16 bg-indigo-600 text-white text-center">
+          <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Coding Experience?</h2>
+          <p class="mb-8 max-w-2xl mx-auto">Install TCT Themes today and join a community of 10K+ developers who code smarter and more beautifully.</p>
+          <a href="https://marketplace.visualstudio.com/items?itemName=DelowarHossain.compiled-thought-themes" target="_blank" class="inline-block bg-yellow-400 text-indigo-900 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-500 transition">Install Now</a>
+          <a href="https://github.com/mdhossain-2437/open-source-the-compiled-thought-themes" target="_blank" class="inline-block ml-4 bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition">Visit GitHub</a>
+        </section>
+
+        <script>
+          // FAQ toggle functionality
+          document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+              const answer = question.nextElementSibling;
+              if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+              } else {
+                answer.classList.add('hidden');
+              }
+            });
+          });
+        </script>
+
+
+        <div
+          class="vscode-editor rounded-lg shadow-lg mx-auto max-w-7xl"
+          style="height: 500px"
+        >
+          <div
+            class="vscode-titlebar flex items-center px-4 py-2 bg-gray-900 text-gray-300"
+          >
+            <div class="vscode-traffic-lights flex space-x-2">
+              <div
+                class="traffic-light red rounded-full w-3 h-3 bg-red-500"
+              ></div>
+              <div
+                class="traffic-light yellow rounded-full w-3 h-3 bg-yellow-400"
+              ></div>
+              <div
+                class="traffic-light green rounded-full w-3 h-3 bg-green-500"
+              ></div>
+            </div>
+            <div class="ml-4 font-mono text-sm">
+              Visual Studio Code - TCT Theme Playground
+            </div>
+          </div>
+          <div class="vscode-tabs flex bg-gray-800 text-gray-400 text-sm">
+            <div
+              class="vscode-tab active flex items-center px-4 py-2 border-r border-gray-700 cursor-pointer"
+            >
+              <i class="fab fa-js-square text-yellow-400 mr-2"></i> app.js
+            </div>
+            <div
+              class="vscode-tab flex items-center px-4 py-2 border-r border-gray-700 cursor-pointer"
+            >
+              <i class="fab fa-react text-blue-400 mr-2"></i> Component.jsx
+            </div>
+            <div
+              class="vscode-tab flex items-center px-4 py-2 border-r border-gray-700 cursor-pointer"
+            >
+              <i class="fab fa-python text-green-400 mr-2"></i> main.py
+            </div>
+            <div class="vscode-tab flex items-center px-4 py-2 cursor-pointer">
+              <i class="fab fa-css3-alt text-blue-500 mr-2"></i> styles.css
+            </div>
+          </div>
+          <div class="vscode-main flex h-full bg-gray-900 text-gray-100">
+            <div class="vscode-sidebar w-60 bg-gray-800 p-4 overflow-y-auto">
+              <div class="sidebar-section mb-6">
+                <div
+                  class="sidebar-title uppercase text-xs font-semibold text-gray-400 mb-2"
+                >
+                  Explorer
+                </div>
+                <div
+                  class="file-item bg-gray-700 rounded px-2 py-1 mb-1 cursor-pointer text-white flex items-center space-x-2"
+                >
+                  <i class="fas fa-folder-open text-blue-400"></i>
+                  <span>tct-themes-project</span>
+                </div>
+                <div
+                  class="file-item px-2 py-1 mb-1 cursor-pointer hover:bg-gray-700 rounded flex items-center space-x-2"
+                >
+                  <i class="fab fa-js-square text-yellow-400"></i>
+                  <span>app.js</span>
+                </div>
+                <div
+                  class="file-item px-2 py-1 mb-1 cursor-pointer hover:bg-gray-700 rounded flex items-center space-x-2"
+                >
+                  <i class="fab fa-react text-blue-400"></i>
+                  <span>Component.jsx</span>
+                </div>
+                <div
+                  class="file-item px-2 py-1 mb-1 cursor-pointer hover:bg-gray-700 rounded flex items-center space-x-2"
+                >
+                  <i class="fab fa-python text-green-400"></i>
+                  <span>main.py</span>
+                </div>
+                <div
+                  class="file-item px-2 py-1 mb-1 cursor-pointer hover:bg-gray-700 rounded flex items-center space-x-2"
+                >
+                  <i class="fab fa-css3-alt text-blue-500"></i>
+                  <span>styles.css</span>
+                </div>
+              </div>
+              <div class="sidebar-section">
+                <div
+                  class="sidebar-title uppercase text-xs font-semibold text-gray-400 mb-2"
+                >
+                  TCT Themes
+                </div>
+                <div
+                  class="file-item px-2 py-1 mb-1 cursor-pointer flex items-center space-x-2"
+                >
+                  <i class="fas fa-palette text-pink-400"></i>
+                  <span
+                    >Current:
+                    <span id="current-theme-name">TCT Candyland</span></span
+                  >
+                </div>
+                <div
+                  class="file-item px-2 py-1 mb-1 cursor-pointer flex items-center space-x-2"
+                >
+                  <i class="fas fa-brain text-purple-400"></i>
+                  <span>AI Recommendations: ON</span>
+                </div>
+                <div
+                  class="file-item px-2 py-1 mb-1 cursor-pointer flex items-center space-x-2"
+                >
+                  <i class="fas fa-memory text-green-400"></i>
+                  <span>Memory Usage: Optimized</span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="vscode-editor-area flex-1 p-4 overflow-auto font-mono text-sm leading-relaxed whitespace-pre-wrap"
+              id="code-content"
+            >
+              <code id="code-sample" class="block"></code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">
+            Powerful Features
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Experience the next generation of VS Code themes with intelligent
+            features designed for modern developers.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl theme-card"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div
+              class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mb-6 floating"
+            >
+              <i class="fas fa-brain text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">
+              Smart Recommendations
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              AI-powered theme suggestions based on your coding patterns, file
+              types, and time of day for optimal productivity.
+            </p>
+          </div>
+
+          <div
+            class="bg-gradient-to-br from-purple-50 to-pink-100 p-8 rounded-2xl theme-card"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div
+              class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mb-6 floating"
+            >
+              <i class="fas fa-palette text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">
+              38+ Premium Themes
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Carefully crafted color schemes including signature themes like
+              Candyland, Sunset, Forest, and Starry Night.
+            </p>
+          </div>
+
+          <div
+            class="bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-2xl theme-card"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div
+              class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mb-6 floating"
+            >
+              <i class="fas fa-memory text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">
+              Memory Optimized
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Intelligent caching system that uses minimal resources while
+              providing lightning-fast theme switching.
+            </p>
+          </div>
+
+          <div
+            class="bg-gradient-to-br from-yellow-50 to-orange-100 p-8 rounded-2xl theme-card"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <div
+              class="w-16 h-16 bg-yellow-500 rounded-2xl flex items-center justify-center mb-6 floating"
+            >
+              <i class="fas fa-italic text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">
+              Italic Variants
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Beautiful italic versions of popular themes optimized for premium
+              fonts like Operator Mono and Fira Code.
+            </p>
+          </div>
+
+          <div
+            class="bg-gradient-to-br from-red-50 to-pink-100 p-8 rounded-2xl theme-card"
+            data-aos="fade-up"
+            data-aos-delay="500"
+          >
+            <div
+              class="w-16 h-16 bg-red-500 rounded-2xl flex items-center justify-center mb-6 floating"
+            >
+              <i class="fas fa-code text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">Code Snippets</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Built-in Python and React snippets to boost your productivity with
+              common patterns and boilerplate code.
+            </p>
+          </div>
+
+          <div
+            class="bg-gradient-to-br from-indigo-50 to-blue-100 p-8 rounded-2xl theme-card"
+            data-aos="fade-up"
+            data-aos-delay="600"
+          >
+            <div
+              class="w-16 h-16 bg-indigo-500 rounded-2xl flex items-center justify-center mb-6 floating"
+            >
+              <i class="fas fa-clock text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">
+              Auto Theme Switching
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Automatic theme changes based on time of day and coding context
+              for the perfect ambiance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live VS Code Editor Simulator -->
+    <section id="live-editor" class="py-20 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">
+            🎮 Interactive Theme Playground
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Experience all 38+ TCT themes in a real VS Code-like environment!
+            Click any theme below to see how your code will look. This is
+            exactly how it appears in your editor.
+          </p>
+        </div>
+
+        <div class="mb-8" data-aos="fade-up">
+          <div class="flex flex-wrap justify-center gap-3 mb-6">
+            <button
+              class="theme-btn px-4 py-2 rounded-lg font-medium transition-all"
+              data-theme="candyland"
+            >
+              🍭 TCT Candyland
+            </button>
+            <button
+              class="theme-btn px-4 py-2 rounded-lg font-medium transition-all"
+              data-theme="sunset"
+            >
+              🌅 TCT Sunset
+            </button>
+            <button
+              class="theme-btn px-4 py-2 rounded-lg font-medium transition-all"
+              data-theme="forest"
+            >
+              🌲 TCT Forest
+            </button>
+            <button
+              class="theme-btn px-4 py-2 rounded-lg font-medium transition-all"
+              data-theme="seawave"
+            >
+              🌊 TCT Sea Wave
+            </button>
+            <button
+              class="theme-btn px-4 py-2 rounded-lg font-medium transition-all"
+              data-theme="zen"
+            >
+              🧘 TCT Zen Garden
+            </button>
+            <button
+              class="theme-btn px-4 py-2 rounded-lg font-medium transition-all"
+              data-theme="starry"
+            >
+              ⭐ TCT Starry Night
+            </button>
+            <button
+              class="theme-btn px-4 py-2 rounded-lg font-medium transition-all"
+              data-theme="dracula"
+            >
+              🧛 TCT Dracula
+            </button>
+            <button
+              class="theme-btn px-4 py-2 rounded-lg font-medium transition-all"
+              data-theme="monokai"
+            >
+              🎯 TCT Monokai Pro
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="vscode-editor theme-transition"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <!-- VS Code Title Bar -->
+          <div class="vscode-titlebar">
+            <div class="vscode-traffic-lights">
+              <div class="traffic-light red"></div>
+              <div class="traffic-light yellow"></div>
+              <div class="traffic-light green"></div>
+            </div>
+            <div class="ml-4 text-sm text-gray-400">
+              Visual Studio Code - TCT Theme Playground
+            </div>
+          </div>
+
+          <!-- VS Code Tabs -->
+          <div class="vscode-tabs">
+            <div class="vscode-tab active">
+              <i class="fab fa-js-square text-yellow-400"></i>
+              <span>app.js</span>
+            </div>
+            <div class="vscode-tab">
+              <i class="fab fa-react text-blue-400"></i>
+              <span>Component.jsx</span>
+            </div>
+            <div class="vscode-tab">
+              <i class="fab fa-python text-green-400"></i>
+              <span>main.py</span>
+            </div>
+            <div class="vscode-tab">
+              <i class="fab fa-css3-alt text-blue-500"></i>
+              <span>styles.css</span>
+            </div>
+          </div>
+
+          <!-- VS Code Main Area -->
+          <div class="vscode-main">
+            <!-- Sidebar -->
+            <div class="vscode-sidebar">
+              <div class="sidebar-section">
+                <div class="sidebar-title">Explorer</div>
+                <div class="file-item active">
+                  <i class="fas fa-folder-open text-blue-400"></i>
+                  <span>tct-themes-project</span>
+                </div>
+                <div class="file-item" style="padding-left: 24px">
+                  <i class="fab fa-js-square text-yellow-400"></i>
+                  <span>app.js</span>
+                </div>
+                <div class="file-item" style="padding-left: 24px">
+                  <i class="fab fa-react text-blue-400"></i>
+                  <span>Component.jsx</span>
+                </div>
+                <div class="file-item" style="padding-left: 24px">
+                  <i class="fab fa-python text-green-400"></i>
+                  <span>main.py</span>
+                </div>
+                <div class="file-item" style="padding-left: 24px">
+                  <i class="fab fa-css3-alt text-blue-500"></i>
+                  <span>styles.css</span>
+                </div>
+              </div>
+              <div class="sidebar-section">
+                <div class="sidebar-title">TCT Themes</div>
+                <div class="file-item">
+                  <i class="fas fa-palette text-pink-400"></i>
+                  <span
+                    >Current:
+                    <span id="current-theme-name">TCT Candyland</span></span
+                  >
+                </div>
+                <div class="file-item">
+                  <i class="fas fa-brain text-purple-400"></i>
+                  <span>AI Recommendations: ON</span>
+                </div>
+                <div class="file-item">
+                  <i class="fas fa-memory text-green-400"></i>
+                  <span>Memory Usage: Optimized</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Editor Area -->
+            <div class="vscode-editor-area">
+              <div class="flex h-full">
+                <div class="line-numbers" id="line-numbers">
+                  1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30
+                </div>
+                <div class="code-content" id="code-content">
+                  <span class="comment"
+                    >// 🎨 Welcome to The Compiled Thought Themes!</span
+                  >
+                  <span class="comment"
+                    >// Experience intelligent, AI-powered themes that adapt to
+                    your code</span
+                  >
+
+                  <span class="keyword">import</span>
+                  <span class="variable">React</span>, {
+                  <span class="variable">useState</span>,
+                  <span class="variable">useEffect</span> }
+                  <span class="keyword">from</span>
+                  <span class="string">'react'</span>;
+                  <span class="keyword">import</span> {
+                  <span class="variable">TCTThemeEngine</span> }
+                  <span class="keyword">from</span>
+                  <span class="string">'./tct-engine'</span>;
+
+                  <span class="comment">/**</span>
+                  <span class="comment">
+                    * 🚀 TCT Theme Showcase Component</span
+                  >
+                  <span class="comment">
+                    * Demonstrates intelligent theme switching and AI
+                    recommendations</span
+                  >
+                  <span class="comment">
+                    * @param {Object} props - Component properties</span
+                  >
+                  <span class="comment"> */</span>
+                  <span class="keyword">const</span>
+                  <span class="function">TCTShowcase</span> = ({
+                  <span class="variable">currentTheme</span> }) => {
+                  <span class="keyword">const</span> [<span class="variable"
+                    >isActive</span
+                  >, <span class="variable">setIsActive</span>] =
+                  <span class="function">useState</span>(<span class="keyword"
+                    >false</span
+                  >); <span class="keyword">const</span> [<span class="variable"
+                    >aiRecommendations</span
+                  >, <span class="variable">setAiRecommendations</span>] =
+                  <span class="function">useState</span>([]);
+
+                  <span class="comment"
+                    >// 🧠 AI-powered theme recommendations</span
+                  >
+                  <span class="function">useEffect</span>(() => {
+                  <span class="keyword">const</span>
+                  <span class="variable">engine</span> =
+                  <span class="keyword">new</span>
+                  <span class="function">TCTThemeEngine</span>();
+                  <span class="variable">engine</span>.<span class="function"
+                    >analyzeContext</span
+                  >(<span class="string">'javascript'</span>,
+                  <span class="string">'evening'</span>) .<span class="function"
+                    >then</span
+                  >(<span class="variable">recommendations</span> => {
+                  <span class="variable">console</span>.<span class="function"
+                    >log</span
+                  >(<span class="string">' </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

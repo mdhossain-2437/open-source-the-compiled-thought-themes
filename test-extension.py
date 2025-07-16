@@ -163,6 +163,25 @@ def test_memory_optimization():
         print(f"❌ Memory optimization test failed: {e}")
         return False
 
+def test_theme_caching():
+    """Test theme caching mechanism for efficiency"""
+    try:
+        # Simulate loading multiple themes
+        theme_ids = [f"theme_{i}" for i in range(15)]
+        preload_result = theme_manager.preloadThemes(theme_ids)
+
+        # Check cache stats
+        cache_stats = theme_manager.getCacheStats()
+        print(f"✅ Cache Stats: Hits={cache_stats['hits']}, Misses={cache_stats['misses']}, Evictions={cache_stats['evictions']}, Size={cache_stats['size']}")
+
+        # Ensure cache size does not exceed limit
+        assert cache_stats['size'] <= theme_manager.MAX_CACHE_SIZE, "Cache size exceeded limit"
+
+        return True
+    except Exception as e:
+        print(f"❌ Theme caching test failed: {e}")
+        return False
+
 def run_all_tests():
     """Run comprehensive test suite"""
     print("🧪 Starting Thorough Testing of TCT Extension\n")
@@ -173,7 +192,8 @@ def run_all_tests():
         ("Theme File Validation", test_theme_files),
         ("Snippet Validation", test_snippets),
         ("Package.json Structure", test_package_json),
-        ("Memory Optimization", test_memory_optimization)
+        ("Memory Optimization", test_memory_optimization),
+        ("Theme Caching", test_theme_caching)
     ]
     
     results = []

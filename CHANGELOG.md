@@ -2,6 +2,30 @@
 
 All notable changes to the "Delowar All-in-One Extension" will be documented in this file.
 
+## [3.1.0] - 2025-01-16
+
+### Enhanced Edition Release
+
+- ✨ Rebranded as "The Compiled Thought Themes - Enhanced Edition"
+- 🔄 Version bump to 3.1.0 for enhanced release
+- 📦 Updated package configuration for new release
+- 🎨 Added new premium theme variants: Aurora, Aurora Borealis, Cyber Synthwave, Deep Ocean, Desert Oasis, Golden Hour, Neon Dreams, Quantum Dark
+- 🌅 Enhanced light theme collection with Morning Light and Soft Dawn
+- 🔧 Improved extension stability and performance
+
+## [3.0.0] - 2025-07-16
+
+### Major Update
+
+- ThemeManager overhaul: improved memory, speed, and error handling
+- LRU+TTL cache, metrics, and smarter invalidation
+- Theme preview, search, and quick switch features
+- More light, dark, and unique TCT themes
+- Workspace-specific theme settings and migration system
+- Theme export/import, user ratings, and analytics
+- Modularized code, better docs, and new tests
+- Bug fixes: duplicate cache logic, validation errors, diagnostics
+
 ## [1.0.0] - 2025-01-15
 
 ### Added

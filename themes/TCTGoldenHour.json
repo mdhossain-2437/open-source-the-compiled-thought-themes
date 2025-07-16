@@ -1,0 +1,81 @@
+{
+  "name": "TCT Golden Hour",
+  "type": "light",
+  "colors": {
+    "editor.background": "#FFF4E6",
+    "editor.foreground": "#5D4037",
+    "activityBar.background": "#FFE0B2",
+    "activityBar.foreground": "#5D4037",
+    "sideBar.background": "#FFF3E0",
+    "sideBar.foreground": "#5D4037",
+    "titleBar.activeBackground": "#FFE0B2",
+    "titleBar.activeForeground": "#5D4037",
+    "statusBar.background": "#FFE0B2",
+    "statusBar.foreground": "#5D4037",
+    "tab.activeBackground": "#FFFFFF",
+    "tab.activeForeground": "#5D4037",
+    "tab.inactiveBackground": "#FFF3E0",
+    "tab.inactiveForeground": "#8D6E63",
+    "editorLineNumber.foreground": "#BCAAA4",
+    "editorLineNumber.activeForeground": "#5D4037",
+    "editorIndentGuide.background": "#FFECB3",
+    "editorIndentGuide.activeBackground": "#FFD54F",
+    "editor.selectionBackground": "#FFCC80",
+    "editor.selectionHighlightBackground": "#FFAB40",
+    "editor.wordHighlightBackground": "#FFAB40",
+    "editor.wordHighlightStrongBackground": "#FF6F00"
+  },
+  "tokenColors": [
+    {
+      "scope": ["comment", "punctuation.definition.comment"],
+      "settings": {
+        "foreground": "#8D6E63"
+      }
+    },
+    {
+      "scope": ["string", "string.quoted"],
+      "settings": {
+        "foreground": "#2E7D32"
+      }
+    },
+    {
+      "scope": ["keyword", "storage.type", "storage.modifier"],
+      "settings": {
+        "foreground": "#1565C0"
+      }
+    },
+    {
+      "scope": ["entity.name.function", "support.function"],
+      "settings": {
+        "foreground": "#6A1B9A"
+      }
+    },
+    {
+      "scope": ["variable", "support.variable"],
+      "settings": {
+        "foreground": "#D84315"
+      }
+    },
+    {
+      "scope": ["constant", "constant.numeric", "constant.language"],
+      "settings": {
+        "foreground": "#EF6C00"
+      }
+    },
+    {
+      "scope": ["entity.name.type", "support.type"],
+      "settings": {
+        "foreground": "#00897B"
+      }
+    }
+  ],
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "function": "#6A1B9A",
+    "variable": "#D84315",
+    "type": "#00897B",
+    "class": "#1565C0",
+    "property": "#EF6C00",
+    "parameter": "#D84315"
+  }
+}

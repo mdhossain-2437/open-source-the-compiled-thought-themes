@@ -1,0 +1,35 @@
+{
+  "name": "TCT Neon Dreams",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#1a1b26",
+    "editor.foreground": "#a9b1d6",
+    "activityBar.background": "#1a1b26",
+    "sideBar.background": "#1f2335",
+    "titleBar.activeBackground": "#1a1b26"
+  },
+  "tokenColors": [
+    {
+      "name": "Keywords",
+      "scope": ["keyword", "storage.type", "storage.modifier"],
+      "settings": {
+        "foreground": "#ff79c6",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Functions",
+      "scope": ["entity.name.function", "support.function"],
+      "settings": {
+        "foreground": "#7aa2f7"
+      }
+    },
+    {
+      "name": "Strings",
+      "scope": "string",
+      "settings": {
+        "foreground": "#9ece6a"
+      }
+    }
+  ]
+}
