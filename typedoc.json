@@ -1,0 +1,13 @@
+{
+  "entryPoints": ["./src/extension.ts"],
+  "out": "docs",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "theme": "default",
+  "name": "The Compiled Thought Themes",
+  "readme": "none",
+  "plugin": ["typedoc-plugin-markdown"],
+  "listInvalidSymbolLinks": true,
+  "categorizeByGroup": true
+}

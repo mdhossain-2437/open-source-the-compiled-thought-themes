@@ -33,6 +33,26 @@
   "contributes": {
     "themes": [
       {
+        "label": "TCT UI",
+        "uiTheme": "vs-dark",
+        "path": "./themes/_ui.json"
+      },
+      {
+        "label": "TCT Default Color",
+        "uiTheme": "vs-dark",
+        "path": "./themes/default-color-theme.json"
+      },
+      {
+        "label": "TCT Darcula",
+        "uiTheme": "vs-dark",
+        "path": "./themes/darcula.json"
+      },
+      {
+        "label": "TCT Candyland",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTCandyland.json"
+      },
+      {
         "label": "TCT Ayu",
         "uiTheme": "vs-dark",
         "path": "./themes/ayu.json"
@@ -48,24 +68,9 @@
         "path": "./themes/blue-velvet-theme.json"
       },
       {
-        "label": "TCT Darcula",
-        "uiTheme": "vs-dark",
-        "path": "./themes/darcula.json"
-      },
-      {
-        "label": "TCT Darcula Italic",
-        "uiTheme": "vs-dark",
-        "path": "./themes/darculaItalic.json"
-      },
-      {
         "label": "TCT Dark Theme",
         "uiTheme": "vs-dark",
         "path": "./themes/dark_theme_json.json"
-      },
-      {
-        "label": "TCT Default Color",
-        "uiTheme": "vs-dark",
-        "path": "./themes/default-color-theme.json"
       },
       {
         "label": "TCT Dracula",
@@ -188,16 +193,6 @@
         "path": "./themes/vintage-theme.json"
       },
       {
-        "label": "TCT UI",
-        "uiTheme": "vs-dark",
-        "path": "./themes/_ui.json"
-      },
-      {
-        "label": "TCT Candyland",
-        "uiTheme": "vs-dark",
-        "path": "./themes/TCTCandyland.json"
-      },
-      {
         "label": "TCT Sunset",
         "uiTheme": "vs-dark",
         "path": "./themes/TCTSunset.json"
@@ -231,6 +226,41 @@
         "label": "TCT Soft Dawn",
         "uiTheme": "vs",
         "path": "./themes/TCTSoftDawn.json"
+      },
+      {
+        "label": "TCT Neon Dreams",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTNeonDreams.json"
+      },
+      {
+        "label": "TCT Aurora Borealis",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTAuroraBorealis.json"
+      },
+      {
+        "label": "TCT Cyber Synthwave",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTCyberSynthwave.json"
+      },
+      {
+        "label": "TCT Deep Ocean",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTDeepOcean.json"
+      },
+      {
+        "label": "TCT Desert Oasis",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTDesertOasis.json"
+      },
+      {
+        "label": "TCT Golden Hour",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTGoldenHour.json"
+      },
+      {
+        "label": "TCT Quantum Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTQuantumDark.json"
       }
     ],
     "snippets": [
@@ -393,33 +423,80 @@
     "package": "node ./scripts/version.js && vsce package --no-dependencies",
     "publish": "node ./scripts/version.js && vsce publish",
     "release": "node ./scripts/release.js",
-    "clean": "rimraf out",
+    "clean": "node node_modules/rimraf/bin.js out",
     "precompile": "npm run clean",
     "version:bump": "node ./scripts/version.js bump",
-    "changelog": "node ./scripts/version.js changelog"
+    "changelog": "node ./scripts/version.js changelog",
+    "icons:sync": "node ./scripts/sync-icons.js",
+    "icons:optimize": "node ./scripts/optimize-icons.js",
+    "dev": "npm run watch",
+    "build": "npm run clean && npm run compile",
+    "lint": "eslint \"src/**/*.ts\"",
+    "lint:fix": "eslint \"src/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.{ts,json}\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "validate": "npm run lint && npm run test",
+    "prepare": "husky install",
+    "prebuild": "npm run validate",
+    "prepackage": "npm run build",
+    "postinstall": "node ./scripts/setup-dev.js",
+    "start": "npm run dev",
+    "dev:full": "concurrently \"npm run watch\" \"npm run test:watch\"",
+    "verify": "npm run lint && npm run test && npm run build",
+    "release:major": "node ./scripts/release.js major",
+    "release:minor": "node ./scripts/release.js minor",
+    "release:patch": "node ./scripts/release.js patch",
+    "ci": "npm run clean && npm run verify && npm run package",
+    "docs": "typedoc --out docs src",
+    "analyze": "npm audit && npm outdated",
+    "update-deps": "npm update && npm audit fix",
+    "all": "npm run clean && npm run verify && npm run package && npm run docs"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
     "@types/feather-icons": "^4.29.4",
+    "@types/jest": "^30.0.0",
     "@types/node": "16.x",
     "@types/primer__octicons": "^19.11.0",
     "@types/semver": "^7.7.0",
     "@types/vscode": "^1.70.0",
+    "@typescript-eslint/eslint-plugin": "^8.37.0",
+    "@typescript-eslint/parser": "^8.37.0",
+    "@vscode/vsce": "^3.6.0",
+    "babel-jest": "^30.0.4",
+    "concurrently": "^9.2.0",
     "conventional-changelog-cli": "^4.1.0",
     "conventional-recommended-bump": "^9.0.0",
+    "eslint": "^9.31.0",
+    "husky": "^9.1.7",
+    "jest": "^30.0.4",
+    "jest-environment-node": "^30.0.4",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.6.2",
     "rimraf": "^3.0.2",
     "semver": "^7.7.2",
-    "typescript": "^4.9.4",
+    "ts-jest": "^29.4.0",
+    "typedoc": "^0.28.7",
+    "typescript": "^4.9.5",
     "vsce": "^2.15.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@primer/octicons": "^19.8.0",
     "analytics-node": "^3.0.0",
     "chokidar": "^3.5.3",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
     "feather-icons": "^4.29.1",
-    "material-design-icons": "^3.0.1"
+    "material-design-icons": "^3.0.1",
+    "material-design-icons-iconfont": "^6.7.0"
   },
   "repository": {
     "type": "git",

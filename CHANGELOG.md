@@ -1,6 +1,6 @@
 # Change Log
 
-All notable changes to the "Delowar All-in-One Extension" will be documented in this file.
+All notable changes to the "The Compiled Thought Themes Extension" will be documented in this file.
 
 ## [3.1.0] - 2025-01-16
 
@@ -26,7 +26,7 @@ All notable changes to the "Delowar All-in-One Extension" will be documented in 
 - Modularized code, better docs, and new tests
 - Bug fixes: duplicate cache logic, validation errors, diagnostics
 
-## [1.0.0] - 2025-01-15
+## [2.0.0] - 2025-01-15
 
 ### Added
 

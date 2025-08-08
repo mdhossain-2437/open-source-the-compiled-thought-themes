@@ -1,0 +1,7 @@
+{
+  "name": "test-theme",
+  "colors": {
+    "editor.background": "#1E1E1E",
+    "editor.foreground": "#D4D4D4"
+  }
+}

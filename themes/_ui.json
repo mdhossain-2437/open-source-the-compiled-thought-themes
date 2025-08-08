@@ -1,4 +1,5 @@
 {
+  "name": "TCT UI",
   "type": "dark",
   "colors": {
     "focusBorder": "#74819B",
@@ -7,7 +8,7 @@
     "input.background": "#0b1015",
     "input.border": "#18222D",
     "list.activeSelectionBackground": "#0b1015",
-    "list.activeSelectionForeg  round": "#ffffff",
+    "list.activeSelectionForeground": "#ffffff",
     "list.inactiveSelectionBackground": "#0b1015",
     "list.inactiveSelectionForeground": "#ffffff",
     "list.hoverBackground": "#18222D",
@@ -1294,9 +1295,7 @@
     },
     {
       "name": "Reset JavaScript string interpolation expression",
-      "scope": [
-        "meta.template.expression"
-      ],
+      "scope": ["meta.template.expression"],
       "settings": {
         "foreground": "#aab1c0"
       }
