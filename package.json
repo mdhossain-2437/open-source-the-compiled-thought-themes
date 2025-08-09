@@ -367,6 +367,7 @@
     "conventional-changelog-cli": "^4.1.0",
     "conventional-recommended-bump": "^9.0.0",
     "eslint": "^9.31.0",
+    "globals": "^16.3.0",
     "husky": "^9.1.7",
     "jest": "^30.0.4",
     "jest-environment-node": "^30.0.4",

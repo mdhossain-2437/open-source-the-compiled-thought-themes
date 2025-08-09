@@ -1,6 +1,9 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
+import { THEME_REGISTRY } from "./themeRegistry";
+import type { ThemeRegistryEntry } from "./types/themes";
+import { LRUCache } from "./lib/lruCache";
 
 // Theme interfaces
 export interface ThemeLoadMetrics {
@@ -33,22 +36,14 @@ export interface ThemeError extends Error {
   themeId: string;
 }
 
-interface ThemeCacheEntry {
-  content: ThemeContent;
-  lastAccessed: number;
-  size: number;
-}
-
 export class ThemeManager {
   private static instance: ThemeManager;
   private readonly themeMetadata = new Map<string, ThemeMetadata>();
-  private readonly themeCache = new Map<string, ThemeCacheEntry>();
-  private readonly maxCacheSize = 5; // Maximum number of themes in cache
-  private readonly maxCacheMemory = 5 * 1024 * 1024; // 5MB max cache size
-  private currentCacheSize = 0;
+  private readonly lruCache: LRUCache<string, ThemeContent>;
   private loadPromises = new Map<string, Promise<ThemeContent>>();
 
   private constructor(private context: vscode.ExtensionContext) {
+    this.lruCache = new LRUCache<string, ThemeContent>(5);
     this.initializeFromRegistry();
   }
 
@@ -145,7 +140,7 @@ export class ThemeManager {
       return existingPromise;
     }
 
-    const loadPromise = (async () => {
+    const loadPromise = (async (): Promise<ThemeContent> => {
       const startTime = performance.now();
       const metadata = this.themeMetadata.get(themeId);
 
@@ -158,30 +153,19 @@ export class ThemeManager {
       }
 
       // Check cache first
-      const cached = this.themeCache.get(themeId);
+      const cached = this.lruCache.get(themeId);
       if (cached) {
-        cached.lastAccessed = Date.now();
-        this.recordMetrics(themeId, startTime, true, cached.size);
-        return cached.content;
+        this.recordMetrics(themeId, startTime, true, 0); // Size is not tracked in the new cache
+        return cached;
       }
 
       try {
         const themePath = path.join(this.context.extensionPath, metadata.path);
         const content = await fs.promises.readFile(themePath, "utf8");
-        const theme = JSON.parse(content);
+        const theme: ThemeContent = JSON.parse(content);
         const size = Buffer.from(content).length;
 
-        // Manage cache size
-        this.manageCache(size);
-
-        const entry: ThemeCacheEntry = {
-          content: theme,
-          lastAccessed: Date.now(),
-          size,
-        };
-
-        this.themeCache.set(themeId, entry);
-        this.currentCacheSize += size;
+        this.lruCache.put(themeId, theme);
         this.recordMetrics(themeId, startTime, false, size);
 
         return theme;
@@ -204,33 +188,6 @@ export class ThemeManager {
     } catch (error) {
       this.loadPromises.delete(themeId);
       throw error;
-    }
-  }
-
-  private manageCache(newSize: number): void {
-    while (
-      (this.currentCacheSize + newSize > this.maxCacheMemory ||
-        this.themeCache.size >= this.maxCacheSize) &&
-      this.themeCache.size > 0
-    ) {
-      // Find least recently used entry
-      let oldestTime = Date.now();
-      let oldestId: string | undefined;
-
-      for (const [id, entry] of this.themeCache) {
-        if (entry.lastAccessed < oldestTime) {
-          oldestTime = entry.lastAccessed;
-          oldestId = id;
-        }
-      }
-
-      if (oldestId) {
-        const entry = this.themeCache.get(oldestId);
-        if (entry) {
-          this.currentCacheSize -= entry.size;
-          this.themeCache.delete(oldestId);
-        }
-      }
     }
   }
 

@@ -6,13 +6,13 @@ import * as fs from 'fs';
 
 jest.mock('vscode', () => ({
   workspace: {
-    getConfiguration: () => ({
-      get: () => undefined,
-      update: () => Promise.resolve(),
+    getConfiguration: (): { get: () => undefined; update: () => Promise<void> } => ({
+      get: (): undefined => undefined,
+      update: (): Promise<void> => Promise.resolve(),
     }),
   },
   window: {
-    showInformationMessage: () => Promise.resolve(),
+    showInformationMessage: (): Promise<void> => Promise.resolve(),
   },
 }));
 

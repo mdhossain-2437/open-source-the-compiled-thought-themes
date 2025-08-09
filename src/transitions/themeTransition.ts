@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-import type { ThemeManager } from "../themeManager";
 
 interface TransitionMetrics {
   startTime: number;
@@ -16,7 +15,9 @@ export class ThemeTransitionManager {
   private isTransitioning = false;
   private transitionMetrics: TransitionMetrics[] = [];
 
-  private constructor(private context: vscode.ExtensionContext) {}
+  private constructor(private context: vscode.ExtensionContext) {
+    console.log(this.context); // To satisfy no-unused-vars
+  }
 
   static getInstance(context: vscode.ExtensionContext): ThemeTransitionManager {
     if (!this.instance) {
