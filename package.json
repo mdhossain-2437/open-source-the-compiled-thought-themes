@@ -220,6 +220,10 @@
       {
         "command": "DelowarHossain.customizeKeyboardShortcuts",
         "title": "TCT: Customize Theme Shortcuts"
+      },
+      {
+        "command": "DelowarHossain.surpriseMe",
+        "title": "TCT: Surprise Me!"
       }
     ],
     "configuration": {

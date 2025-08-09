@@ -246,9 +246,22 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     },
   });
 
+  const surpriseMeCommand = vscode.commands.registerCommand(
+    "DelowarHossain.surpriseMe",
+    async () => {
+      const themeIds = themeManager.getAllThemeIds();
+      const randomThemeId =
+        themeIds[Math.floor(Math.random() * themeIds.length)];
+      await themeManager.setTheme(randomThemeId);
+      const theme = await themeManager.getTheme(randomThemeId);
+      vscode.window.showInformationMessage(`Switched to a surprise theme: ${theme.name}`);
+    }
+  );
+
   context.subscriptions.push(
     selectThemeCommand,
-    toggleItalicCommand
+    toggleItalicCommand,
+    surpriseMeCommand
   );
 
   // Listen for configuration changes to optimize performance
