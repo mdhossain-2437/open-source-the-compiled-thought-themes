@@ -48,7 +48,7 @@ jobs:
   deploy:
     name: Deploy Extension
     needs: build
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -58,22 +58,17 @@ jobs:
         with:
           name: vsix-package
 
-      - name: Get version
-        id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+      - name: Generate version
+        id: generate_version
+        run: echo "VERSION=0.0.0-main-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           files: '*.vsix'
-          name: 'Release v${{ env.VERSION }}'
-          body_path: CHANGELOG.md
+          name: 'Dev Build ${{ env.VERSION }}'
+          tag_name: ${{ env.VERSION }}
           draft: false
-          prerelease: false
+          prerelease: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish to Marketplace
-        run: npm run publish
-        env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
