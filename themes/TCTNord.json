@@ -1,0 +1,93 @@
+{
+  "name": "TCT Nord",
+  "type": "dark",
+  "include": "./_ui.json",
+  "colors": {
+    "editor.background": "#2E3440",
+    "editor.foreground": "#D8DEE9",
+    "editor.lineHighlightBackground": "#3B4252",
+    "editor.selectionBackground": "#434C5E",
+    "editorCursor.foreground": "#D8DEE9",
+    "activityBar.background": "#2E3440",
+    "sideBar.background": "#2E3440"
+  },
+  "tokenColors": [
+    {
+      "name": "Comment",
+      "scope": "comment",
+      "settings": {
+        "foreground": "#4C566A"
+      }
+    },
+    {
+      "name": "String",
+      "scope": "string",
+      "settings": {
+        "foreground": "#A3BE8C"
+      }
+    },
+    {
+      "name": "Number",
+      "scope": "constant.numeric",
+      "settings": {
+        "foreground": "#B48EAD"
+      }
+    },
+    {
+      "name": "Keyword",
+      "scope": "keyword",
+      "settings": {
+        "foreground": "#81A1C1"
+      }
+    },
+    {
+      "name": "Function",
+      "scope": "entity.name.function, support.function",
+      "settings": {
+        "foreground": "#88C0D0"
+      }
+    },
+    {
+      "name": "Class, Type",
+      "scope": "entity.name.type, entity.name.class, support.type, support.class",
+      "settings": {
+        "foreground": "#8FBCBB"
+      }
+    },
+    {
+      "name": "Variable",
+      "scope": "variable",
+      "settings": {
+        "foreground": "#D8DEE9"
+      }
+    },
+    {
+      "name": "Operator",
+      "scope": "keyword.operator",
+      "settings": {
+        "foreground": "#81A1C1"
+      }
+    },
+    {
+      "name": "Tag",
+      "scope": "entity.name.tag",
+      "settings": {
+        "foreground": "#5E81AC"
+      }
+    },
+    {
+      "name": "Attribute",
+      "scope": "entity.other.attribute-name",
+      "settings": {
+        "foreground": "#D08770"
+      }
+    },
+    {
+      "name": "Error",
+      "scope": "invalid",
+      "settings": {
+        "foreground": "#BF616A"
+      }
+    }
+  ]
+}

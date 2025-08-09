@@ -1,0 +1,93 @@
+{
+  "name": "TCT Gruvbox Material",
+  "type": "dark",
+  "include": "./_ui.json",
+  "colors": {
+    "editor.background": "#282828",
+    "editor.foreground": "#ddc7a1",
+    "editor.lineHighlightBackground": "#3c3836",
+    "editor.selectionBackground": "#504945",
+    "editorCursor.foreground": "#ddc7a1",
+    "activityBar.background": "#282828",
+    "sideBar.background": "#282828"
+  },
+  "tokenColors": [
+    {
+      "name": "Comment",
+      "scope": "comment",
+      "settings": {
+        "foreground": "#928374"
+      }
+    },
+    {
+      "name": "String",
+      "scope": "string",
+      "settings": {
+        "foreground": "#b3b890"
+      }
+    },
+    {
+      "name": "Number",
+      "scope": "constant.numeric",
+      "settings": {
+        "foreground": "#c39ac9"
+      }
+    },
+    {
+      "name": "Keyword",
+      "scope": "keyword",
+      "settings": {
+        "foreground": "#e78a8a"
+      }
+    },
+    {
+      "name": "Function",
+      "scope": "entity.name.function, support.function",
+      "settings": {
+        "foreground": "#8da3b9"
+      }
+    },
+    {
+      "name": "Class, Type",
+      "scope": "entity.name.type, entity.name.class, support.type, support.class",
+      "settings": {
+        "foreground": "#e9b189"
+      }
+    },
+    {
+      "name": "Variable",
+      "scope": "variable",
+      "settings": {
+        "foreground": "#ddc7a1"
+      }
+    },
+    {
+      "name": "Operator",
+      "scope": "keyword.operator",
+      "settings": {
+        "foreground": "#e78a8a"
+      }
+    },
+    {
+      "name": "Tag",
+      "scope": "entity.name.tag",
+      "settings": {
+        "foreground": "#94b8a1"
+      }
+    },
+    {
+      "name": "Attribute",
+      "scope": "entity.other.attribute-name",
+      "settings": {
+        "foreground": "#e89f73"
+      }
+    },
+    {
+      "name": "Error",
+      "scope": "invalid",
+      "settings": {
+        "foreground": "#e78a8a"
+      }
+    }
+  ]
+}

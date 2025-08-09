@@ -1,6 +1,6 @@
 {
   "type": "dark",
-  "name": "ayu",
+  "name": "TCT Ayu",
   "include": "./_ui.json",
   "tokenColors": [
     {

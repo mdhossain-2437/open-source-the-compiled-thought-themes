@@ -1,6 +1,6 @@
 {
   "type": "dark",
-  "name": "ayu italic",
+  "name": "TCT Ayu Italic",
   "include": "./ayu.json",
   "tokenColors": [
     {
