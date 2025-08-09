@@ -247,16 +247,19 @@ export async function activate(context: vscode.ExtensionContext) {
 
   // Smart theme recommendation on startup
   setTimeout(async () => {
-    const recommended = await themeManager.getRecommendedTheme();
+    const editor = vscode.window.activeTextEditor;
+    const languageId = editor ? editor.document.languageId : undefined;
+    const recommended = await themeManager.getRecommendedTheme(languageId);
+
     if (recommended) {
       const selection = await vscode.window.showInformationMessage(
-        `💡 Recommended theme for your current context: ${recommended.name}`,
+        `💡 Recommended theme for your current context: ${recommended.theme.name}`,
         "Apply Theme",
         "Dismiss"
       );
 
       if (selection === "Apply Theme") {
-        await themeManager.setTheme(recommended.name);
+        await themeManager.setTheme(recommended.id);
       }
     }
   }, 2000);
@@ -265,33 +268,53 @@ export async function activate(context: vscode.ExtensionContext) {
   const selectThemeCommand = vscode.commands.registerCommand(
     "DelowarHossain.selectTheme",
     async () => {
-      try {
-        const themes = await themeManager.getThemes();
-        const items = themes.map((theme: ThemeContent) => ({
-          id: theme.name, // Using name as ID since it's unique
-          label: theme.name,
-          description: theme.type,
-        }));
+      const originalTheme =
+        vscode.workspace.getConfiguration().get("workbench.colorTheme") || "";
 
-        const selected = await vscode.window.showQuickPick(items, {
-          placeHolder: "Select a theme",
+      try {
+        const quickPick = vscode.window.createQuickPick();
+        quickPick.placeholder = "Select a theme to preview";
+        const themeIds = themeManager.getAllThemeIds();
+        quickPick.items = themeIds.map((themeId) => {
+          const metadata = themeManager.getThemeMetadata(themeId);
+          return {
+            id: themeId,
+            label: metadata?.label || themeId,
+            description: metadata?.description,
+          };
         });
 
-        if (selected) {
-          try {
-            await themeManager.setTheme(selected.id);
+        quickPick.onDidSelectItem(async (item) => {
+          if (item) {
+            await themeManager.setTheme((item as any).id);
+          }
+        });
+
+        let accepted = false;
+
+        quickPick.onDidAccept(async () => {
+          accepted = true;
+          const selected = quickPick.selectedItems[0];
+          if (selected) {
+            // Theme is already set by onDidSelectItem, so we just need to confirm it.
             vscode.window.showInformationMessage(
               `Applied theme: ${selected.label}`
             );
-          } catch (error) {
-            vscode.window.showErrorMessage(
-              `Failed to apply theme: ${
-                error instanceof Error ? error.message : "Unknown error"
-              }`
-            );
           }
-        }
+          quickPick.hide();
+        });
+
+        quickPick.onDidHide(async () => {
+          if (!accepted) {
+            await themeManager.setTheme(originalTheme);
+          }
+          quickPick.dispose();
+        });
+
+        quickPick.show();
       } catch (error) {
+        // Restore original theme on error
+        await themeManager.setTheme(originalTheme);
         vscode.window.showErrorMessage(`Failed to select theme: ${error}`);
       }
     }
@@ -302,45 +325,46 @@ export async function activate(context: vscode.ExtensionContext) {
     "DelowarHossain.toggleItalic",
     async () => {
       try {
-        const currentTheme = vscode.workspace
+        const currentThemeId = vscode.workspace
           .getConfiguration()
           .get<string>("workbench.colorTheme");
-        if (!currentTheme) return;
+        if (!currentThemeId) return;
 
-        const themes = await themeManager.getThemes();
-        const current = themes.find(
-          (t: ThemeContent) => t.name === currentTheme
-        );
+        const currentTheme = await themeManager.getTheme(currentThemeId);
+        const themeMetadata = themeManager.getThemeMetadata(currentThemeId);
 
-        if (!current) {
+        if (!themeMetadata) {
           vscode.window.showWarningMessage(
             "Current theme not found in TCT collection"
           );
           return;
         }
 
-        // Find italic variant
-        const baseName = current.name.replace(" Italic", "");
-        const isCurrentlyItalic = current.name.includes("Italic");
-        const targetName = isCurrentlyItalic ? baseName : `${baseName} Italic`;
+        const isItalic = themeMetadata.label.includes("Italic");
+        const baseThemeId = isItalic
+          ? themeMetadata.id.replace("-italic", "")
+          : themeMetadata.id;
+        const baseThemeMetadata = themeManager.getThemeMetadata(baseThemeId);
 
-        const targetTheme = themes.find(
-          (t: ThemeContent) => t.name === targetName
-        );
+        if (!baseThemeMetadata) {
+          vscode.window.showWarningMessage("Base theme could not be determined.");
+          return;
+        }
 
-        if (targetTheme) {
-          await vscode.commands.executeCommand(
-            "workbench.colorTheme.selectTheme",
-            targetTheme.name
-          );
+        const targetThemeId =
+          isItalic || !baseThemeMetadata.variants?.italic
+            ? baseThemeMetadata.id
+            : baseThemeMetadata.variants.italic.id;
+
+        if (targetThemeId) {
+          await themeManager.setTheme(targetThemeId);
+          const targetTheme = await themeManager.getTheme(targetThemeId);
           vscode.window.showInformationMessage(
             `Switched to ${targetTheme.name}`
           );
         } else {
           vscode.window.showInformationMessage(
-            `No ${
-              isCurrentlyItalic ? "regular" : "italic"
-            } variant available for this theme`
+            `No variant available for this theme.`
           );
         }
       } catch (error) {
