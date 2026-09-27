@@ -1,6 +1,9 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
+import { THEME_REGISTRY } from "./themeRegistry";
+import type { ThemeRegistryEntry } from "./types/themes";
+import { LRUCache } from "./lib/lruCache";
 
 // Theme interfaces
 export interface ThemeLoadMetrics {
@@ -9,14 +12,10 @@ export interface ThemeLoadMetrics {
   size: number;
 }
 
-export interface ThemeMetadata {
-  id: string;
-  label: string;
-  uiTheme: "vs" | "vs-dark" | "hc-black";
-  path: string;
+export type ThemeMetadata = ThemeRegistryEntry & {
   lastAccessed: number;
   loadMetrics: ThemeLoadMetrics[];
-}
+};
 
 export interface ThemeContent {
   name: string;
@@ -37,25 +36,15 @@ export interface ThemeError extends Error {
   themeId: string;
 }
 
-interface ThemeCacheEntry {
-  content: ThemeContent;
-  lastAccessed: number;
-  size: number;
-}
-
 export class ThemeManager {
   private static instance: ThemeManager;
   private readonly themeMetadata = new Map<string, ThemeMetadata>();
-  private readonly themeCache = new Map<string, ThemeCacheEntry>();
-  private readonly maxCacheSize = 5; // Maximum number of themes in cache
-  private readonly maxCacheMemory = 5 * 1024 * 1024; // 5MB max cache size
-  private currentCacheSize = 0;
+  private readonly lruCache: LRUCache<string, ThemeContent>;
   private loadPromises = new Map<string, Promise<ThemeContent>>();
 
   private constructor(private context: vscode.ExtensionContext) {
-    this.initializeThemes().catch((error) => {
-      console.error("Failed to initialize themes:", error);
-    });
+    this.lruCache = new LRUCache<string, ThemeContent>(5);
+    this.initializeFromRegistry();
   }
 
   public static getInstance(context: vscode.ExtensionContext): ThemeManager {
@@ -65,11 +54,23 @@ export class ThemeManager {
     return ThemeManager.instance;
   }
 
-  public async getRecommendedTheme(): Promise<ThemeContent> {
+  public async getRecommendedTheme(
+    languageId?: string
+  ): Promise<{ id: string; theme: ThemeContent } | null> {
+    // 1. Recommend based on language
+    if (languageId) {
+      const themeIds = this.getAllThemeIds();
+      for (const themeId of themeIds) {
+        const metadata = this.getThemeMetadata(themeId);
+        if (metadata?.recommendations?.includes(languageId)) {
+          return { id: themeId, theme: await this.getTheme(themeId) };
+        }
+      }
+    }
+
+    // 2. Fallback to time-based recommendation
     const hour = new Date().getHours();
     const isDarkTheme = hour < 6 || hour >= 18;
-
-    // Get all themes and filter by type
     const themeIds = this.getAllThemeIds();
     const themes = await Promise.all(
       themeIds.map(async (id) => ({
@@ -83,15 +84,15 @@ export class ThemeManager {
     );
 
     if (matchingThemes.length > 0) {
-      return matchingThemes[0].theme;
+      return matchingThemes[0];
     }
 
-    // Fallback to first available theme
+    // 3. Fallback to first available theme
     if (themes.length > 0) {
-      return themes[0].theme;
+      return themes[0];
     }
 
-    throw this.createThemeError("THEME_NOT_FOUND", "No themes available", "");
+    return null;
   }
 
   public async getThemes(): Promise<ThemeContent[]> {
@@ -106,31 +107,30 @@ export class ThemeManager {
       .update("workbench.colorTheme", theme.name, true);
   }
 
-  private async initializeThemes(): Promise<void> {
-    const themesPath = path.join(this.context.extensionPath, "themes");
-    const files = await fs.promises.readdir(themesPath);
+  private initializeFromRegistry(): void {
+    for (const themeId in THEME_REGISTRY) {
+      const entry = THEME_REGISTRY[themeId];
+      this.themeMetadata.set(themeId, {
+        ...entry,
+        lastAccessed: 0,
+        loadMetrics: [],
+      });
 
-    await Promise.all(
-      files
-        .filter((file) => file.endsWith(".json"))
-        .map(async (file) => {
-          try {
-            const filePath = path.join(themesPath, file);
-            const stats = await fs.promises.stat(filePath);
-
-            this.themeMetadata.set(file, {
-              id: file,
-              label: file.replace(".json", ""),
-              uiTheme: "vs-dark", // Default, will be updated when theme is loaded
-              path: filePath,
-              lastAccessed: Date.now(),
-              loadMetrics: [],
-            });
-          } catch (error) {
-            console.warn(`Failed to initialize theme ${file}:`, error);
-          }
-        })
-    );
+      if (entry.variants) {
+        for (const variantId in entry.variants) {
+          const variant = entry.variants[variantId];
+          this.themeMetadata.set(variant.id, {
+            id: variant.id,
+            label: variant.label,
+            path: variant.path,
+            uiTheme: entry.uiTheme,
+            description: entry.description,
+            lastAccessed: 0,
+            loadMetrics: [],
+          });
+        }
+      }
+    }
   }
 
   private async loadTheme(themeId: string): Promise<ThemeContent> {
@@ -140,7 +140,7 @@ export class ThemeManager {
       return existingPromise;
     }
 
-    const loadPromise = (async () => {
+    const loadPromise = (async (): Promise<ThemeContent> => {
       const startTime = performance.now();
       const metadata = this.themeMetadata.get(themeId);
 
@@ -153,29 +153,19 @@ export class ThemeManager {
       }
 
       // Check cache first
-      const cached = this.themeCache.get(themeId);
+      const cached = this.lruCache.get(themeId);
       if (cached) {
-        cached.lastAccessed = Date.now();
-        this.recordMetrics(themeId, startTime, true, cached.size);
-        return cached.content;
+        this.recordMetrics(themeId, startTime, true, 0); // Size is not tracked in the new cache
+        return cached;
       }
 
       try {
-        const content = await fs.promises.readFile(metadata.path, "utf8");
-        const theme = JSON.parse(content);
+        const themePath = path.join(this.context.extensionPath, metadata.path);
+        const content = await fs.promises.readFile(themePath, "utf8");
+        const theme: ThemeContent = JSON.parse(content);
         const size = Buffer.from(content).length;
 
-        // Manage cache size
-        this.manageCache(size);
-
-        const entry: ThemeCacheEntry = {
-          content: theme,
-          lastAccessed: Date.now(),
-          size,
-        };
-
-        this.themeCache.set(themeId, entry);
-        this.currentCacheSize += size;
+        this.lruCache.put(themeId, theme);
         this.recordMetrics(themeId, startTime, false, size);
 
         return theme;
@@ -198,33 +188,6 @@ export class ThemeManager {
     } catch (error) {
       this.loadPromises.delete(themeId);
       throw error;
-    }
-  }
-
-  private manageCache(newSize: number): void {
-    while (
-      (this.currentCacheSize + newSize > this.maxCacheMemory ||
-        this.themeCache.size >= this.maxCacheSize) &&
-      this.themeCache.size > 0
-    ) {
-      // Find least recently used entry
-      let oldestTime = Date.now();
-      let oldestId: string | undefined;
-
-      for (const [id, entry] of this.themeCache) {
-        if (entry.lastAccessed < oldestTime) {
-          oldestTime = entry.lastAccessed;
-          oldestId = id;
-        }
-      }
-
-      if (oldestId) {
-        const entry = this.themeCache.get(oldestId);
-        if (entry) {
-          this.currentCacheSize -= entry.size;
-          this.themeCache.delete(oldestId);
-        }
-      }
     }
   }
 
@@ -263,6 +226,10 @@ export class ThemeManager {
 
   public getLoadMetrics(themeId: string): ThemeLoadMetrics[] {
     return this.themeMetadata.get(themeId)?.loadMetrics || [];
+  }
+
+  public getThemeMetadata(themeId: string): ThemeMetadata | undefined {
+    return this.themeMetadata.get(themeId);
   }
 
   private createThemeError(

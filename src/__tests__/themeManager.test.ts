@@ -1,158 +1,80 @@
 import { jest, describe, it, expect, beforeEach } from '@jest/globals';
 import { ThemeManager } from '../themeManager';
-import { join } from 'path';
+import { THEME_REGISTRY } from '../themeRegistry';
+import * as path from 'path';
+import * as fs from 'fs';
 
-jest.mock('vscode');
-
-// Import types from vscode
-import type {
-  Uri,
-  ExtensionContext,
-  Extension,
-  LanguageModelAccessInformation,
-  Event,
-  SecretStorageChangeEvent,
-  EnvironmentVariableCollection,
-  EnvironmentVariableMutator,
-  Disposable,
-  LanguageModelChat,
-  GlobalEnvironmentVariableCollection,
-  Memento,
-} from 'vscode';
-
-// Use path relative to the test file location
-const testPath = join('c:', 'Users', 'mdhos', 'projects', 'the-compiled-thought-themes');
-const extensionPath = testPath;
-const fixturesPath = join(extensionPath, 'themes');
-
-type ExtensionMemento = Memento & { setKeysForSync(keys: readonly string[]): void };
-
-const mockUri = {
-  fsPath: fixturesPath,
-  path: fixturesPath,
-  scheme: 'file',
-  authority: '',
-  query: '',
-  fragment: '',
-  with: function (change: {
-    scheme?: string;
-    authority?: string;
-    path?: string;
-    query?: string;
-    fragment?: string;
-  }): Uri {
-    return { ...this, ...change } as Uri;
+jest.mock('vscode', () => ({
+  workspace: {
+    getConfiguration: (): { get: () => undefined; update: () => Promise<void> } => ({
+      get: (): undefined => undefined,
+      update: (): Promise<void> => Promise.resolve(),
+    }),
   },
-  toJSON: function (): {
-    scheme: string;
-    authority: string;
-    path: string;
-    query: string;
-    fragment: string;
-  } {
-    return {
-      scheme: this.scheme,
-      authority: this.authority,
-      path: this.path,
-      query: this.query,
-      fragment: this.fragment,
-    };
+  window: {
+    showInformationMessage: (): Promise<void> => Promise.resolve(),
   },
-};
+}));
 
-const mockExtension: Extension<unknown> = {
-  id: 'test-extension',
-  extensionUri: mockUri,
-  extensionPath: extensionPath,
-  isActive: true,
-  packageJSON: {},
-  activate: function (): Promise<unknown> {
-    return Promise.resolve(undefined);
+jest.mock('fs', () => ({
+  promises: {
+    readFile: jest.fn(),
   },
-  exports: undefined,
-  extensionKind: 1, // ExtensionKind.Workspace
-};
+}));
 
-const mockOnDidChange: Event<void> = (_listener: (_e: void) => void): Disposable => {
-  return {
-    dispose: (): void => {
-      /* noop */
+jest.mock('../themeRegistry', () => ({
+  THEME_REGISTRY: {
+    'tct-test-dark': {
+      id: 'tct-test-dark',
+      label: 'TCT Test Dark',
+      path: './themes/TCTTestDark.json',
+      uiTheme: 'vs-dark',
+      description: 'A test theme.',
     },
-  };
-};
-
-const mockLangModelAccess: LanguageModelAccessInformation = {
-  onDidChange: mockOnDidChange,
-  canSendRequest: (_chat: LanguageModelChat): boolean => false,
-};
-
-const mockEnvCollection: GlobalEnvironmentVariableCollection = {
-  replace: jest.fn(),
-  append: jest.fn(),
-  prepend: jest.fn(),
-  get: (_variable: string): EnvironmentVariableMutator | undefined => undefined,
-  forEach: jest.fn(),
-  delete: jest.fn(),
-  clear: jest.fn(),
-  persistent: true,
-  description: '',
-  [Symbol.iterator]: function* () {
-    yield* [];
+    'tct-test-light': {
+      id: 'tct-test-light',
+      label: 'TCT Test Light',
+      path: './themes/TCTTestLight.json',
+      uiTheme: 'vs',
+      description: 'A light test theme.',
+    },
+    'tct-recommended': {
+      id: 'tct-recommended',
+      label: 'TCT Recommended',
+      path: './themes/TCTRecommended.json',
+      uiTheme: 'vs-dark',
+      description: 'A recommended theme.',
+      recommendations: ['typescript'],
+    },
   },
-  getScoped: (): EnvironmentVariableCollection => mockEnvCollection,
+}));
+
+const mockContext: any = {
+  extensionPath: path.resolve(__dirname, '../../'),
+  asAbsolutePath: (relativePath: string) => path.resolve(__dirname, '../../', relativePath),
 };
-
-const createMemento = (): ExtensionMemento => ({
-  get: (_key: string): unknown => undefined,
-  update: (_key: string, _value: unknown): Promise<void> => Promise.resolve(),
-  keys: (): readonly string[] => [],
-  setKeysForSync: (_keys: readonly string[]): void => {
-    /* noop */
-  },
-});
-
-const mockContext: ExtensionContext = {
-  subscriptions: [],
-  extensionPath: extensionPath,
-  globalState: createMemento(),
-  workspaceState: createMemento(),
-  environmentVariableCollection: mockEnvCollection,
-  storageUri: mockUri,
-  globalStorageUri: mockUri,
-  logUri: mockUri,
-  extensionUri: mockUri,
-  asAbsolutePath: (relativePath: string): string => join(extensionPath, relativePath),
-  storagePath: join(extensionPath, 'storage'),
-  globalStoragePath: join(extensionPath, 'global-storage'),
-  logPath: join(extensionPath, 'log'),
-  extensionMode: 1, // ExtensionMode.Test
-  secrets: {
-    get: (_key: string): Promise<string | undefined> => Promise.resolve(undefined),
-    store: (_key: string, _value: string): Promise<void> => Promise.resolve(),
-    delete: (_key: string): Promise<void> => Promise.resolve(),
-    onDidChange: ((_listener: (e: SecretStorageChangeEvent) => void): Disposable => {
-      return {
-        dispose: (): void => {
-          /* noop */
-        },
-      };
-    }) as unknown as Event<SecretStorageChangeEvent>,
-  },
-  extension: mockExtension,
-  languageModelAccessInformation: mockLangModelAccess,
-};
-
-interface ThemeManagerInternal extends ThemeManager {
-  _instance?: ThemeManager;
-  themesPath: string;
-  loadingThemes: Set<string>;
-}
 
 describe('ThemeManager', () => {
+  let themeManager: ThemeManager;
+
   beforeEach(() => {
     jest.clearAllMocks();
-    // Reset singleton instance
-    (ThemeManager as unknown as ThemeManagerInternal)._instance = undefined;
+    (ThemeManager as any).instance = undefined;
+    themeManager = ThemeManager.getInstance(mockContext);
+
+    (fs.promises.readFile as jest.Mock).mockImplementation(((async (filePath: string) => {
+      const themeId = path.basename(filePath, '.json');
+      const theme = Object.values(THEME_REGISTRY).find(t => t.path.includes(themeId));
+      if (theme) {
+        return JSON.stringify({
+          name: theme.label,
+          type: theme.uiTheme === 'vs' ? 'light' : 'dark',
+          colors: {},
+          tokenColors: [],
+        });
+      }
+      throw new Error(`File not found: ${filePath}`);
+    }) as any));
   });
 
   it('should be a singleton', () => {
@@ -161,16 +83,32 @@ describe('ThemeManager', () => {
     expect(instance1).toBe(instance2);
   });
 
-  it('should initialize with themes path', () => {
-    const manager = ThemeManager.getInstance(mockContext); // Mock access to themesPath
-    const themePath = join(extensionPath, 'themes');
-    (manager as unknown as ThemeManagerInternal).themesPath = themePath;
-    expect((manager as unknown as ThemeManagerInternal).themesPath).toBeDefined();
+  it('should initialize from the theme registry', () => {
+    const themeIds = themeManager.getAllThemeIds();
+    expect(themeIds).toEqual(['tct-test-dark', 'tct-test-light', 'tct-recommended']);
   });
 
-  it('should handle theme loading states', () => {
-    const manager = ThemeManager.getInstance(mockContext); // Mock loading themes set
-    (manager as unknown as ThemeManagerInternal).loadingThemes = new Set();
-    expect((manager as unknown as ThemeManagerInternal).loadingThemes).toEqual(new Set());
+  it('should get theme metadata', () => {
+    const metadata = themeManager.getThemeMetadata('tct-test-dark');
+    expect(metadata).toBeDefined();
+    expect(metadata?.label).toBe('TCT Test Dark');
+  });
+
+  it('should get a theme by ID', async () => {
+    const theme = await themeManager.getTheme('tct-test-dark');
+    expect(theme).toBeDefined();
+    expect(theme.name).toBe('TCT Test Dark');
+  });
+
+  it('should recommend a theme based on languageId', async () => {
+    const recommended = await themeManager.getRecommendedTheme('typescript');
+    expect(recommended).toBeDefined();
+    expect(recommended?.theme.name).toBe('TCT Recommended');
+  });
+
+  it('should fallback to time-based recommendation when no language match', async () => {
+    const recommended = await themeManager.getRecommendedTheme('python');
+    expect(recommended).toBeDefined();
+    expect(recommended?.theme.name).toBeDefined();
   });
 });

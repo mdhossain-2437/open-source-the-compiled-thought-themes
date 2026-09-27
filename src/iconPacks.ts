@@ -1,6 +1,5 @@
-import * as vscode from "vscode";
-import octicons = require("@primer/octicons");
-import feather = require("feather-icons");
+import octicons from "@primer/octicons";
+import feather from "feather-icons";
 
 type OcticonType = {
   toSVG(): string;
@@ -23,7 +22,7 @@ export class IconPackManager {
     this.initializeDefaultPacks();
   }
 
-  private initializeDefaultPacks() {
+  private initializeDefaultPacks(): void {
     // Initialize Octicons
     const octiconPack: IconDefinition[] = Object.entries(octicons).map(
       ([name, icon]: [string, OcticonType]) => ({
@@ -53,7 +52,7 @@ export class IconPackManager {
   public async loadCustomPack(packDefinition: {
     id: string;
     icons: Record<string, string>;
-  }) {
+  }): Promise<void> {
     // Validate and load custom icon pack
     if (!this.validatePackDefinition(packDefinition)) {
       throw new Error("Invalid icon pack definition");
@@ -72,13 +71,14 @@ export class IconPackManager {
   }
 
   private validatePackDefinition(
-    packDefinition: any
+    packDefinition: unknown
   ): packDefinition is { id: string; icons: Record<string, string> } {
+    const pack = packDefinition as { id: string; icons: Record<string, string> };
     return (
-      packDefinition &&
-      typeof packDefinition.id === "string" &&
-      typeof packDefinition.icons === "object" &&
-      Object.values(packDefinition.icons).every(
+      pack &&
+      typeof pack.id === "string" &&
+      typeof pack.icons === "object" &&
+      Object.values(pack.icons).every(
         (icon) => typeof icon === "string"
       )
     );

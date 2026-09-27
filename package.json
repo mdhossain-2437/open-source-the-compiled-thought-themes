@@ -33,26 +33,6 @@
   "contributes": {
     "themes": [
       {
-        "label": "TCT UI",
-        "uiTheme": "vs-dark",
-        "path": "./themes/_ui.json"
-      },
-      {
-        "label": "TCT Default Color",
-        "uiTheme": "vs-dark",
-        "path": "./themes/default-color-theme.json"
-      },
-      {
-        "label": "TCT Darcula",
-        "uiTheme": "vs-dark",
-        "path": "./themes/darcula.json"
-      },
-      {
-        "label": "TCT Candyland",
-        "uiTheme": "vs-dark",
-        "path": "./themes/TCTCandyland.json"
-      },
-      {
         "label": "TCT Ayu",
         "uiTheme": "vs-dark",
         "path": "./themes/ayu.json"
@@ -63,19 +43,9 @@
         "path": "./themes/ayuItalic.json"
       },
       {
-        "label": "TCT Blue Velvet",
+        "label": "TCT Darcula",
         "uiTheme": "vs-dark",
-        "path": "./themes/blue-velvet-theme.json"
-      },
-      {
-        "label": "TCT Dark Theme",
-        "uiTheme": "vs-dark",
-        "path": "./themes/dark_theme_json.json"
-      },
-      {
-        "label": "TCT Dracula",
-        "uiTheme": "vs-dark",
-        "path": "./themes/dracula-theme.json"
+        "path": "./themes/darcula.json"
       },
       {
         "label": "TCT Gruvbox",
@@ -88,16 +58,6 @@
         "path": "./themes/gruvboxItalic.json"
       },
       {
-        "label": "TCT Material",
-        "uiTheme": "vs-dark",
-        "path": "./themes/material.json"
-      },
-      {
-        "label": "TCT Material Italic",
-        "uiTheme": "vs-dark",
-        "path": "./themes/materialItalic.json"
-      },
-      {
         "label": "TCT Monokai",
         "uiTheme": "vs-dark",
         "path": "./themes/monokai.json"
@@ -106,16 +66,6 @@
         "label": "TCT Monokai Italic",
         "uiTheme": "vs-dark",
         "path": "./themes/monokaiItalic.json"
-      },
-      {
-        "label": "TCT Monokai Pro",
-        "uiTheme": "vs-dark",
-        "path": "./themes/monokai_pro_theme.json"
-      },
-      {
-        "label": "TCT Ocean Blue",
-        "uiTheme": "vs-dark",
-        "path": "./themes/ocean_blue_theme.json"
       },
       {
         "label": "TCT Oceanic",
@@ -128,11 +78,6 @@
         "path": "./themes/oceanicItalic.json"
       },
       {
-        "label": "TCT Official",
-        "uiTheme": "vs-dark",
-        "path": "./themes/official-theme.json"
-      },
-      {
         "label": "TCT One Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/one.json"
@@ -141,36 +86,6 @@
         "label": "TCT One Dark Italic",
         "uiTheme": "vs-dark",
         "path": "./themes/oneItalic.json"
-      },
-      {
-        "label": "TCT Party",
-        "uiTheme": "vs-dark",
-        "path": "./themes/party-theme.json"
-      },
-      {
-        "label": "TCT Peace of Eye",
-        "uiTheme": "vs-dark",
-        "path": "./themes/peace-of-eye-theme.json"
-      },
-      {
-        "label": "TCT Peace of Eye Dracula",
-        "uiTheme": "vs-dark",
-        "path": "./themes/peace-of-eye-dracula-theme.json"
-      },
-      {
-        "label": "TCT Professional",
-        "uiTheme": "vs-dark",
-        "path": "./themes/professional-theme.json"
-      },
-      {
-        "label": "TCT Shades of Grey",
-        "uiTheme": "vs-dark",
-        "path": "./themes/shades-of-grey-theme.json"
-      },
-      {
-        "label": "TCT Simple Light",
-        "uiTheme": "vs",
-        "path": "./themes/simple-as-light-theme.json"
       },
       {
         "label": "TCT Slime",
@@ -183,19 +98,9 @@
         "path": "./themes/slimeItalic.json"
       },
       {
-        "label": "TCT Traditional",
-        "uiTheme": "vs-dark",
-        "path": "./themes/traditional-theme.json"
-      },
-      {
-        "label": "TCT Vintage",
-        "uiTheme": "vs-dark",
-        "path": "./themes/vintage-theme.json"
-      },
-      {
-        "label": "TCT Sunset",
-        "uiTheme": "vs-dark",
-        "path": "./themes/TCTSunset.json"
+        "label": "TCT Simple Light",
+        "uiTheme": "vs",
+        "path": "./themes/simple-as-light-theme.json"
       },
       {
         "label": "TCT Forest",
@@ -203,14 +108,14 @@
         "path": "./themes/TCTForest.json"
       },
       {
-        "label": "TCT Sea Wave",
-        "uiTheme": "vs-dark",
-        "path": "./themes/TCTSeaWave.json"
-      },
-      {
         "label": "TCT Zen Garden",
         "uiTheme": "vs-dark",
         "path": "./themes/TCTZenGarden.json"
+      },
+      {
+        "label": "TCT Sea Wave",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTSeaWave.json"
       },
       {
         "label": "TCT Starry Night",
@@ -218,49 +123,39 @@
         "path": "./themes/TCTStarryNight.json"
       },
       {
-        "label": "TCT Morning Light",
+        "label": "TCT Solarized Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTSolarizedDark.json"
+      },
+      {
+        "label": "TCT Solarized Light",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTSolarizedLight.json"
+      },
+      {
+        "label": "TCT Solarized Light",
         "uiTheme": "vs",
-        "path": "./themes/TCTMorningLight.json"
+        "path": "./themes/TCTSolarizedLight.json"
       },
       {
-        "label": "TCT Soft Dawn",
+        "label": "TCT Solarized Dark",
         "uiTheme": "vs",
-        "path": "./themes/TCTSoftDawn.json"
+        "path": "./themes/TCTSolarizedDark.json"
       },
       {
-        "label": "TCT Neon Dreams",
+        "label": "TCT Nord",
         "uiTheme": "vs-dark",
-        "path": "./themes/TCTNeonDreams.json"
+        "path": "./themes/TCTNord.json"
       },
       {
-        "label": "TCT Aurora Borealis",
+        "label": "TCT Gruvbox Material",
         "uiTheme": "vs-dark",
-        "path": "./themes/TCTAuroraBorealis.json"
+        "path": "./themes/TCTGruvboxMaterial.json"
       },
       {
-        "label": "TCT Cyber Synthwave",
+        "label": "TCT High Contrast",
         "uiTheme": "vs-dark",
-        "path": "./themes/TCTCyberSynthwave.json"
-      },
-      {
-        "label": "TCT Deep Ocean",
-        "uiTheme": "vs-dark",
-        "path": "./themes/TCTDeepOcean.json"
-      },
-      {
-        "label": "TCT Desert Oasis",
-        "uiTheme": "vs-dark",
-        "path": "./themes/TCTDesertOasis.json"
-      },
-      {
-        "label": "TCT Golden Hour",
-        "uiTheme": "vs-dark",
-        "path": "./themes/TCTGoldenHour.json"
-      },
-      {
-        "label": "TCT Quantum Dark",
-        "uiTheme": "vs-dark",
-        "path": "./themes/TCTQuantumDark.json"
+        "path": "./themes/TCTHighContrast.json"
       }
     ],
     "snippets": [
@@ -325,6 +220,10 @@
       {
         "command": "DelowarHossain.customizeKeyboardShortcuts",
         "title": "TCT: Customize Theme Shortcuts"
+      },
+      {
+        "command": "DelowarHossain.surpriseMe",
+        "title": "TCT: Surprise Me!"
       }
     ],
     "configuration": {
@@ -448,6 +347,7 @@
     "release:major": "node ./scripts/release.js major",
     "release:minor": "node ./scripts/release.js minor",
     "release:patch": "node ./scripts/release.js patch",
+    "themes:generate": "node ./scripts/generate-themes.js",
     "ci": "npm run clean && npm run verify && npm run package",
     "docs": "typedoc --out docs src",
     "analyze": "npm audit && npm outdated",
@@ -471,6 +371,7 @@
     "conventional-changelog-cli": "^4.1.0",
     "conventional-recommended-bump": "^9.0.0",
     "eslint": "^9.31.0",
+    "globals": "^16.3.0",
     "husky": "^9.1.7",
     "jest": "^30.0.4",
     "jest-environment-node": "^30.0.4",
@@ -479,7 +380,7 @@
     "rimraf": "^3.0.2",
     "semver": "^7.7.2",
     "ts-jest": "^29.4.0",
-    "typedoc": "^0.28.7",
+    "typedoc": "0.25.13",
     "typescript": "^4.9.5",
     "vsce": "^2.15.0"
   },

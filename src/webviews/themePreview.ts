@@ -203,6 +203,15 @@ export class ThemePreviewPanel {
             background: var(--vscode-badge-background);
             color: var(--vscode-badge-foreground);
           }
+          .theme-description {
+            font-size: 14px;
+            color: var(--vscode-descriptionForeground);
+            margin-bottom: 12px;
+          }
+          .theme-recommendations {
+            font-size: 12px;
+            margin-bottom: 12px;
+          }
           .theme-metrics {
             font-size: 12px;
             color: var(--vscode-descriptionForeground);
@@ -220,6 +229,16 @@ export class ThemePreviewPanel {
           .button:hover {
             background: var(--vscode-button-hoverBackground);
           }
+          .code-snippet {
+            background: var(--vscode-textBlockQuote-background);
+            border: 1px solid var(--vscode-textBlockQuote-border);
+            border-radius: 4px;
+            padding: 12px;
+            font-family: var(--vscode-editor-font-family);
+            font-size: var(--vscode-editor-font-size);
+            line-height: 1.5;
+            margin-top: 16px;
+          }
         </style>
       </head>
       <body>
@@ -235,12 +254,22 @@ export class ThemePreviewPanel {
                   : 0;
               const cacheHits = metrics.filter((m) => m.cacheHit).length;
 
+              const metadata = this.themeManager.getThemeMetadata(id);
               return /*html*/ `
                   <div class="theme-card${isActive ? " active" : ""}">
                     <div class="theme-header">
                       <span class="theme-title">${theme.name}</span>
                       <span class="theme-type">${theme.type}</span>
                     </div>
+                    <p class="theme-description">${metadata?.description || ''}</p>
+                    ${
+                      metadata?.recommendations
+                        ? `<div class="theme-recommendations">
+                             <strong>Recommended for:</strong>
+                             <span>${metadata.recommendations.join(", ")}</span>
+                           </div>`
+                        : ""
+                    }
                     <div class="theme-metrics">
                       Avg Load: ${avgLoadTime.toFixed(2)}ms
                       ${
@@ -257,6 +286,7 @@ export class ThemePreviewPanel {
                         Export
                       </button>
                     </div>
+                    ${this._generateCodeSnippetHtml(theme)}
                   </div>
                 `;
             })
@@ -276,6 +306,47 @@ export class ThemePreviewPanel {
         </script>
       </body>
       </html>
+    `;
+  }
+
+  private _generateCodeSnippetHtml(theme: ThemeContent): string {
+    const tokenColorMap = new Map<string, string>();
+    const defaultColor = theme.colors?.['editor.foreground'] || '#ffffff';
+
+    const scopeMappings = {
+      keyword: ['keyword'],
+      function: ['entity.name.function'],
+      string: ['string'],
+      number: ['constant.numeric'],
+      variable: ['variable'],
+      parameter: ['variable.parameter'],
+      comment: ['comment'],
+    };
+
+    for (const tokenType in scopeMappings) {
+      let color = defaultColor;
+      for (const scope of scopeMappings[tokenType]) {
+        const tokenColor = theme.tokenColors.find(tc => {
+          if (!tc.scope) return false;
+          if (Array.isArray(tc.scope)) {
+            return tc.scope.includes(scope);
+          }
+          return tc.scope.split(',').map(s => s.trim()).includes(scope);
+        });
+        if (tokenColor && tokenColor.settings.foreground) {
+          color = tokenColor.settings.foreground;
+          break;
+        }
+      }
+      tokenColorMap.set(tokenType, color);
+    }
+
+    return `
+      <pre class="code-snippet"><code><span style="color: ${tokenColorMap.get('comment')}">// A sample code snippet</span>
+<span style="color: ${tokenColorMap.get('keyword')}">function</span> <span style="color: ${tokenColorMap.get('function')}">greet</span>(<span style="color: ${tokenColorMap.get('parameter')}">name</span>) {
+  <span style="color: ${tokenColorMap.get('keyword')}">const</span> <span style="color: ${tokenColorMap.get('variable')}">message</span> = <span style="color: ${tokenColorMap.get('string')}">\`Hello, \${name}!\`</span>;
+  <span style="color: ${tokenColorMap.get('function')}">console</span>.log(<span style="color: ${tokenColorMap.get('variable')}">message</span>, <span style="color: ${tokenColorMap.get('number')}">123</span>);
+}</code></pre>
     `;
   }
 

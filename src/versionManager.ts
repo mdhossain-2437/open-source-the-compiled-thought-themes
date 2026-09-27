@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 import * as semver from "semver";
+import { execSync } from "child_process";
 
 interface GitError {
   code: string;
@@ -212,7 +213,6 @@ ${changes.map((change) => `- ${change}`).join("\n")}
 
     try {
       let themeChanges = 0;
-      let coreChanges = 0;
       let apiChanges = false;
       let newFeatures = false;
 
@@ -230,7 +230,6 @@ ${changes.map((change) => `- ${change}`).join("\n")}
         }
 
         if (file.includes("src/")) {
-          coreChanges++;
           if (this.containsBreakingChanges(content)) {
             analysis.breakingChanges = true;
             analysis.impact = "high";
@@ -294,7 +293,6 @@ ${changes.map((change) => `- ${change}`).join("\n")}
     command: string
   ): Promise<GitOperationResult> {
     try {
-      const { execSync } = require("child_process");
       const result = execSync(command, {
         cwd: this.context.extensionPath,
         encoding: "utf8",
@@ -305,13 +303,14 @@ ${changes.map((change) => `- ${change}`).join("\n")}
         success: true,
         data: result,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as { status?: number; message: string };
       const gitError: GitError = {
         code:
-          typeof error.status === "number"
-            ? `GIT_ERROR_${error.status}`
+          typeof err.status === "number"
+            ? `GIT_ERROR_${err.status}`
             : "GIT_UNKNOWN_ERROR",
-        message: error?.message || "Unknown git error occurred",
+        message: err?.message || "Unknown git error occurred",
         command: command,
       };
 
@@ -361,7 +360,7 @@ ${changes.map((change) => `- ${change}`).join("\n")}
       }
 
       // Update version in package.json
-      const pkg = require(this.packageJsonPath);
+      const pkg = JSON.parse(fs.readFileSync(this.packageJsonPath, "utf8"));
       pkg.version = version;
       fs.writeFileSync(this.packageJsonPath, JSON.stringify(pkg, null, 2));
 
