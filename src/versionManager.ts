@@ -212,7 +212,6 @@ ${changes.map((change) => `- ${change}`).join("\n")}
 
     try {
       let themeChanges = 0;
-      let coreChanges = 0;
       let apiChanges = false;
       let newFeatures = false;
 
@@ -230,7 +229,6 @@ ${changes.map((change) => `- ${change}`).join("\n")}
         }
 
         if (file.includes("src/")) {
-          coreChanges++;
           if (this.containsBreakingChanges(content)) {
             analysis.breakingChanges = true;
             analysis.impact = "high";
@@ -305,13 +303,14 @@ ${changes.map((change) => `- ${change}`).join("\n")}
         success: true,
         data: result,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as { status?: number; message?: string } | null;
       const gitError: GitError = {
         code:
-          typeof error.status === "number"
-            ? `GIT_ERROR_${error.status}`
+          typeof err?.status === "number"
+            ? `GIT_ERROR_${err.status}`
             : "GIT_UNKNOWN_ERROR",
-        message: error?.message || "Unknown git error occurred",
+        message: err?.message || "Unknown git error occurred",
         command: command,
       };
 

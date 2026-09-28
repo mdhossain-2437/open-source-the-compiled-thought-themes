@@ -11,15 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [20.x, 22.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -27,19 +28,22 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Test
+      - name: Test Unit & Mocks
         run: npm run test
+
+      - name: Test E2E Theme Switching
+        run: node tests/e2e/runner.js
 
       - name: Build
         run: npm run build
 
       - name: Package Extension
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && matrix.node-version == '20.x'
         run: npm run package
 
-      - name: Upload VSIX
-        if: github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v2
+      - name: Upload VSIX Artifact
+        if: github.ref == 'refs/heads/main' && matrix.node-version == '20.x'
+        uses: actions/upload-artifact@v4
         with:
-          name: extension
-          path: '*.vsix'
+          name: compiled-thought-themes-vsix
+          path: "*.vsix"

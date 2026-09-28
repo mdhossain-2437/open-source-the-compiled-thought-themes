@@ -1,5 +1,5 @@
 {
-  "name": "Delowar Dark Pro",
+  "name": "TCT Dark Theme",
   "type": "dark",
   "semanticHighlighting": true,
   "colors": {
@@ -11,38 +11,31 @@
     "editor.wordHighlightBackground": "#2d3748",
     "editor.findMatchBackground": "#ffd33d44",
     "editor.findMatchHighlightBackground": "#ffd33d22",
-    
     "activityBar.background": "#010409",
     "activityBar.foreground": "#e6edf3",
     "activityBar.inactiveForeground": "#7d8590",
     "activityBarBadge.background": "#1f6feb",
     "activityBarBadge.foreground": "#f0f6fc",
-    
     "sideBar.background": "#0d1117",
     "sideBar.foreground": "#e6edf3",
     "sideBarSectionHeader.background": "#161b22",
     "sideBarSectionHeader.foreground": "#e6edf3",
-    
     "statusBar.background": "#0d1117",
     "statusBar.foreground": "#e6edf3",
     "statusBarItem.hoverBackground": "#21262d",
-    
     "titleBar.activeBackground": "#0d1117",
     "titleBar.activeForeground": "#e6edf3",
     "titleBar.inactiveBackground": "#0d1117",
     "titleBar.inactiveForeground": "#7d8590",
-    
     "tab.activeBackground": "#0d1117",
     "tab.activeForeground": "#e6edf3",
     "tab.inactiveBackground": "#161b22",
     "tab.inactiveForeground": "#7d8590",
     "tab.border": "#21262d",
-    
     "panel.background": "#0d1117",
     "panel.border": "#21262d",
     "panelTitle.activeForeground": "#e6edf3",
     "panelTitle.inactiveForeground": "#7d8590",
-    
     "terminal.background": "#0d1117",
     "terminal.foreground": "#e6edf3",
     "terminal.ansiBlack": "#484f58",
@@ -53,42 +46,34 @@
     "terminal.ansiMagenta": "#bc8cff",
     "terminal.ansiCyan": "#39c5cf",
     "terminal.ansiWhite": "#b1bac4",
-    
     "button.background": "#238636",
     "button.foreground": "#ffffff",
     "button.hoverBackground": "#2ea043",
-    
     "input.background": "#0d1117",
     "input.foreground": "#e6edf3",
     "input.border": "#30363d",
     "input.placeholderForeground": "#7d8590",
-    
     "dropdown.background": "#161b22",
     "dropdown.foreground": "#e6edf3",
     "dropdown.border": "#30363d",
-    
     "list.activeSelectionBackground": "#2d3748",
     "list.activeSelectionForeground": "#e6edf3",
     "list.hoverBackground": "#21262d",
     "list.inactiveSelectionBackground": "#2d3748",
-    
     "scrollbarSlider.background": "#21262d",
     "scrollbarSlider.hoverBackground": "#30363d",
     "scrollbarSlider.activeBackground": "#484f58",
-    
     "gitDecoration.addedResourceForeground": "#3fb950",
     "gitDecoration.modifiedResourceForeground": "#d29922",
     "gitDecoration.deletedResourceForeground": "#ff7b72",
     "gitDecoration.untrackedResourceForeground": "#39c5cf",
     "gitDecoration.ignoredResourceForeground": "#7d8590",
-    
     "editorWidget.background": "#161b22",
     "editorWidget.border": "#30363d",
     "editorSuggestWidget.background": "#161b22",
     "editorSuggestWidget.border": "#30363d",
     "editorSuggestWidget.foreground": "#e6edf3",
     "editorSuggestWidget.selectedBackground": "#2d3748",
-    
     "peekView.background": "#161b22",
     "peekViewEditor.background": "#0d1117",
     "peekViewResult.background": "#161b22",
@@ -363,5 +348,37 @@
         "foreground": "#79c0ff"
       }
     }
-  ]
+  ],
+  "semanticTokenColors": {
+    "namespace": "#ffa657",
+    "type": "#ffa657",
+    "class": "#ffa657",
+    "struct": "#ffa657",
+    "interface": "#ffa657",
+    "enum": "#ffa657",
+    "typeParameter": "#E5C07B",
+    "parameter": "#E5C07B",
+    "variable": "#ffa657",
+    "variable.readonly": "#79c0ff",
+    "variable.defaultLibrary": "#ffa657",
+    "property": "#ffa657",
+    "property.readonly": "#79c0ff",
+    "enumMember": "#79c0ff",
+    "event": "#d2a8ff",
+    "function": "#d2a8ff",
+    "function.declaration": "#d2a8ff",
+    "method": "#d2a8ff",
+    "method.declaration": "#d2a8ff",
+    "member.declaration": "#d2a8ff",
+    "decorator": "#E5C07B",
+    "macro": "#79c0ff",
+    "label": "#ffa657",
+    "comment": "#8b949e",
+    "string": "#a5d6ff",
+    "keyword": "#ff7b72",
+    "keyword.control": "#ff7b72",
+    "number": "#79c0ff",
+    "regexp": "#a5d6ff",
+    "operator": "#ff7b72"
+  }
 }

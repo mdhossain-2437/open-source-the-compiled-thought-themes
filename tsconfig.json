@@ -11,6 +11,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["node_modules", ".vscode-test"],
+  "exclude": ["node_modules", ".vscode-test", "src/__tests__"],
   "include": ["src/**/*"]
 }

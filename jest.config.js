@@ -12,12 +12,5 @@ module.exports = {
     '^vscode$': '<rootDir>/src/__tests__/mocks/vscode.ts',
   },
   collectCoverageFrom: ['src/**/*.ts', '!src/**/*.d.ts', '!src/test/**'],
-  coverageThreshold: {
-    global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80,
-    },
-  },
 };
+

@@ -1,24 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { jest } from '@jest/globals';
-import type { Mock } from 'jest-mock';
 
-// Import vscode types
-import type { Uri, OutputChannel, ExtensionMode } from 'vscode';
-
-// Define expected vscode mock structure
-interface VSCodeMock {
-  EventEmitter: Mock;
-  ExtensionMode: {
-    Test: ExtensionMode;
-    Development: ExtensionMode;
-    Production: ExtensionMode;
-  };
-  Uri: {
-    file: Mock<(path: string) => Uri>;
-  };
-  window: {
-    createOutputChannel: Mock<(name: string) => OutputChannel>;
-  };
+// Augment NodeJS.Timer for compatibility across Node versions
+declare global {
+  namespace NodeJS {
+    interface Timer {
+      close(): this;
+      [Symbol.dispose](): void;
+      _onTimeout(...args: any[]): void;
+    }
+  }
 }
 
 // Setup jest globally
@@ -26,6 +17,10 @@ interface VSCodeMock {
 
 // Mock vscode since we can't load it in test environment
 jest.mock('vscode', () => {
-  const mockVscode = jest.requireActual('./mocks/vscode.ts') as { default: VSCodeMock };
-  return mockVscode.default;
+  const mockVscode = jest.requireActual('./mocks/vscode.ts') as { default: any };
+  return {
+    __esModule: true,
+    ...mockVscode.default,
+    default: mockVscode.default,
+  };
 });

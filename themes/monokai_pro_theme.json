@@ -1,5 +1,5 @@
 {
-  "name": "Delowar Monokai Pro",
+  "name": "TCT Monokai Pro",
   "type": "dark",
   "semanticHighlighting": true,
   "colors": {
@@ -11,38 +11,31 @@
     "editor.wordHighlightBackground": "#5b595c",
     "editor.findMatchBackground": "#ffd86644",
     "editor.findMatchHighlightBackground": "#ffd86622",
-
     "activityBar.background": "#221f22",
     "activityBar.foreground": "#fcfcfa",
     "activityBar.inactiveForeground": "#939293",
     "activityBarBadge.background": "#fc9867",
     "activityBarBadge.foreground": "#221f22",
-
     "sideBar.background": "#2d2a2e",
     "sideBar.foreground": "#fcfcfa",
     "sideBarSectionHeader.background": "#3a3739",
     "sideBarSectionHeader.foreground": "#fcfcfa",
-
     "statusBar.background": "#2d2a2e",
     "statusBar.foreground": "#fcfcfa",
     "statusBarItem.hoverBackground": "#3a3739",
-
     "titleBar.activeBackground": "#2d2a2e",
     "titleBar.activeForeground": "#fcfcfa",
     "titleBar.inactiveBackground": "#2d2a2e",
     "titleBar.inactiveForeground": "#939293",
-
     "tab.activeBackground": "#2d2a2e",
     "tab.activeForeground": "#fcfcfa",
     "tab.inactiveBackground": "#3a3739",
     "tab.inactiveForeground": "#939293",
     "tab.border": "#5b595c",
-
     "panel.background": "#2d2a2e",
     "panel.border": "#5b595c",
     "panelTitle.activeForeground": "#fcfcfa",
     "panelTitle.inactiveForeground": "#939293",
-
     "terminal.background": "#2d2a2e",
     "terminal.foreground": "#fcfcfa",
     "terminal.ansiBlack": "#2d2a2e",
@@ -53,29 +46,23 @@
     "terminal.ansiMagenta": "#ab9df2",
     "terminal.ansiCyan": "#78dce8",
     "terminal.ansiWhite": "#fcfcfa",
-
     "button.background": "#fc9867",
     "button.foreground": "#221f22",
     "button.hoverBackground": "#fd7f24",
-
     "input.background": "#2d2a2e",
     "input.foreground": "#fcfcfa",
     "input.border": "#5b595c",
     "input.placeholderForeground": "#939293",
-
     "dropdown.background": "#3a3739",
     "dropdown.foreground": "#fcfcfa",
     "dropdown.border": "#5b595c",
-
     "list.activeSelectionBackground": "#5b595c",
     "list.activeSelectionForeground": "#fcfcfa",
     "list.hoverBackground": "#3a3739",
     "list.inactiveSelectionBackground": "#5b595c",
-
     "scrollbarSlider.background": "#5b595c",
     "scrollbarSlider.hoverBackground": "#727072",
     "scrollbarSlider.activeBackground": "#939293",
-
     "gitDecoration.addedResourceForeground": "#a9dc76",
     "gitDecoration.modifiedResourceForeground": "#ffd866",
     "gitDecoration.deletedResourceForeground": "#ff6188",
@@ -85,7 +72,10 @@
   "tokenColors": [
     {
       "name": "Comment",
-      "scope": ["comment", "punctuation.definition.comment"],
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
       "settings": {
         "foreground": "#727072",
         "fontStyle": "italic"
@@ -93,28 +83,40 @@
     },
     {
       "name": "String",
-      "scope": ["string", "string.quoted", "string.template"],
+      "scope": [
+        "string",
+        "string.quoted",
+        "string.template"
+      ],
       "settings": {
         "foreground": "#ffd866"
       }
     },
     {
       "name": "Number",
-      "scope": ["constant.numeric"],
+      "scope": [
+        "constant.numeric"
+      ],
       "settings": {
         "foreground": "#ab9df2"
       }
     },
     {
       "name": "Boolean",
-      "scope": ["constant.language.boolean"],
+      "scope": [
+        "constant.language.boolean"
+      ],
       "settings": {
         "foreground": "#ab9df2"
       }
     },
     {
       "name": "Keyword",
-      "scope": ["keyword", "storage.type", "storage.modifier"],
+      "scope": [
+        "keyword",
+        "storage.type",
+        "storage.modifier"
+      ],
       "settings": {
         "foreground": "#ff6188"
       }
@@ -132,21 +134,30 @@
     },
     {
       "name": "Class",
-      "scope": ["entity.name.class", "entity.other.inherited-class"],
+      "scope": [
+        "entity.name.class",
+        "entity.other.inherited-class"
+      ],
       "settings": {
         "foreground": "#78dce8"
       }
     },
     {
       "name": "Variable",
-      "scope": ["variable", "meta.definition.variable"],
+      "scope": [
+        "variable",
+        "meta.definition.variable"
+      ],
       "settings": {
         "foreground": "#fcfcfa"
       }
     },
     {
       "name": "Property",
-      "scope": ["variable.other.property", "support.variable.property"],
+      "scope": [
+        "variable.other.property",
+        "support.variable.property"
+      ],
       "settings": {
         "foreground": "#fcfcfa"
       }
@@ -165,10 +176,45 @@
     },
     {
       "name": "Tag",
-      "scope": ["entity.name.tag", "meta.tag"],
+      "scope": [
+        "entity.name.tag",
+        "meta.tag"
+      ],
       "settings": {
         "foreground": "#ff6188"
       }
     }
-  ]
+  ],
+  "semanticTokenColors": {
+    "namespace": "#78dce8",
+    "type": "#78dce8",
+    "class": "#78dce8",
+    "struct": "#78dce8",
+    "interface": "#78dce8",
+    "enum": "#78dce8",
+    "typeParameter": "#E5C07B",
+    "parameter": "#E5C07B",
+    "variable": "#fcfcfa",
+    "variable.readonly": "#ab9df2",
+    "variable.defaultLibrary": "#78dce8",
+    "property": "#fcfcfa",
+    "property.readonly": "#ab9df2",
+    "enumMember": "#ab9df2",
+    "event": "#a9dc76",
+    "function": "#a9dc76",
+    "function.declaration": "#a9dc76",
+    "method": "#a9dc76",
+    "method.declaration": "#a9dc76",
+    "member.declaration": "#a9dc76",
+    "decorator": "#E5C07B",
+    "macro": "#ab9df2",
+    "label": "#fcfcfa",
+    "comment": "#9a989a",
+    "string": "#ffd866",
+    "keyword": "#ff6188",
+    "keyword.control": "#ff6188",
+    "number": "#ab9df2",
+    "regexp": "#ffd866",
+    "operator": "#ff6188"
+  }
 }

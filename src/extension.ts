@@ -1,18 +1,10 @@
 import * as vscode from "vscode";
-import * as fs from "fs";
-import * as path from "path";
 import { ThemePreviewPanel } from "./webviews/themePreview";
 import { ThemeTransitionManager } from "./transitions/themeTransition";
-import type { ThemeManager, ThemeContent } from "./themeManager";
+import type { ThemeManager, ThemeContent, ThemeMetadata } from "./themeManager";
+import { CustomizationManager } from "./customizationManager";
 
-// Core interfaces
-interface ThemeInfo {
-  name: string;
-  path: string;
-  type: "dark" | "light" | "hc";
-}
-
-interface ThemeAnalytics {
+export interface ThemeAnalytics {
   usageCount: number;
   lastUsed: Date;
   averageUsageDuration: number;
@@ -20,7 +12,7 @@ interface ThemeAnalytics {
   workspacePreferences: { [key: string]: string };
 }
 
-interface ThemeSchedule {
+export interface ThemeSchedule {
   themeId: string;
   startTime: string;
   endTime: string;
@@ -28,16 +20,11 @@ interface ThemeSchedule {
   timeZone: string;
 }
 
-interface IconPack {
-  id: string;
-  name: string;
-  icons: { [key: string]: string };
-}
-
 // Memory-optimized theme manager instance
 let themeManager: ThemeManager;
+let autoThemeTimer: ReturnType<typeof setInterval> | null = null;
 
-class FontManager {
+export class FontManager {
   private static readonly RECOMMENDED_FONTS = new Set([
     "Operator Mono",
     "Fira Code",
@@ -104,12 +91,12 @@ class FontManager {
   }
 }
 
-class GeminiAIManager {
+export class GeminiAIManager {
   private static instance: GeminiAIManager;
-  private context: vscode.ExtensionContext;
+  private _context: vscode.ExtensionContext;
 
   private constructor(context: vscode.ExtensionContext) {
-    this.context = context;
+    this._context = context;
   }
 
   static getInstance(context: vscode.ExtensionContext): GeminiAIManager {
@@ -119,9 +106,12 @@ class GeminiAIManager {
     return GeminiAIManager.instance;
   }
 
-  async analyzeCode(document: vscode.TextDocument): Promise<any> {
-    // Implement Gemini API integration for code analysis
-    // This is a placeholder for the actual implementation
+  async analyzeCode(_document: vscode.TextDocument): Promise<{
+    suggestions: string[];
+    warnings: string[];
+    optimizations: string[];
+  }> {
+    // Placeholder for Gemini API integration for code analysis
     return {
       suggestions: [],
       warnings: [],
@@ -129,31 +119,30 @@ class GeminiAIManager {
     };
   }
 
-  async suggestTheme(context: any): Promise<string> {
+  async suggestTheme(_context?: unknown): Promise<string> {
     // AI-powered theme suggestion based on context
     return "TCT Professional";
   }
 }
 
-class CustomThemeBuilder {
+export class CustomThemeBuilder {
   static async createCustomTheme(base: ThemeContent): Promise<ThemeContent> {
-    const customizations = await vscode.window.showQuickPick([
+    await vscode.window.showQuickPick([
       "Modify Colors",
       "Adjust Contrast",
       "Change Font Styles",
       "Edit Token Colors",
     ]);
 
-    // Implement theme customization logic
     return base;
   }
 
-  static async exportTheme(theme: ThemeContent): Promise<void> {
-    // Implement theme export logic
+  static async exportTheme(_theme: ThemeContent): Promise<void> {
+    // Theme export logic
   }
 }
 
-class ThemeAnalyticsManager {
+export class ThemeAnalyticsManager {
   private analytics: Map<string, ThemeAnalytics> = new Map();
   private storageKey = "theme-analytics";
   private context: vscode.ExtensionContext;
@@ -194,9 +183,9 @@ class ThemeAnalyticsManager {
   }
 }
 
-class ThemeScheduler {
+export class ThemeScheduler {
   private schedules: ThemeSchedule[] = [];
-  private timer: NodeJS.Timer | null = null;
+  private timer: NodeJS.Timeout | null = null;
 
   constructor(private themeManager: ThemeManager) {
     this.loadSchedules();
@@ -204,8 +193,7 @@ class ThemeScheduler {
   }
 
   private loadSchedules() {
-    const config = vscode.workspace.getConfiguration("tct.scheduling");
-    // Load schedules from configuration
+    vscode.workspace.getConfiguration("tct.scheduling");
   }
 
   private startScheduler() {
@@ -215,14 +203,12 @@ class ThemeScheduler {
 
     this.timer = setInterval(() => {
       this.checkAndApplySchedule();
-    }, 60000); // Check every minute
+    }, 60000);
   }
 
   private async checkAndApplySchedule() {
-    const now = new Date();
-    const currentSchedule = this.schedules.find((schedule) => {
-      // Check if current time matches schedule
-      return true; // Implement actual time checking logic
+    const currentSchedule = this.schedules.find((_schedule) => {
+      return true;
     });
 
     if (currentSchedule) {
@@ -238,7 +224,14 @@ export async function activate(context: vscode.ExtensionContext) {
     ThemeManager.getInstance(context)
   );
 
-  console.log("The Compiled Thought Themes extension is now active!");
+  try {
+    const allRegisteredThemes = await themeManager.getThemes();
+    CustomizationManager.setRegisteredThemes(
+      allRegisteredThemes.map((t) => t.label || t.name)
+    );
+  } catch {
+    // Non-critical
+  }
 
   const aiManager = GeminiAIManager.getInstance(context);
 
@@ -246,129 +239,282 @@ export async function activate(context: vscode.ExtensionContext) {
   await FontManager.optimizeFontSettings();
 
   // Smart theme recommendation on startup
-  setTimeout(async () => {
-    const recommended = await themeManager.getRecommendedTheme();
-    if (recommended) {
-      const selection = await vscode.window.showInformationMessage(
-        `💡 Recommended theme for your current context: ${recommended.name}`,
-        "Apply Theme",
-        "Dismiss"
-      );
+  const startupTimer = setTimeout(async () => {
+    try {
+      const recommended = await themeManager.getRecommendedTheme();
+      if (recommended) {
+        const selection = await vscode.window.showInformationMessage(
+          `💡 Recommended theme for your current context: ${recommended.name}`,
+          "Apply Theme",
+          "Dismiss"
+        );
 
-      if (selection === "Apply Theme") {
-        await themeManager.setTheme(recommended.name);
+        if (selection === "Apply Theme") {
+          await themeManager.setTheme(recommended.name);
+        }
       }
+    } catch {
+      // non-critical recommendation failure
     }
   }, 2000);
+  if (typeof startupTimer.unref === "function") {
+    startupTimer.unref();
+  }
+  context.subscriptions.push(
+    new vscode.Disposable(() => clearTimeout(startupTimer))
+  );
 
-  // Enhanced theme selector command
+  // Enhanced theme selector command supporting optional preselectedId
   const selectThemeCommand = vscode.commands.registerCommand(
     "DelowarHossain.selectTheme",
-    async () => {
+    async (preselectedId?: string) => {
       try {
-        const themes = await themeManager.getThemes();
-        const items = themes.map((theme: ThemeContent) => ({
-          id: theme.name, // Using name as ID since it's unique
-          label: theme.name,
-          description: theme.type,
+        const allThemes = await themeManager.getThemes();
+        const currentTheme = vscode.workspace
+          .getConfiguration("workbench")
+          .get<string>("colorTheme");
+
+        const items = allThemes.map((t: { id?: string; filename?: string; label?: string; name?: string; type?: string }) => ({
+          id: t.id || t.filename || t.label || "",
+          label: t.label || t.name || "",
+          description: t.type,
+          detail: t.label === currentTheme ? "(Current Active Theme)" : "",
         }));
 
-        const selected = await vscode.window.showQuickPick(items, {
-          placeHolder: "Select a theme",
-        });
+        let selected: { id: string; label: string } | undefined;
+        if (preselectedId) {
+          selected = items.find(
+            (i: { id: string; label: string }) => i.id === preselectedId || i.label === preselectedId
+          );
+          if (!selected) {
+            const resolvedMeta = themeManager.resolveMetadata(preselectedId);
+            if (resolvedMeta) {
+              selected = { id: resolvedMeta.filename, label: resolvedMeta.label };
+            }
+          }
+        } else {
+          selected = await vscode.window.showQuickPick(items, {
+            placeHolder: "Select a Compiled Thought Theme",
+          });
+        }
 
         if (selected) {
           try {
-            await themeManager.setTheme(selected.id);
+            await themeManager.setTheme(selected.id || selected.label);
             vscode.window.showInformationMessage(
               `Applied theme: ${selected.label}`
             );
+            return selected;
           } catch (error) {
             vscode.window.showErrorMessage(
               `Failed to apply theme: ${
                 error instanceof Error ? error.message : "Unknown error"
               }`
             );
+            return null;
           }
         }
+        return null;
       } catch (error) {
         vscode.window.showErrorMessage(`Failed to select theme: ${error}`);
+        return null;
       }
     }
   );
 
-  // Intelligent italic toggle
+  // Intelligent italic toggle with robust counterpart resolution
   const toggleItalicCommand = vscode.commands.registerCommand(
     "DelowarHossain.toggleItalic",
     async () => {
       try {
         const currentTheme = vscode.workspace
-          .getConfiguration()
-          .get<string>("workbench.colorTheme");
-        if (!currentTheme) return;
-
-        const themes = await themeManager.getThemes();
-        const current = themes.find(
-          (t: ThemeContent) => t.name === currentTheme
-        );
-
-        if (!current) {
-          vscode.window.showWarningMessage(
-            "Current theme not found in TCT collection"
-          );
-          return;
+          .getConfiguration("workbench")
+          .get<string>("colorTheme");
+        if (!currentTheme) {
+          await vscode.window.showWarningMessage("No active theme set");
+          return false;
         }
 
-        // Find italic variant
-        const baseName = current.name.replace(" Italic", "");
-        const isCurrentlyItalic = current.name.includes("Italic");
-        const targetName = isCurrentlyItalic ? baseName : `${baseName} Italic`;
-
-        const targetTheme = themes.find(
-          (t: ThemeContent) => t.name === targetName
-        );
-
-        if (targetTheme) {
-          await vscode.commands.executeCommand(
-            "workbench.colorTheme.selectTheme",
-            targetTheme.name
+        const currentMeta = themeManager.resolveMetadata(currentTheme);
+        if (!currentMeta) {
+          await vscode.window.showWarningMessage(
+            "Current theme not found in TCT collection"
           );
-          vscode.window.showInformationMessage(
-            `Switched to ${targetTheme.name}`
+          return false;
+        }
+
+        const isCurrentlyItalic = currentMeta.isItalic;
+        let targetMeta: ThemeMetadata | null = null;
+
+        if (isCurrentlyItalic) {
+          // Switch to standard variant
+          const baseLabel = currentMeta.label.replace(/\s+Italic$/i, "").trim();
+          const baseFilename = currentMeta.filename.replace(
+            /Italic\.json$/i,
+            ".json"
           );
+          targetMeta =
+            themeManager.resolveMetadata(baseLabel) ||
+            themeManager.resolveMetadata(baseFilename);
         } else {
-          vscode.window.showInformationMessage(
+          // Switch to italic variant
+          const italicLabel = `${currentMeta.label} Italic`;
+          const italicFilename = currentMeta.filename.replace(
+            /\.json$/i,
+            "Italic.json"
+          );
+          targetMeta =
+            themeManager.resolveMetadata(italicLabel) ||
+            themeManager.resolveMetadata(italicFilename);
+        }
+
+        if (targetMeta) {
+          await themeManager.setTheme(targetMeta.label || targetMeta.filename);
+          await vscode.window.showInformationMessage(
+            `Switched to ${targetMeta.label}`
+          );
+          return true;
+        } else {
+          await vscode.window.showInformationMessage(
             `No ${
               isCurrentlyItalic ? "regular" : "italic"
             } variant available for this theme`
           );
+          return false;
         }
       } catch (error) {
-        vscode.window.showErrorMessage(`Failed to toggle italic: ${error}`);
+        await vscode.window.showErrorMessage(`Failed to toggle italic: ${error}`);
+        return false;
       }
     }
   );
 
-  // Auto theme switching based on time (optional feature)
+  // Font optimization command
+  const optimizeFontSettingsCommand = vscode.commands.registerCommand(
+    "DelowarHossain.optimizeFontSettings",
+    async () => {
+      return FontManager.optimizeFontSettings();
+    }
+  );
+
+  // Random theme selection command
+  const randomThemeCommand = vscode.commands.registerCommand(
+    "DelowarHossain.randomTheme",
+    async () => {
+      try {
+        const themes = await themeManager.getThemes();
+        if (!themes || themes.length === 0) {
+          return null;
+        }
+        const selected = themes[Math.floor(Math.random() * themes.length)];
+        await themeManager.setTheme(selected.id || selected.label);
+        vscode.window.showInformationMessage(
+          `Random theme applied: ${selected.label}`
+        );
+        return selected;
+      } catch (error) {
+        vscode.window.showErrorMessage(`Failed to apply random theme: ${error}`);
+        return null;
+      }
+    }
+  );
+
+  // Contributed commands handlers
+  const viewThemeAnalyticsCommand = vscode.commands.registerCommand(
+    "DelowarHossain.viewThemeAnalytics",
+    async () => {
+      vscode.window.showInformationMessage("TCT Theme Analytics is active.");
+    }
+  );
+
+  const shareThemeCommand = vscode.commands.registerCommand(
+    "DelowarHossain.shareTheme",
+    async () => {
+      const current = vscode.workspace
+        .getConfiguration("workbench")
+        .get<string>("colorTheme");
+      vscode.window.showInformationMessage(
+        `Share TCT Theme: ${current || "TCT Theme"}`
+      );
+    }
+  );
+
+  const configureScheduleCommand = vscode.commands.registerCommand(
+    "DelowarHossain.configureSchedule",
+    async () => {
+      vscode.window.showInformationMessage(
+        "Theme scheduling can be configured in settings under tct.scheduling."
+      );
+    }
+  );
+
+  const customizeIconsCommand = vscode.commands.registerCommand(
+    "DelowarHossain.customizeIcons",
+    async () => {
+      vscode.window.showInformationMessage(
+        "Icon packs can be configured under tct.iconPacks in settings."
+      );
+    }
+  );
+
+  const configureWorkspaceThemeCommand = vscode.commands.registerCommand(
+    "DelowarHossain.configureWorkspaceTheme",
+    async () => {
+      vscode.window.showInformationMessage(
+        "Workspace theme overrides are configured under tct.workspace."
+      );
+    }
+  );
+
+  const customizeKeyboardShortcutsCommand = vscode.commands.registerCommand(
+    "DelowarHossain.customizeKeyboardShortcuts",
+    async () => {
+      vscode.commands.executeCommand(
+        "workbench.action.openGlobalKeybindings",
+        "DelowarHossain"
+      );
+    }
+  );
+
+  // Auto theme switching based on time
   const autoThemeCommand = vscode.commands.registerCommand(
     "DelowarHossain.enableAutoTheme",
-    () => {
-      const interval = setInterval(async () => {
-        const config = vscode.workspace.getConfiguration();
-        const autoThemeEnabled = config.get<boolean>(
+    async () => {
+      const config = vscode.workspace.getConfiguration("DelowarHossain");
+      await config.update("autoTheme", true, vscode.ConfigurationTarget.Global);
+
+      try {
+        const recommended = await themeManager.getRecommendedTheme();
+        if (recommended) {
+          await themeManager.setTheme(recommended.label || recommended.name);
+        }
+      } catch {
+        // non-critical recommendation failure
+      }
+
+      if (autoThemeTimer) {
+        clearInterval(autoThemeTimer);
+        autoThemeTimer = null;
+      }
+
+      autoThemeTimer = setInterval(async () => {
+        const currentConfig = vscode.workspace.getConfiguration();
+        const autoThemeEnabled = currentConfig.get<boolean>(
           "DelowarHossain.autoTheme",
           false
         );
 
         if (!autoThemeEnabled) {
-          clearInterval(interval);
+          if (autoThemeTimer) {
+            clearInterval(autoThemeTimer);
+            autoThemeTimer = null;
+          }
           return;
         }
 
         const hour = new Date().getHours();
         const isDarkTheme = hour < 6 || hour >= 18;
 
-        // Get all themes and filter by type
         const themeIds = themeManager.getAllThemeIds();
         const themes = await Promise.all(
           themeIds.map(async (id) => ({
@@ -382,18 +528,23 @@ export async function activate(context: vscode.ExtensionContext) {
         );
 
         if (availableThemes.length > 0) {
-          // Select a random theme of appropriate type
           const selected =
             availableThemes[Math.floor(Math.random() * availableThemes.length)];
 
-          const currentTheme = config.get<string>("workbench.colorTheme");
-          if (currentTheme !== selected.theme.name) {
+          const currentTheme = currentConfig.get<string>("workbench.colorTheme");
+          const targetThemeName = selected.theme.label || selected.theme.name;
+          if (currentTheme !== targetThemeName) {
             await themeManager.setTheme(selected.id);
           }
         }
-      }, 60000 * 30); // Check every 30 minutes
+      }, 60000 * 30);
+
+      if (typeof autoThemeTimer.unref === "function") {
+        autoThemeTimer.unref();
+      }
 
       vscode.window.showInformationMessage("Auto theme switching enabled!");
+      return true;
     }
   );
 
@@ -423,37 +574,71 @@ export async function activate(context: vscode.ExtensionContext) {
   // Clean up on deactivate
   context.subscriptions.push({
     dispose: () => {
+      if (autoThemeTimer) {
+        clearInterval(autoThemeTimer);
+        autoThemeTimer = null;
+      }
       themeTransitionManager.dispose();
       if (ThemePreviewPanel.currentPanel) {
         ThemePreviewPanel.currentPanel.dispose();
       }
+      if (themeManager) {
+        themeManager.dispose();
+      }
     },
   });
+
+  const customizeThemeCommand = vscode.commands.registerCommand(
+    "DelowarHossain.customizeTheme",
+    async () => {
+      await CustomizationManager.promptCustomizationQuickPick();
+    }
+  );
+
+  // Listen for dynamic theme style customizations
+  const customizationConfigListener = vscode.workspace.onDidChangeConfiguration(
+    async (event) => {
+      if (event.affectsConfiguration("tct.customization")) {
+        await CustomizationManager.applyCustomizations();
+      }
+    }
+  );
+  context.subscriptions.push(customizationConfigListener);
 
   context.subscriptions.push(
     selectThemeCommand,
     toggleItalicCommand,
-    autoThemeCommand
+    optimizeFontSettingsCommand,
+    randomThemeCommand,
+    customizeThemeCommand,
+    autoThemeCommand,
+    viewThemeAnalyticsCommand,
+    shareThemeCommand,
+    configureScheduleCommand,
+    customizeIconsCommand,
+    configureWorkspaceThemeCommand,
+    customizeKeyboardShortcutsCommand
   );
 
   // Listen for configuration changes to optimize performance
-  vscode.workspace.onDidChangeConfiguration((event) => {
+  const configPerfListener = vscode.workspace.onDidChangeConfiguration((event) => {
     if (event.affectsConfiguration("workbench.colorTheme")) {
-      // Clear cache when theme changes to free memory
-      setTimeout(() => {
-        if (themeManager["themeCache"].size > 3) {
-          themeManager["themeCache"].clear();
-        }
-      }, 5000);
+      // Clear cache when theme changes to free memory if cache exceeds threshold
+      if (themeManager.getCacheStats().size > 3) {
+        themeManager.clearCache();
+      }
     }
   });
+  context.subscriptions.push(configPerfListener);
 
   // Add workspace change monitoring
-  vscode.workspace.onDidChangeTextDocument(async (event) => {
-    if (vscode.workspace.getConfiguration().get("tct.ai.enabled")) {
-      await aiManager.analyzeCode(event.document);
-    }
-  });
+  context.subscriptions.push(
+    vscode.workspace.onDidChangeTextDocument(async (event) => {
+      if (vscode.workspace.getConfiguration().get("tct.ai.enabled")) {
+        await aiManager.analyzeCode(event.document);
+      }
+    })
+  );
 
   // Test commands for theme performance
   const testThemesCommand = vscode.commands.registerCommand(
@@ -471,7 +656,6 @@ export async function activate(context: vscode.ExtensionContext) {
         const themeIds = themeManager.getAllThemeIds();
 
         // First pass - load all themes to measure initial load times
-        console.log("First pass - Loading all themes...");
         for (const id of themeIds) {
           const start = performance.now();
           await themeManager.setTheme(id);
@@ -481,7 +665,6 @@ export async function activate(context: vscode.ExtensionContext) {
         }
 
         // Second pass - themes should be cached
-        console.log("Second pass - Testing cache...");
         for (const id of themeIds) {
           const start = performance.now();
           await themeManager.setTheme(id);
@@ -491,7 +674,6 @@ export async function activate(context: vscode.ExtensionContext) {
         }
 
         // Random access test
-        console.log("Random access test...");
         for (let i = 0; i < 10; i++) {
           const randomId =
             themeIds[Math.floor(Math.random() * themeIds.length)];
@@ -522,7 +704,7 @@ export async function activate(context: vscode.ExtensionContext) {
             arrayBuffers:
               (endMemory.arrayBuffers - startMemory.arrayBuffers) / 1024 / 1024,
           },
-          cacheSize: themeManager["themeCache"].size,
+          cacheSize: themeManager.getCacheStats().size,
         };
 
         // Show results
@@ -585,7 +767,7 @@ export async function activate(context: vscode.ExtensionContext) {
   // ...existing code...
 }
 
-async function generateThemePreviewHTML(
+export async function generateThemePreviewHTML(
   themeManager: ThemeManager
 ): Promise<string> {
   const themeIds = themeManager.getAllThemeIds();
@@ -641,5 +823,14 @@ async function generateThemePreviewHTML(
 }
 
 export function deactivate() {
-  console.log("The Compiled Thought Themes extension is now deactivated");
+  if (autoThemeTimer) {
+    clearInterval(autoThemeTimer);
+    autoThemeTimer = null;
+  }
+  if (themeManager) {
+    themeManager.dispose();
+  }
 }
+
+export { CustomizationManager };
+

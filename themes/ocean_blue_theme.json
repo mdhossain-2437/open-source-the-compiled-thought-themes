@@ -1,5 +1,5 @@
 {
-  "name": "Delowar Ocean Blue",
+  "name": "TCT Ocean Blue",
   "type": "dark",
   "semanticHighlighting": true,
   "colors": {
@@ -11,38 +11,31 @@
     "editor.wordHighlightBackground": "#1e3a8a",
     "editor.findMatchBackground": "#fbbf2444",
     "editor.findMatchHighlightBackground": "#fbbf2422",
-    
     "activityBar.background": "#0c1017",
     "activityBar.foreground": "#bfdbfe",
     "activityBar.inactiveForeground": "#64748b",
     "activityBarBadge.background": "#3b82f6",
     "activityBarBadge.foreground": "#ffffff",
-    
     "sideBar.background": "#0f1419",
     "sideBar.foreground": "#bfdbfe",
     "sideBarSectionHeader.background": "#1e293b",
     "sideBarSectionHeader.foreground": "#bfdbfe",
-    
     "statusBar.background": "#0f1419",
     "statusBar.foreground": "#bfdbfe",
     "statusBarItem.hoverBackground": "#1e293b",
-    
     "titleBar.activeBackground": "#0f1419",
     "titleBar.activeForeground": "#bfdbfe",
     "titleBar.inactiveBackground": "#0f1419",
     "titleBar.inactiveForeground": "#64748b",
-    
     "tab.activeBackground": "#0f1419",
     "tab.activeForeground": "#bfdbfe",
     "tab.inactiveBackground": "#1e293b",
     "tab.inactiveForeground": "#64748b",
     "tab.border": "#334155",
-    
     "panel.background": "#0f1419",
     "panel.border": "#334155",
     "panelTitle.activeForeground": "#bfdbfe",
     "panelTitle.inactiveForeground": "#64748b",
-    
     "terminal.background": "#0f1419",
     "terminal.foreground": "#bfdbfe",
     "terminal.ansiBlack": "#334155",
@@ -53,29 +46,23 @@
     "terminal.ansiMagenta": "#a855f7",
     "terminal.ansiCyan": "#06b6d4",
     "terminal.ansiWhite": "#e2e8f0",
-    
     "button.background": "#2563eb",
     "button.foreground": "#ffffff",
     "button.hoverBackground": "#3b82f6",
-    
     "input.background": "#0f1419",
     "input.foreground": "#bfdbfe",
     "input.border": "#334155",
     "input.placeholderForeground": "#64748b",
-    
     "dropdown.background": "#1e293b",
     "dropdown.foreground": "#bfdbfe",
     "dropdown.border": "#334155",
-    
     "list.activeSelectionBackground": "#1e3a8a",
     "list.activeSelectionForeground": "#bfdbfe",
     "list.hoverBackground": "#1e293b",
     "list.inactiveSelectionBackground": "#1e3a8a",
-    
     "scrollbarSlider.background": "#334155",
     "scrollbarSlider.hoverBackground": "#475569",
     "scrollbarSlider.activeBackground": "#64748b",
-    
     "gitDecoration.addedResourceForeground": "#22c55e",
     "gitDecoration.modifiedResourceForeground": "#f59e0b",
     "gitDecoration.deletedResourceForeground": "#ef4444",
@@ -256,5 +243,37 @@
         "foreground": "#60a5fa"
       }
     }
-  ]
+  ],
+  "semanticTokenColors": {
+    "namespace": "#fbbf24",
+    "type": "#fbbf24",
+    "class": "#fbbf24",
+    "struct": "#fbbf24",
+    "interface": "#fbbf24",
+    "enum": "#fbbf24",
+    "typeParameter": "#E5C07B",
+    "parameter": "#E5C07B",
+    "variable": "#fbbf24",
+    "variable.readonly": "#60a5fa",
+    "variable.defaultLibrary": "#fbbf24",
+    "property": "#fbbf24",
+    "property.readonly": "#60a5fa",
+    "enumMember": "#60a5fa",
+    "event": "#c084fc",
+    "function": "#c084fc",
+    "function.declaration": "#c084fc",
+    "method": "#c084fc",
+    "method.declaration": "#c084fc",
+    "member.declaration": "#c084fc",
+    "decorator": "#E5C07B",
+    "macro": "#60a5fa",
+    "label": "#fbbf24",
+    "comment": "#74849b",
+    "string": "#7dd3fc",
+    "keyword": "#fb7185",
+    "keyword.control": "#fb7185",
+    "number": "#60a5fa",
+    "regexp": "#7dd3fc",
+    "operator": "#fb7185"
+  }
 }

@@ -1,122 +1,127 @@
 # 🎨 The Compiled Thought Themes (TCT)
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://marketplace.visualstudio.com/items?itemName=DelowarHossain.compiled-thought-themes)
+[![Version](https://img.shields.io/badge/version-4.0.0-blue.svg)](https://marketplace.visualstudio.com/items?itemName=DelowarHossain.compiled-thought-themes)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Downloads](https://img.shields.io/badge/downloads-1k+-brightgreen.svg)](https://marketplace.visualstudio.com/items?itemName=DelowarHossain.compiled-thought-themes)
 
-> **Intelligent, memory-optimized theme collection with smart recommendations and advanced features**
+> **Intelligent, memory-optimized theme collection with smart recommendations, multi-index lookup, and enterprise-grade stability**
 
 ## ✨ Features
 
 ### 🧠 **Intelligent Theme System**
 
-- **Smart Recommendations**: Automatically suggests themes based on file type and time of day
-- **Context-Aware Switching**: Different themes for Python, JavaScript, React, CSS, etc.
-- **Memory Optimized**: Efficient caching system that uses minimal resources
-- **Auto Theme Switching**: Optional time-based theme changes
+- **Multi-Index Theme Lookup**: Zero `THEME_NOT_FOUND` errors—themes resolve by manifest label, internal name, or disk filename.
+- **Smart Recommendations**: Suggests optimal themes based on language syntax and time of day.
+- **Context-Aware Switching**: Tailored color palettes for Python, JavaScript, TypeScript, React, HTML, CSS, Rust, Go, and more.
+- **Memory Optimized**: Bounded O(1) LRU caching (up to 10 themes) with automatic TTL cleanup and in-flight request coalescing.
+- **Auto Theme Switching**: Seamless automatic day/night theme scheduling.
 
-### 🎨 **Beautiful Theme Collection**
+### 🎨 **Beautiful 48-Theme Collection**
 
-- **38 Carefully Crafted Themes**: All prefixed with "TCT" for easy identification
-- **Custom Color Palettes**: Unique themes like Candyland, Sunset, Forest, Sea Wave, Zen Garden, Starry Night
-- **Bracket Colorization**: Rainbow bracket pairs for better code readability
-- **Custom Cursor Colors**: Enhanced visual experience with golden cursor highlights
+- **48 Carefully Crafted Themes**: Complete aesthetic overhaul ("Dorshoniyo Poriborton") with synchronized canonical branding.
+- **WCAG AA Compliance**: High-contrast ratios (>= 4.5:1) ensuring superior legibility and reduced eye strain across light and dark themes.
+- **Full TextMate Syntax Highlighting**: Rich token rules for all themes, including modern variants like Aurora Borealis, Cyber Synthwave, Deep Ocean, Desert Oasis, Morning Light, Quantum Dark, and Soft Dawn.
+- **Rainbow Bracket Colorization**: Integrated bracket pair colorization across all themes for enhanced code navigation.
+- **Workbench & Terminal Polish**: Hand-crafted 16-color ANSI terminal palettes, styled activity bars, status bars, sidebars, and minimap tokens.
 
 ### 🔤 **Advanced Typography**
 
-- **Operator Mono Support**: Optimized for premium coding fonts
-- **Font Ligatures**: Automatic ligature support for better code symbols
-- **Italic Variants**: Many themes include beautiful italic versions
-- **Font Optimization**: Auto-configures best font settings
+- **Font Optimization**: Single-command typography configuration (Operator Mono, Fira Code, JetBrains Mono, Cascadia Code).
+- **Font Ligatures**: One-click ligature enablement for modern code glyphs (`=>`, `===`, `!=`).
+- **Italic Variants**: Beautiful cursive and italic variants for keywords, comments, and attributes.
 
 ### 📝 **Code Snippets**
 
-- **Python Snippets**: Common patterns and boilerplate code
-- **React/JavaScript Snippets**: Modern React hooks and components
-- **TypeScript Support**: Full TypeScript and TSX snippet support
+- **Python Snippets**: Modern patterns, classes, decorators, and data structures.
+- **React / JavaScript Snippets**: Modern React hooks, functional components, and async patterns.
+- **TypeScript Support**: Full TypeScript and TSX snippet integration.
+
+---
 
 ## 🚀 Quick Start
 
-1. **Install** the extension from VS Code Marketplace
-2. **Open Command Palette** (`Ctrl+Shift+P` / `Cmd+Shift+P`)
-3. **Run**: `TCT: Select Theme`
-4. **Choose** your favorite theme from the intelligent picker
+1. **Install** the extension from the VS Code Marketplace.
+2. **Open Command Palette** (`Ctrl+Shift+P` / `Cmd+Shift+P`).
+3. **Run**: `TCT: Select Theme`.
+4. **Choose** your favorite theme from the interactive quick pick with instant preview.
+
+---
 
 ## 🎯 Smart Commands
 
-| Command                            | Description                                      |
-| ---------------------------------- | ------------------------------------------------ |
-| `TCT: Select Theme`                | Intelligent theme picker with search and preview |
-| `TCT: Toggle Italic Variant`       | Switch between regular and italic versions       |
-| `TCT: Enable Auto Theme Switching` | Time-based automatic theme changes               |
-| `TCT: Preview Themes`              | Visual preview of all available themes           |
+| Command | Identifier | Description |
+| :--- | :--- | :--- |
+| `TCT: Select Theme` | `DelowarHossain.selectTheme` | QuickPick theme selector with search, tags, and instant preview |
+| `TCT: Toggle Italic Variant` | `DelowarHossain.toggleItalic` | Instant toggle between standard and italic counterpart |
+| `TCT: Preview Themes` | `DelowarHossain.previewTheme` | Interactive Webview preview panel |
+| `TCT: Optimize Font Settings` | `DelowarHossain.optimizeFontSettings` | Configures best-in-class coding fonts and ligatures |
+| `TCT: Random Theme` | `DelowarHossain.randomTheme` | Surprise yourself with a randomly selected theme |
+| `TCT: Enable Auto Theme Switching` | `DelowarHossain.enableAutoTheme` | Toggles automatic day/night theme scheduling |
+| `TCT: View Theme Analytics` | `DelowarHossain.viewThemeAnalytics` | Displays local theme switching metrics and history |
+| `TCT: Share Current Theme` | `DelowarHossain.shareTheme` | Generates shareable snippet for current theme settings |
+
+---
 
 ## ⚙️ Configuration
 
-````json
-{
-  "Delowar Hossain.autoTheme": true,
-  "Delowar Hossain.smartRecommendations": true,
-  "Delowar Hossain.fontFamily": "Operator Mono, Fira Code, JetBrains Mono",
-  "Delowar Hossain.fontLigatures": true,
-  "Delowar Hossain.enableItalic": true
-}
-
-## 🎨 Theme Categories
-
-### 🌟 **Signature TCT Themes**
-- **TCT Candyland** - Playful pink and purple palette
-- **TCT Sunset** - Warm orange and red gradients
-- **TCT Forest** - Calming green nature tones
-- **TCT Sea Wave** - Cool blue ocean vibes
-- **TCT Zen Garden** - Minimalist gray harmony
-- **TCT Starry Night** - Deep purple cosmic feel
-
-### 🔥 **Popular Dark Themes**
-- TCT Dracula, TCT Monokai Pro, TCT Gruvbox
-- TCT Material, TCT One Dark, TCT Oceanic
-- TCT Darcula, TCT Ayu, TCT Professional
-
-### ☀️ **Light Themes**
-- TCT Simple Light - Clean and minimal light theme
-
-### ✨ **Italic Variants**
-Most themes include beautiful italic versions for enhanced readability.
-
-## ⚙️ Configuration
+Add and customize settings in your `settings.json`:
 
 ```json
 {
-  "Delowar Hossain.autoTheme": true,
-  "Delowar Hossain.smartRecommendations": true,
-  "Delowar Hossain.fontFamily": "Operator Mono, Fira Code, JetBrains Mono",
-  "Delowar Hossain.fontLigatures": true,
-  "Delowar Hossain.enableItalic": true
+  "DelowarHossain.autoTheme": true,
+  "DelowarHossain.smartRecommendations": true,
+  "DelowarHossain.fontFamily": "Operator Mono, Fira Code, JetBrains Mono",
+  "DelowarHossain.fontLigatures": true,
+  "DelowarHossain.enableItalic": true
 }
-````
+```
 
-## 🎯 Smart Recommendations
+---
 
-The extension intelligently recommends themes based on:
+## 🎨 Theme Catalog (48 Themes)
 
-- **File Type**: Python files get Forest/Zen themes, JavaScript gets Sea Wave/Starry Night
-- **Time of Day**: Light themes during day, dark themes at night
-- **Context**: Different themes for different coding scenarios
+### 🌟 **Signature TCT Modern Themes**
+- **TCT Aurora** & **TCT Aurora Borealis** - Vibrant northern lights emerald and cyan
+- **TCT Cyber Synthwave** - High-energy neon cyberpunk aesthetic
+- **TCT Deep Ocean** - Calming abyssal navy and aquamarine
+- **TCT Desert Oasis** - Warm terracotta, amber, and golden sand
+- **TCT Quantum Dark** - Ultra-modern deep void with electric accents
+- **TCT Candyland** & **TCT Candyland Italic** - Playful pastel magenta and violet
+- **TCT Sunset** - Warm orange, crimson, and twilight purple
+- **TCT Forest** - Soothing nature tones and organic emerald
+- **TCT Sea Wave** - Ocean blue gradients and cool marine tones
+- **TCT Zen Garden** - Balanced charcoal and stone minimalism
+- **TCT Starry Night** - Cosmic indigo and starlight gold
 
-## 🔧 Memory Optimization
+### 🔥 **Popular Dark Themes & Italic Variants**
+- **TCT Darcula** & **TCT Darcula Italic**
+- **TCT Dracula** & **TCT Dracula Italic**
+- **TCT Monokai Pro** & **TCT Monokai Italic**
+- **TCT Gruvbox** & **TCT Gruvbox Italic**
+- **TCT Ayu** & **TCT Ayu Italic**
+- **TCT Material** & **TCT Material Italic**
+- **TCT One Dark** & **TCT One Dark Italic**
+- **TCT Oceanic** & **TCT Oceanic Italic**
+- **TCT Slime** & **TCT Slime Italic**
+- **TCT Blue Velvet**, **TCT Neon Dreams**, **TCT Professional**, **TCT Night Owl**, **TCT Nord**
 
-- **Lazy Loading**: Themes load only when needed
-- **Smart Caching**: Keeps only 5 most recent themes in memory
-- **Efficient Storage**: Removed duplicate and unused theme files
-- **Performance**: Minimal impact on VS Code startup time
+### ☀️ **Accessible Light Themes**
+- **TCT Simple Light** - Clean, high-contrast minimal light theme (WCAG AA compliant)
+- **TCT Simple as Light** - Refined, accessible day editing
+- **TCT Morning Light** - Soft morning daylight with gentle amber tones
+- **TCT Soft Dawn** - Pastel sunrise glow for relaxed reading
+- **TCT Golden Hour** - Warm golden sunlight illumination
 
-## 📦 What's Included
+---
 
-- **38 Premium Themes** with bracket colorization
-- **Python & React Snippets** for faster coding
-- **Font Optimization** for better readability
-- **Smart Theme Engine** for intelligent recommendations
-- **Memory Efficient** caching system
+## 🔧 Performance & Architecture
+
+- **O(1) LRU Caching**: Memory footprint capped with bounded LRU cache (10 items max).
+- **TTL Expiration**: Background timer with `.unref()` ensures no process hanging during clean exit.
+- **Request Coalescing**: Parallel theme requests share the same promise, preventing disk I/O thrashing.
+- **Cross-Platform Resilience**: Works identically across Windows, macOS, and Linux.
+
+---
 
 ## 🛠️ Development
 
@@ -127,15 +132,20 @@ npm install
 # Compile TypeScript
 npm run compile
 
-# Package extension
-npm run package
+# Run tests
+npm test
 
-# Watch for changes
-npm run watch
+# Run End-to-End test suite
+node tests/e2e/runner.js
+
+# Package extension (.vsix)
+npm run package
 ```
 
+---
+
 ## 📄 License
-softwar inggener
+
 MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 🤝 Contributing
@@ -148,28 +158,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - 💡 [Feature Requests](https://github.com/mdhossain-2437/open-source-the-compiled-thought-themes/issues)
 - ⭐ [Rate & Review](https://marketplace.visualstudio.com/items?itemName=DelowarHossain.compiled-thought-themes)
 
-## 🌟 Why Developers Love TCT Themes
-
-> _"These themes are not just beautiful - they're intelligent! The smart recommendations have completely transformed my coding workflow. I can't imagine coding without TCT themes now."_ - **Sarah Chen, Senior Developer**
-
-> _"Finally, themes that understand context! The automatic switching based on file types is genius. My productivity has increased by 40% since switching to TCT."_ - **Marcus Rodriguez, Full-Stack Engineer**
-
-> _"The memory optimization is incredible. No more VS Code slowdowns when switching themes. Plus, the Candyland theme makes coding feel like a game!"_ - **Priya Patel, Frontend Developer**
-
-### 🎯 **Star This Repository If You:**
-
-- ✨ Want to support innovative theme development
-- 🚀 Believe in AI-powered coding experiences
-- 🎨 Love beautiful, functional design
-- 💡 Appreciate intelligent software that adapts to you
-- 🌟 Want to be part of a growing community of 10K+ developers
-
-**[⭐ STAR NOW - It takes 2 seconds but means the world to us!](https://github.com/mdhossain-2437/open-source-the-compiled-thought-themes)**
-
-_Every star helps us reach more developers and continue building amazing themes! 🚀_
-
 ---
 
 **Made with ❤️ by Delowar Hossain**
 
 _Transform your coding experience with intelligent, beautiful themes that adapt to your workflow._
+

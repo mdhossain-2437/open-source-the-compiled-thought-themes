@@ -89,7 +89,27 @@
     "gitDecoration.deletedResourceForeground": "#EF596F",
     "gitDecoration.untrackedResourceForeground": "#11eb73",
     "gitDecoration.ignoredResourceForeground": "#00B7C9",
-    "gitDecoration.conflictingResourceForeground": "#d55fde"
+    "gitDecoration.conflictingResourceForeground": "#d55fde",
+    "terminal.background": "#0b1015",
+    "terminal.foreground": "#c7d0d9",
+    "terminal.ansiBlack": "#18222D",
+    "terminal.ansiRed": "#EF596F",
+    "terminal.ansiGreen": "#98c378",
+    "terminal.ansiYellow": "#e5c07b",
+    "terminal.ansiBlue": "#61afef",
+    "terminal.ansiMagenta": "#d55fde",
+    "terminal.ansiCyan": "#56b6c2",
+    "terminal.ansiWhite": "#c7d0d9",
+    "terminal.ansiBrightBlack": "#4B5567",
+    "terminal.ansiBrightRed": "#f44747",
+    "terminal.ansiBrightGreen": "#a2db7f",
+    "terminal.ansiBrightYellow": "#f1d48c",
+    "terminal.ansiBrightBlue": "#7abcf5",
+    "terminal.ansiBrightMagenta": "#e27deb",
+    "terminal.ansiBrightCyan": "#70c8d4",
+    "terminal.ansiBrightWhite": "#ffffff",
+    "minimap.background": "#0b1015",
+    "minimap.selectionHighlight": "#18222D"
   },
   "tokenColors": [
     {
@@ -1295,11 +1315,46 @@
     },
     {
       "name": "Reset JavaScript string interpolation expression",
-      "scope": ["meta.template.expression"],
+      "scope": [
+        "meta.template.expression"
+      ],
       "settings": {
         "foreground": "#aab1c0"
       }
     }
   ],
-  "uuid": "32bd64fa-d60a-4858-a5fc-5164cc49a2b8"
+  "uuid": "32bd64fa-d60a-4858-a5fc-5164cc49a2b8",
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "namespace": "#2BBAC5",
+    "type": "#2BBAC5",
+    "class": "#2BBAC5",
+    "struct": "#2BBAC5",
+    "interface": "#2BBAC5",
+    "enum": "#2BBAC5",
+    "typeParameter": "#A6B2C0",
+    "parameter": "#A6B2C0",
+    "variable": "#e5c07b",
+    "variable.readonly": "#D8985F",
+    "variable.defaultLibrary": "#2BBAC5",
+    "property": "#e5c07b",
+    "property.readonly": "#D8985F",
+    "enumMember": "#D8985F",
+    "event": "#52ADF2",
+    "function": "#52ADF2",
+    "function.declaration": "#52ADF2",
+    "method": "#52ADF2",
+    "method.declaration": "#52ADF2",
+    "member.declaration": "#52ADF2",
+    "decorator": "#A6B2C0",
+    "macro": "#D8985F",
+    "label": "#e5c07b",
+    "comment": "#7c8390",
+    "string": "#98c378",
+    "keyword": "#d19a66ff",
+    "keyword.control": "#d19a66ff",
+    "number": "#D8985F",
+    "regexp": "#98c378",
+    "operator": "#d19a66ff"
+  }
 }

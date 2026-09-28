@@ -2,7 +2,7 @@
   "name": "compiled-thought-themes",
   "displayName": "The Compiled Thought Themes - Enhanced Edition",
   "description": "Intelligent, memory-optimized theme collection with smart recommendations and advanced features",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "publisher": "DelowarHossain",
   "license": "MIT",
   "engines": {
@@ -26,6 +26,28 @@
     "smart themes"
   ],
   "icon": "logo.png",
+  "galleryBanner": {
+    "color": "#0B132B",
+    "theme": "dark"
+  },
+  "pricing": "Free",
+  "badges": [
+    {
+      "url": "https://img.shields.io/visual-studio-marketplace/v/DelowarHossain.compiled-thought-themes?style=flat-square&color=blue&label=VS%20Marketplace",
+      "href": "https://marketplace.visualstudio.com/items?itemName=DelowarHossain.compiled-thought-themes",
+      "description": "Visual Studio Marketplace Version"
+    },
+    {
+      "url": "https://img.shields.io/visual-studio-marketplace/i/DelowarHossain.compiled-thought-themes?style=flat-square&color=green&label=Installs",
+      "href": "https://marketplace.visualstudio.com/items?itemName=DelowarHossain.compiled-thought-themes",
+      "description": "Marketplace Installs"
+    },
+    {
+      "url": "https://img.shields.io/badge/WCAG%202.1-AA%20Compliant-brightgreen?style=flat-square",
+      "href": "https://www.w3.org/WAI/WCAG21/quickref/",
+      "description": "WCAG AA Contrast Compliant"
+    }
+  ],
   "activationEvents": [
     "onStartupFinished"
   ],
@@ -46,6 +68,11 @@
         "label": "TCT Darcula",
         "uiTheme": "vs-dark",
         "path": "./themes/darcula.json"
+      },
+      {
+        "label": "TCT Darcula Italic",
+        "uiTheme": "vs-dark",
+        "path": "./themes/darculaItalic.json"
       },
       {
         "label": "TCT Candyland",
@@ -254,13 +281,18 @@
       },
       {
         "label": "TCT Golden Hour",
-        "uiTheme": "vs-dark",
+        "uiTheme": "vs",
         "path": "./themes/TCTGoldenHour.json"
       },
       {
         "label": "TCT Quantum Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/TCTQuantumDark.json"
+      },
+      {
+        "label": "TCT Aurora",
+        "uiTheme": "vs-dark",
+        "path": "./themes/TCTAurora.json"
       }
     ],
     "snippets": [
@@ -325,6 +357,18 @@
       {
         "command": "DelowarHossain.customizeKeyboardShortcuts",
         "title": "TCT: Customize Theme Shortcuts"
+      },
+      {
+        "command": "DelowarHossain.optimizeFontSettings",
+        "title": "TCT: Optimize Font Settings"
+      },
+      {
+        "command": "DelowarHossain.randomTheme",
+        "title": "TCT: Apply Random Theme"
+      },
+      {
+        "command": "DelowarHossain.customizeTheme",
+        "title": "TCT: Customize Theme Styles (Italic/Bold/Accents)"
       }
     ],
     "configuration": {
@@ -412,35 +456,57 @@
           "type": "object",
           "default": {},
           "description": "Custom keyboard shortcuts for theme actions"
+        },
+        "tct.customization.italicComments": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable cursive/italic font style for code comments across TCT themes"
+        },
+        "tct.customization.italicKeywords": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable cursive/italic font style for control keywords (if, return, def, class)"
+        },
+        "tct.customization.boldKeywords": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable bold emphasis on language keywords"
+        },
+        "tct.customization.accentStatusBar": {
+          "type": "boolean",
+          "default": false,
+          "description": "Apply signature Aurora Navy and Aquamarine accents to the workbench status bar"
+        },
+        "tct.customization.vividMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Boost color saturation and vibrancy for code syntax highlighting"
         }
       }
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "npm run clean && npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "package": "node ./scripts/version.js && vsce package --no-dependencies",
+    "package": "vsce package --no-dependencies",
     "publish": "node ./scripts/version.js && vsce publish",
     "release": "node ./scripts/release.js",
-    "clean": "node node_modules/rimraf/bin.js out",
-    "precompile": "npm run clean",
+    "clean": "node -e \"const fs = require('fs'); fs.rmSync('out', { recursive: true, force: true, maxRetries: 3, retryDelay: 100 });\"",
     "version:bump": "node ./scripts/version.js bump",
     "changelog": "node ./scripts/version.js changelog",
     "icons:sync": "node ./scripts/sync-icons.js",
     "icons:optimize": "node ./scripts/optimize-icons.js",
     "dev": "npm run watch",
-    "build": "npm run clean && npm run compile",
+    "build": "npm run compile",
     "lint": "eslint \"src/**/*.ts\"",
     "lint:fix": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.{ts,json}\"",
-    "test": "jest",
+    "test": "jest --runInBand",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "validate": "npm run lint && npm run test",
     "prepare": "husky install",
-    "prebuild": "npm run validate",
-    "prepackage": "npm run build",
     "postinstall": "node ./scripts/setup-dev.js",
     "start": "npm run dev",
     "dev:full": "concurrently \"npm run watch\" \"npm run test:watch\"",
@@ -457,9 +523,10 @@
   "devDependencies": {
     "@babel/core": "^7.28.0",
     "@babel/preset-env": "^7.28.0",
+    "@eslint/js": "^9.31.0",
     "@types/feather-icons": "^4.29.4",
     "@types/jest": "^30.0.0",
-    "@types/node": "16.x",
+    "@types/node": "^20.17.0",
     "@types/primer__octicons": "^19.11.0",
     "@types/semver": "^7.7.0",
     "@types/vscode": "^1.70.0",
@@ -477,11 +544,10 @@
     "lint-staged": "^16.1.2",
     "prettier": "^3.6.2",
     "rimraf": "^3.0.2",
-    "semver": "^7.7.2",
     "ts-jest": "^29.4.0",
     "typedoc": "^0.28.7",
-    "typescript": "^4.9.5",
-    "vsce": "^2.15.0"
+    "typedoc-plugin-markdown": "^4.13.1",
+    "typescript": "^5.7.3"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
@@ -496,7 +562,8 @@
     "date-fns-tz": "^2.0.0",
     "feather-icons": "^4.29.1",
     "material-design-icons": "^3.0.1",
-    "material-design-icons-iconfont": "^6.7.0"
+    "material-design-icons-iconfont": "^6.7.0",
+    "semver": "^7.7.2"
   },
   "repository": {
     "type": "git",

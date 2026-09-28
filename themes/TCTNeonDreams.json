@@ -11,7 +11,11 @@
   "tokenColors": [
     {
       "name": "Keywords",
-      "scope": ["keyword", "storage.type", "storage.modifier"],
+      "scope": [
+        "keyword",
+        "storage.type",
+        "storage.modifier"
+      ],
       "settings": {
         "foreground": "#ff79c6",
         "fontStyle": "italic"
@@ -19,7 +23,10 @@
     },
     {
       "name": "Functions",
-      "scope": ["entity.name.function", "support.function"],
+      "scope": [
+        "entity.name.function",
+        "support.function"
+      ],
       "settings": {
         "foreground": "#7aa2f7"
       }
@@ -31,5 +38,38 @@
         "foreground": "#9ece6a"
       }
     }
-  ]
+  ],
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "namespace": "#4EC9B0",
+    "type": "#4EC9B0",
+    "class": "#4EC9B0",
+    "struct": "#4EC9B0",
+    "interface": "#4EC9B0",
+    "enum": "#4EC9B0",
+    "typeParameter": "#E5C07B",
+    "parameter": "#E5C07B",
+    "variable": "#a9b1d6",
+    "variable.readonly": "#D19A66",
+    "variable.defaultLibrary": "#4EC9B0",
+    "property": "#a9b1d6",
+    "property.readonly": "#D19A66",
+    "enumMember": "#D19A66",
+    "event": "#7aa2f7",
+    "function": "#7aa2f7",
+    "function.declaration": "#7aa2f7",
+    "method": "#7aa2f7",
+    "method.declaration": "#7aa2f7",
+    "member.declaration": "#7aa2f7",
+    "decorator": "#E5C07B",
+    "macro": "#D19A66",
+    "label": "#a9b1d6",
+    "comment": "#7F848E",
+    "string": "#9ece6a",
+    "keyword": "#ff79c6",
+    "keyword.control": "#ff79c6",
+    "number": "#D19A66",
+    "regexp": "#9ece6a",
+    "operator": "#ff79c6"
+  }
 }

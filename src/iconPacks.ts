@@ -1,4 +1,3 @@
-import * as vscode from "vscode";
 import octicons = require("@primer/octicons");
 import feather = require("feather-icons");
 
@@ -72,13 +71,15 @@ export class IconPackManager {
   }
 
   private validatePackDefinition(
-    packDefinition: any
+    packDefinition: unknown
   ): packDefinition is { id: string; icons: Record<string, string> } {
+    const pd = packDefinition as Record<string, unknown> | null;
     return (
-      packDefinition &&
-      typeof packDefinition.id === "string" &&
-      typeof packDefinition.icons === "object" &&
-      Object.values(packDefinition.icons).every(
+      !!pd &&
+      typeof pd.id === "string" &&
+      typeof pd.icons === "object" &&
+      pd.icons !== null &&
+      Object.values(pd.icons as Record<string, unknown>).every(
         (icon) => typeof icon === "string"
       )
     );

@@ -1,6 +1,6 @@
 {
   "type": "dark",
-  "name": "gruvbox italic",
+  "name": "TCT Gruvbox Italic",
   "include": "./gruvbox.json",
   "tokenColors": [
     {
@@ -77,5 +77,38 @@
       }
     }
   ],
-  "uuid": "32bd64fa-d60a-4858-a5fc-5164cc49a2b8"
+  "uuid": "32bd64fa-d60a-4858-a5fc-5164cc49a2b8",
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "namespace": "#689d6a",
+    "type": "#689d6a",
+    "class": "#689d6a",
+    "struct": "#689d6a",
+    "interface": "#689d6a",
+    "enum": "#689d6a",
+    "typeParameter": "#83a598",
+    "parameter": "#83a598",
+    "variable": "#d3869b",
+    "variable.readonly": "#D19A66",
+    "variable.defaultLibrary": "#689d6a",
+    "property": "#d3869b",
+    "property.readonly": "#D19A66",
+    "enumMember": "#D19A66",
+    "event": "#689d6a",
+    "function": "#689d6a",
+    "function.declaration": "#689d6a",
+    "method": "#689d6a",
+    "method.declaration": "#689d6a",
+    "member.declaration": "#689d6a",
+    "decorator": "#83a598",
+    "macro": "#D19A66",
+    "label": "#d3869b",
+    "comment": "#a29384",
+    "string": "#b8bb26",
+    "keyword": "#ff513c",
+    "keyword.control": "#ff513c",
+    "number": "#D19A66",
+    "regexp": "#b8bb26",
+    "operator": "#ff513c"
+  }
 }

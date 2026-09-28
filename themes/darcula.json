@@ -24,7 +24,7 @@
     {
       "scope": "header",
       "settings": {
-        "foreground": "#000080"
+        "foreground": "#6897BB"
       }
     },
     {
@@ -34,13 +34,18 @@
       }
     },
     {
-      "scope": ["constant.language", "constant.character"],
+      "scope": [
+        "constant.language",
+        "constant.character"
+      ],
       "settings": {
         "foreground": "#CC7832"
       }
     },
     {
-      "scope": ["constant.numeric"],
+      "scope": [
+        "constant.numeric"
+      ],
       "settings": {
         "foreground": "#6897BB"
       }
@@ -207,7 +212,7 @@
     {
       "scope": "storage",
       "settings": {
-        "foreground": "red"
+        "foreground": "#CC7832"
       }
     },
     {
@@ -456,7 +461,9 @@
     },
     {
       "name": "Arrow Function",
-      "scope": ["storage.type.function.arrow"],
+      "scope": [
+        "storage.type.function.arrow"
+      ],
       "settings": {
         "foreground": "#A9B7C6"
       }
@@ -483,13 +490,18 @@
     },
     {
       "name": "Variable and parameter name",
-      "scope": ["meta.definition.variable.name", "support.variable"],
+      "scope": [
+        "meta.definition.variable.name",
+        "support.variable"
+      ],
       "settings": {
         "foreground": "#A9B7C6"
       }
     },
     {
-      "scope": ["variable"],
+      "scope": [
+        "variable"
+      ],
       "settings": {
         "foreground": "#FFC66D"
       }
@@ -554,5 +566,38 @@
         "foreground": "#b267e6"
       }
     }
-  ]
+  ],
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "namespace": "#2BBAC5",
+    "type": "#2BBAC5",
+    "class": "#2BBAC5",
+    "struct": "#2BBAC5",
+    "interface": "#2BBAC5",
+    "enum": "#2BBAC5",
+    "typeParameter": "#A6B2C0",
+    "parameter": "#A6B2C0",
+    "variable": "#e5c07b",
+    "variable.readonly": "#D8985F",
+    "variable.defaultLibrary": "#2BBAC5",
+    "property": "#e5c07b",
+    "property.readonly": "#D8985F",
+    "enumMember": "#D8985F",
+    "event": "#52ADF2",
+    "function": "#52ADF2",
+    "function.declaration": "#52ADF2",
+    "method": "#52ADF2",
+    "method.declaration": "#52ADF2",
+    "member.declaration": "#52ADF2",
+    "decorator": "#A6B2C0",
+    "macro": "#D8985F",
+    "label": "#e5c07b",
+    "comment": "#7c8390",
+    "string": "#98c378",
+    "keyword": "#d19a66ff",
+    "keyword.control": "#d19a66ff",
+    "number": "#D8985F",
+    "regexp": "#98c378",
+    "operator": "#d19a66ff"
+  }
 }

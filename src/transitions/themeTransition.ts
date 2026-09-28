@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-import type { ThemeManager } from "../themeManager";
 
 interface TransitionMetrics {
   startTime: number;
@@ -12,7 +11,7 @@ interface TransitionMetrics {
 
 export class ThemeTransitionManager {
   private static instance: ThemeTransitionManager;
-  private transitionInterval: NodeJS.Timer | null = null;
+  private transitionInterval: ReturnType<typeof setInterval> | null = null;
   private isTransitioning = false;
   private transitionMetrics: TransitionMetrics[] = [];
 
